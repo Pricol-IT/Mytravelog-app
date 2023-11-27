@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('approver.layouts.app')
 @section('title')
     {{__('My Trip Details')}}
 @endsection
@@ -46,7 +46,22 @@
                         @endif
                     </td>
                     
-                    <td><a href="{{route('user.summary',$trip->id)}}" class="btn btn-warning text-white"><i class="bx bxs-file-blank"></i></a></td>
+                    
+                      <td> 
+                        <a href="{{route('approver.summary',$trip->id)}}" class="btn btn-warning text-white"><i class="bx bxs-file-blank"></i></a>
+                        @if($trip->status == 'pending')
+                        <a href="{{route('approver.approve',$trip->id)}}" class="btn btn-success text-white"><i class="bi bi-check-circle-fill"></i></a>
+                        <a href="{{route('approver.reject',$trip->id)}}" class="btn btn-danger text-white"><i class="bi bi-x-circle-fill"></i></a>
+                        @elseif($trip->status == 'approved')
+                        <a href="{{route('approver.reject',$trip->id)}}" class="btn btn-danger text-white"><i class="bi bi-x-circle-fill"></i></a>
+                        @elseif($trip->status == 'reject')
+
+                        @elseif($trip->status == 'clarification')
+                        <a href="{{route('approver.approve',$trip->id)}}" class="btn btn-success text-white"><i class="bi bi-check-circle-fill"></i></a>
+                        <a href="{{route('approver.reject',$trip->id)}}" class="btn btn-danger text-white"><i class="bi bi-x-circle-fill"></i></a>
+                        @endif
+                     </td>
+                    
                   </tr>
                   @empty
                   <tr>
@@ -66,3 +81,4 @@
     </section>
   </main>
 @endsection
+

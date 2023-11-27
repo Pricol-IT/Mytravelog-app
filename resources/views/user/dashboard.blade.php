@@ -9,6 +9,11 @@
         <form class="addtrip " action="{{route('addtrip')}}" method="post"> 
             @csrf
             @method('post')
+            <div class="row">
+              <div class="col-lg-12">
+                <h5 class="fw-bold">Create New Trip</h5>
+              </div>
+            </div>
             <div class="row pb-sm-1 pb-lg-0">
               <div class="col-lg-3 col-md-6 pb-sm-1 pb-lg-0">
                   <input type="text" name="tripname" class="form-control" required placeholder="Enter Trip Name">

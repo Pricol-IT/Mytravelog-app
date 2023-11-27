@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Approver;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -16,21 +16,18 @@ use App\Models\Accomadation;
 use App\Models\Connectivity;
 use App\Models\Forex;
 
-
-class UserController extends Controller
+class ApproverController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-
     public function index()
     {
-        return view('user.dashboard');
+        return view('approver.dashboard');
     }
-    
+
     public function addtrip(Request $request)
     {
         $id=DB::select("SHOW TABLE STATUS LIKE 'trips'");
@@ -45,14 +42,14 @@ class UserController extends Controller
             'trip_todate' => $request->ttdate,
         ];
         toastr()->success('TripId Generated Successfully');
-        return view('user.trip.addtrip',compact('tripDetails','trips'));
+        return view('approver.trip.addtrip',compact('tripDetails','trips'));
     }
 
     public function mytripDetails()
     {
         $user_id = auth()->user()->id;
         $trips = Trip::where('user_id',$user_id)->orderBy('id','desc')->get();
-        return view('user.trip.mytrip',compact('trips'));
+        return view('approver.trip.mytrip',compact('trips'));
     }
 
     public function storetrip(Request $request)
@@ -184,7 +181,7 @@ class UserController extends Controller
         if($trip)
         {
             toastr()->success('Trip Submitted for Approval');
-            return redirect()->route('user.mytrip');
+            return redirect()->route('approver.mytrip');
         }else
         {
             toastr()->success('Something Went Wrong, Please try again!');
@@ -197,10 +194,66 @@ class UserController extends Controller
         // $trip = Trip::find($id)->first();
         $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation', 'advance', 'connectivity', 'forex'])->find($id);
 
-        return view('user.trip.summary', compact('trip'));
+        return view('approver.trip.summary', compact('trip'));
 
          // return $trip;
     }
 
-    
+    public function OthersDetails()
+    {
+        $user_id = auth()->user()->id;
+        $trips = Trip::where('user_id','!=',$user_id)->orderBy('id','desc')->get();
+        return view('approver.trip.alltrip',compact('trips'));
+    }
+
+    public function pendingDetails()
+    {
+        $user_id = auth()->user()->id;
+        $trips = Trip::where('user_id','!=',$user_id)->where('status','pending')->orderBy('id','desc')->get();
+        return view('approver.trip.pending',compact('trips'));
+    }
+
+    public function approvalDetails()
+    {
+        $user_id = auth()->user()->id;
+        $trips = Trip::where('user_id','!=',$user_id)->where('status','approved')->orderBy('id','desc')->get();
+        return view('approver.trip.approved',compact('trips'));
+    }
+    public function clarificationDetails()
+    {
+        $user_id = auth()->user()->id;
+        $trips = Trip::where('user_id','!=',$user_id)->where('status','clarification')->orderBy('id','desc')->get();
+        return view('approver.trip.clarification',compact('trips'));
+    }
+
+    public function tripApproved($id)
+    {
+        $trip = Trip::find($id)->update(['status'=>'approved']);
+        toastr()->success('Trip Request Approved Successfully');
+        return back();
+    }
+
+    public function tripReject($id)
+    {
+        $trip = Trip::find($id)->update(['status'=>'reject']);
+        toastr()->success('Trip Request Rejected Successfully');
+        return back();
+    }
+
+    public function remarks(Request $request)
+    {
+        $trip = Trip::find($request->tripid)->update(['status' => 'clarification','remarks' => $request->remark]);
+        if($trip)
+        {
+        toastr()->success('Remarks Added Successfully');
+        return back();
+
+        }
+        else
+        {
+            toastr()->danger('Something Went Wrong');
+        return back();            
+        }
+        
+    }
 }

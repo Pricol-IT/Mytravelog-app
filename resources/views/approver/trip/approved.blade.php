@@ -1,6 +1,6 @@
-@extends('user.layouts.app')
+@extends('approver.layouts.app')
 @section('title')
-    {{__('My Trip Details')}}
+    {{__('Approved Trip Details')}}
 @endsection
 @section('main')
   <main id="main" class="main">
@@ -10,7 +10,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">My Trip Details</h5>
+              <h5 class="card-title">Approved Trip Details <a href="{{route('approver.alltrip')}}" class="btn btn-danger">Back</a></h5>
               <!-- Table with stripped rows -->
               <div class="table-responsive">
                 <table class="table datatable">
@@ -36,17 +36,15 @@
                     <td>{{$trip->to_date}}</td>
                     <td>
                         @if($trip->status == 'pending')
-                        <span class="bg-info badge">Pending</span>
+                        <span class="text-danger">Pending</span>
                         @elseif($trip->status == 'approved')
-                        <span class="bg-success badge">Approved</span>
-                        @elseif($trip->status == 'reject')
-                        <span class="bg-danger badge ">Rejected</span>
-                        @elseif($trip->status == 'clarification')
-                        <span class="bg-warning badge">Clarification</span>
+                        <span class="text-success">Approved</span>
+                        @else
+                        <span class="text-warning">Clarification</span>
                         @endif
                     </td>
                     
-                    <td><a href="{{route('user.summary',$trip->id)}}" class="btn btn-warning text-white"><i class="bx bxs-file-blank"></i></a></td>
+                    <td><a href="{{route('approver.summary',$trip->id)}}" class="btn btn-warning text-white"><i class="bx bxs-file-blank"></i></a></td>
                   </tr>
                   @empty
                   <tr>
