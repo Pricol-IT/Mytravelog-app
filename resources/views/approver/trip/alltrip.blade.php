@@ -74,6 +74,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Trip ID</th>
+                    <th scope="col">User Name</th>
                     <th scope="col">Trip Name</th>
                     <th scope="col">From Date</th>
                     <th scope="col">To Date</th>
@@ -87,6 +88,7 @@
                   <tr class="card">
                     <td>{{$loop->iteration}}</td>
                     <td>{{$trip->tripid}}</td>
+                    <td>{{$trip->user->name}}</td>
                     <td>{{$trip->tripname}}</td>
                     <td>{{$trip->from_date}}</td>
                     <td>{{$trip->to_date}}</td>
@@ -121,7 +123,7 @@
                   @empty
                   <tr>
                       
-                      <td colspan="7"> No Data Found</td>
+                      <td colspan="8"> No Data Found</td>
                   </tr>
                   @endforelse
                 </tbody>

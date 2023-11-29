@@ -16,35 +16,44 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">1</span>
+            <span class="badge bg-primary badge-number">{{ approverNotificationsCount() }}</span>
           </a><!-- End Notification Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              You have 1 new notifications
+              You have {{ approverNotificationsCount() }} new notifications
               <!-- <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a> -->
             </li>
+            @php
+                $notifications = approverNotifications();
+            @endphp
+            @forelse($notifications as $notification)
             <li>
               <hr class="dropdown-divider">
             </li>
-
+            @if ($notification->type == 'App\Notifications\Approver\TripAddedNodification')
+            <a href="{{ $notification->data['url'] }}">
             <li class="notification-item">
               <i class="bi bi-check-circle text-success"></i>
               <div>
-                <h4>New Trip Created Successfully</h4>
-                <p>1 min. ago</p>
+                <h4>{{ $notification->data['title'] }}</h4>
+                <p>{{ $notification->created_at->diffForHumans() }}</p>
               </div>
             </li>
-
+            </a>
+            @endif  
             <li>
               <hr class="dropdown-divider">
             </li>
-
-            
-
-            <li>
+              @empty
+              <li>
               <hr class="dropdown-divider">
             </li>
+              <li class="notification-item" >No, Notification found!</li>
+              <li>
+              <hr class="dropdown-divider">
+            </li>
+            @endforelse
             <li class="dropdown-footer">
               <a href="#">Show all notifications</a>
             </li>

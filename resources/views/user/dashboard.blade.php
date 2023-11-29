@@ -163,22 +163,44 @@
              
               <div class="row">
                 <div class="col-lg-6 col-md-6">
-
-                    <div class="card urbox1">
+                    
+                  <div class="card urbox1">
                     <div class="card-body">
                       <h5 class="card-title">Approvals</h5>
-
+                      @forelse($trips as $trip)
+                      <input type="hidden" id="{{$trip->status}}" value="{{$trip->total}}">
+                      @empty
+                      @endforelse
                       <!-- Radial Bar Chart -->
                       <div id="radialBarChart"></div>
-
+                      
                       <script>
                         var tot = 0;
+                        
+                        if(document.getElementById('pending'))
+                        { var pending = Number(document.getElementById('pending').value);
+                        }
+                        else{ var pending = 0; }
+                        if(document.getElementById('reject'))
+                        { var rejected = Number(document.getElementById('reject').value);
+                        }
+                        else{ var rejected = 0; }
+                        if(document.getElementById('approved'))
+                        { var approved = Number(document.getElementById('approved').value);
+                        }
+                        else{ var approved = 0; }
+                        if(document.getElementById('clarification'))
+                        { var clarification = Number(document.getElementById('clarification').value);
+                        }
+                        else{ var clarification = 0; }
+                        
+                        console.log(clarification)
                         document.addEventListener("DOMContentLoaded", () => {
                           new ApexCharts(document.querySelector("#radialBarChart"), {
-                            series: [4, 3, 3, 6],
+                            series: [rejected, clarification, approved, pending],
                             chart: {
                               
-                              height: 350,
+                              height: 330,
                                offsetX: 0,
                                offsetY: 0,
                               type: 'radialBar',
@@ -222,7 +244,7 @@
                                 }
                               }
                             },
-                            labels: ['Accounts Settled', 'Completed', 'Approved', 'Request'],
+                            labels: ['Rejected', 'Clarification', 'Approved', 'Pending'],
                             legend: {
                               show: true,
                                position: 'bottom',

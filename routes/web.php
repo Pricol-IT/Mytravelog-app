@@ -24,11 +24,12 @@ Route::middleware('auth:user', 'verified')->group(function () {
 });
 Auth::routes();
 Route::controller(UserController::class)->prefix('user')->middleware('requester')->group(function () { 
-    Route::get('/dashboard', [UserController::class, 'index'])->name('user.home');
-    Route::get('/mytrip', [UserController::class, 'mytripDetails'])->name('user.mytrip');
-    Route::get('/viewsummary/{id}', [UserController::class, 'viewsummary'])->name('user.summary');
-    Route::post('/addtrip',[UserController::class, 'addtrip'])->name('addtrip');
-    Route::put('/storetrip',[UserController::class, 'storetrip'])->name('storetrip');
+    Route::get('/dashboard', 'index')->name('user.home');
+    Route::get('/mytrip', 'mytripDetails')->name('user.mytrip');
+    Route::get('/viewsummary/{id}', 'viewsummary')->name('user.summary');
+    Route::post('/addtrip','addtrip')->name('addtrip');
+    Route::put('/storetrip','storetrip')->name('storetrip');
+    Route::get('/all_notifications', 'allNotification')->name('user.allnotify');
 
 });
 

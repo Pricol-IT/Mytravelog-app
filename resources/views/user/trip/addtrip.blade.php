@@ -53,7 +53,7 @@
                   <h5>Connectivity</h5>
                 </div>
                 <div class="service shadow text-center" id="Forex" data-bs-toggle="modal" data-bs-target="#extra-form-modal">
-                  <img src="images/cu.svg">
+                  <img src="{{asset('images/cu.svg') }}">
                   <h5>Forex</h5>
                 </div>
             </div>
@@ -78,8 +78,8 @@
             <table class="table rq">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="5">
-                           <h6 class="headdiv"> <i class="bx bxs-plane-alt"></i> Flight Request</h6>
+                       <td class="fw-bold" colspan="5">
+                           <h6 class="text-primary"> <i class="bx bxs-plane-alt"></i> Flight Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -97,8 +97,8 @@
             <table class="table rt">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="5">
-                           <h6 class="headdiv"> <i class='bx bxs-train'></i> Train Request</h6>
+                       <td class="fw-bold" colspan="5">
+                           <h6 class="text-primary"> <i class='bx bxs-train'></i> Train Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -116,8 +116,8 @@
             <table class="table rb">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="5">
-                           <h6 class="headdiv"> <i class='bx bxs-bus' ></i> Bus Request</h6>
+                       <td class="fw-bold" colspan="5">
+                           <h6 class="text-primary"> <i class='bx bxs-bus' ></i> Bus Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -135,8 +135,8 @@
             <table class="table rtx">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="5">
-                           <h6 class="headdiv"> <i class='bx bxs-taxi' ></i> Taxi Request</h6>
+                       <td class="fw-bold" colspan="5">
+                           <h6 class="text-primary"> <i class='bx bxs-taxi' ></i> Taxi Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -154,8 +154,8 @@
             <table class="table rh">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="4">
-                           <h6 class="headdiv"> <i class='bx bxs-hotel' ></i> Accomadation Request</h6>
+                       <td class="fw-bold" colspan="4">
+                           <h6 class="text-primary"> <i class='bx bxs-hotel' ></i> Accomadation Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -172,8 +172,8 @@
             <table class="table ra">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="4">
-                           <h6 class="headdiv"> <i class='bx bx-rupee' ></i> Advance Request</h6>
+                       <td class="fw-bold" colspan="4">
+                           <h6 class="text-primary"> <i class='bx bx-rupee' ></i> Advance Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -189,8 +189,8 @@
             <table class="table rc">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="4">
-                           <h6 class="headdiv"><i class='bx bx-broadcast'></i> Connectivity Request</h6>
+                       <td class="fw-bold" colspan="4">
+                           <h6 class="text-primary"><i class='bx bx-broadcast'></i> Connectivity Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -205,8 +205,8 @@
             <table class="table rf">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="4">
-                           <h6 class="headdiv"> <img src="images/cu.svg" style="background:#0072bc;"> Forex Request</h6>
+                       <td class="fw-bold" colspan="4">
+                           <h6 class="text-primary"> <img src="images/cu.svg" style="background:#0072bc;"> Forex Request</h6>
                        </td> 
                     </tr>
                     <tr>

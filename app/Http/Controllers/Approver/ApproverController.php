@@ -25,7 +25,12 @@ class ApproverController extends Controller
 
     public function index()
     {
-        return view('approver.dashboard');
+        $trips = DB::table('trips')
+                ->select('status', DB::raw('count(*) as total'))
+                ->where('user_id', auth()->user()->id)
+                ->groupBy('status')
+                ->get();
+        return view('approver.dashboard',compact('trips'));
     }
 
     public function addtrip(Request $request)

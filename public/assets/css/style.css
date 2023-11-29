@@ -1648,3 +1648,15 @@ border-radius: 10px!important;
    
   }
 }
+
+
+.notifications {
+  width: 400px;
+}
+
+@media (max-width:500px)
+{
+  .notifications {
+  width: 300px;
+}
+}

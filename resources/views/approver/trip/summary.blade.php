@@ -31,8 +31,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="5">
-                           <h6 class="headdiv"> <i class="bx bxs-plane-alt"></i> Flight Request</h6>
+                       <td class="fw-bold" colspan="5">
+                           <h6 class="text-primary"> <i class="bx bxs-plane-alt"></i> Flight Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -53,8 +53,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="5">
-                           <h6 class="headdiv"> <i class='bx bxs-train'></i> Train Request</h6>
+                       <td class="fw-bold" colspan="5">
+                           <h6 class="text-primary"> <i class='bx bxs-train'></i> Train Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -75,8 +75,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="5">
-                           <h6 class="headdiv"> <i class='bx bxs-bus' ></i> Bus Request</h6>
+                       <td class="fw-bold" colspan="5">
+                           <h6 class="text-primary"> <i class='bx bxs-bus' ></i> Bus Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -97,8 +97,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="5">
-                           <h6 class="headdiv"> <i class='bx bxs-taxi' ></i> Taxi Request</h6>
+                       <td class="fw-bold" colspan="5">
+                           <h6 class="text-primary"> <i class='bx bxs-taxi' ></i> Taxi Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -119,8 +119,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="4">
-                           <h6 class="headdiv"> <i class='bx bxs-hotel' ></i> Accomadation Request</h6>
+                       <td class="fw-bold" colspan="4">
+                           <h6 class="text-primary"> <i class='bx bxs-hotel' ></i> Accomadation Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -140,8 +140,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="4">
-                           <h6 class="headdiv"> <i class='bx bx-rupee' ></i> Advance Request</h6>
+                       <td class="fw-bold" colspan="4">
+                           <h6 class="text-primary"> <i class='bx bx-rupee' ></i> Advance Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -161,8 +161,8 @@
             <table class="table text-center">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="4">
-                           <h6 class="headdiv"><i class='bx bx-broadcast'></i> Connectivity Request</h6>
+                       <td class="fw-bold" colspan="4">
+                           <h6 class="text-primary"><i class='bx bx-broadcast'></i> Connectivity Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -181,8 +181,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                       <td class="text-center" colspan="4">
-                           <h6 class="headdiv"> <img src="{{asset('images/cu.svg')}}" style="background:#0072bc;"> Forex Request</h6>
+                       <td class="fw-bold" colspan="4">
+                           <h6 class="text-primary"> <img src="{{asset('images/cu.svg')}}" style="background:#0072bc;"> Forex Request</h6>
                        </td> 
                     </tr>
                     <tr>

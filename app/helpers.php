@@ -26,4 +26,34 @@ if (! function_exists('dateFormat')) {
     }
 }
 
+if (! function_exists('userNotifications')) {
+    function userNotifications()
+    {
+        return auth()->user()->notifications()->orderBy('id','desc')->take(6)->get();
+    }
+}
 
+if (! function_exists('userNotificationsCount')) {
+
+    function userNotificationsCount()
+    {
+
+        return auth()->user()->notifications()->count();
+    }
+}
+
+if (! function_exists('approverNotifications')) {
+    function approverNotifications()
+    {
+        return auth()->user()->notifications()->orderBy('id','desc')->take(6)->get();
+    }
+}
+
+if (! function_exists('approverNotificationsCount')) {
+
+    function approverNotificationsCount()
+    {
+
+        return auth()->user()->notifications()->count();
+    }
+}

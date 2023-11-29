@@ -45,4 +45,9 @@ class Trip extends Model
     {
         return $this->hasMany(Forex::class,'trip_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id'); 
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
 use App\Models\Trip;
+use App\Models\User;
 use App\Models\Flight;
 use App\Models\Train;
 use App\Models\Taxi;
@@ -15,6 +16,10 @@ use App\Models\Advance;
 use App\Models\Accomadation;
 use App\Models\Connectivity;
 use App\Models\Forex;
+
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\User\NewTripNodification;
+use App\Notifications\Approver\TripAddedNodification;
 
 
 class UserController extends Controller
@@ -28,7 +33,23 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('user.dashboard');
+
+        // $user_id = auth()->user()->id;
+        // $trips = Trip::where('user_id',$user_id)->get();
+        $trips = DB::table('trips')
+                ->select('status', DB::raw('count(*) as total'))
+                ->where('user_id', auth()->user()->id)
+                ->groupBy('status')
+                ->get();
+        
+        return view('user.dashboard',compact('trips'));
+    }
+
+    public function allNotification()
+    {
+        $notifications = auth()->user()->notifications()->paginate(12);
+
+        return view('user.all-notification', compact('notifications'));
     }
     
     public function addtrip(Request $request)
@@ -183,6 +204,13 @@ class UserController extends Controller
         }
         if($trip)
         {
+            $user = auth('user')->user();
+            Notification::send($user, new NewTripNodification());
+            $approvers = User::where('role', 'approver')->get();
+
+            foreach ($approvers as $approver) {
+            $approver->notify(new TripAddedNodification($user));
+            }
             toastr()->success('Trip Submitted for Approval');
             return redirect()->route('user.mytrip');
         }else
