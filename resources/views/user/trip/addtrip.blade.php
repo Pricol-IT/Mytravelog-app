@@ -295,21 +295,7 @@
       e.preventDefault();
     });
     
-    $('.single, .round').hide();
-     $('#triptype').on('change', function () {
-      var type = $(this).val();
-      if (type == 'single') {
-        $('.single').show();
-        $('.round').hide();
-      }
-      else if (type == 'round') {
-        $('.single,.round').show();
-      }
-      else {
-        $('.single').hide();
-        $('.round').hide();
-      }
-    });
+    
 
 $('.closeService').on("click",function(){
   $('#service-form, #extra-service-form ').trigger('reset');
