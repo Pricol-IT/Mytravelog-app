@@ -35,7 +35,7 @@
                            <h6 class="text-primary"> <i class="bx bxs-plane-alt"></i> Flight Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Origin</td>
                         <td>Destination</td>
                         <td>Date/Time</td>
@@ -45,6 +45,7 @@
                 <tbody id="Flightbody">
                     @foreach ($trip->flight as $flight)
                         <tr><td>{{ $flight->origin }}<td>{{ $flight->destination }}</td><td> {{ split_timestamp($flight->preferred_date)[0]; }} / {{ split_timestamp($flight->preferred_date)[1]; }}</td><td>{{ $flight->trip_class }}</td></tr>
+                        <tr><td colspan="4" class="text-primary" style="font-size:12px;margin:0;">{{ $flight->preferences }}</td></tr>
                     @endforeach
                 </tbody>
             </table>
@@ -57,7 +58,7 @@
                            <h6 class="text-primary"> <i class='bx bxs-train'></i> Train Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Origin</td>
                         <td>Destination</td>
                         <td>Date/Time</td>
@@ -67,6 +68,7 @@
                 <tbody id="Trainbody">
                     @foreach ($trip->train as $train)
                     <tr><td>{{ $train->origin }}</td><td>{{ $train->destination }}</td><td>{{ $train->preferred_date }} </td><td>{{ $train->trip_class }}</td></tr>
+                    <tr><td colspan="4" class="text-primary" style="font-size:12px;margin:0;">{{ $train->preferences }}</td></tr>
                     @endforeach
                 </tbody>
             </table>
@@ -79,7 +81,7 @@
                            <h6 class="text-primary"> <i class='bx bxs-bus' ></i> Bus Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Origin</td>
                         <td>Destination</td>
                         <td>Date/Time</td>
@@ -89,6 +91,7 @@
                 <tbody id="Busbody">
                     @foreach ($trip->bus as $bus)
                     <tr><td>{{ $bus->origin }}</td><td>{{ $bus->destination }}</td><td>{{ $bus->preferred_date }}</td><td>{{ $bus->trip_class }}</td></tr>
+                    <tr><td colspan="4" class="text-primary" style="font-size:12px;margin:0;">{{ $bus->preferences }}</td></tr>
                     @endforeach
                 </tbody>
             </table>
@@ -101,7 +104,7 @@
                            <h6 class="text-primary"> <i class='bx bxs-taxi' ></i> Taxi Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Pickup</td>
                         <td>Drop</td>
                         <td>Date/Time</td>
@@ -111,6 +114,7 @@
                 <tbody id="Taxibody">
                     @foreach ($trip->taxi as $taxi)
                     <tr><td>{{ $taxi->origin }}</td><td>{{ $taxi->destination }}</td><td>{{ $taxi->preferred_date }}</td><td>{{ $taxi->trip_taxi }}</td></tr>
+                    <tr><td colspan="4" class="text-primary" style="font-size:12px;margin:0;">{{ $taxi->preferences }}</td></tr>
                     @endforeach
                 </tbody>
             </table>
@@ -123,7 +127,7 @@
                            <h6 class="text-primary"> <i class='bx bxs-hotel' ></i> Accomadation Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Location</td>
                         <td>Check-In</td>
                         <td>Check-Out</td>
@@ -144,7 +148,7 @@
                            <h6 class="text-primary"> <i class='bx bx-rupee' ></i> Advance Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Amount</td>
                         <td>Purpose</td>
                     </tr>
@@ -165,7 +169,7 @@
                            <h6 class="headdiv"><i class='bx bx-broadcast'></i> Connectivity Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Connectivity</td>
                         
                     </tr>
@@ -185,7 +189,7 @@
                            <h6 class="text-primary"> <img src="{{asset('images/cu.svg')}}" style="background:#0072bc;"> Forex Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Currency</td>
                         <td>Amount</td>
                     </tr>
@@ -203,6 +207,18 @@
           </div>
           
           <div class="col-lg-12">
+            <div class="created-log bg-white p-3">
+                <div class="date-log d-flex justify-content-between">
+                    <p><span class="text-primary">Created at: </span>{{formatTime($trip->created_at)}}</p>
+                    <p><span class="text-primary">Modified at: </span>{{formatTime($trip->updated_at)}}</p>
+                </div>
+                @if($trip->remarks !== NULL)
+                <div class="remark"><p><span class="text-primary">Remarks: </span>{{$trip->remarks}}</p></div>
+                @endif
+            </div>
+          </div>
+
+          <div class="col-lg-12 mt-2">
               <center><a href="{{route('user.mytrip')}}" class="btn btn-danger text-center">Back</a></center>
           </div>
         </div>

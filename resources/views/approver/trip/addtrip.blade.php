@@ -246,27 +246,25 @@
       $('.vehicle').val(service);
       $('.extraService').val(service);
       $('.modal-title').text(function(){
-        return "Book a " + service
+        
+        return "Book a " + service;
       });
       if (service == 'Train'){
         $('.train-form').show();
         $('.flight-form, .bus-form, .taxi-form').hide();
       }
       else if(service == 'Bus'){
-        console.log(this.id)
         $('.bus-form').show();
         $('.flight-form, .train-form, .taxi-form').hide();
       }
 
       else if(service == 'Flight'){
-        console.log(this.id)
         $('.flight-form').show();
         $('.bus-form, .train-form, .taxi-form').hide();
       }
 
       else if(service == 'Taxi'){
-        console.log(this.id)
-        $('.taxi-form').show();
+        // $('.taxi-form').show();
         $('.flight-form, .train-form, .bus-form').hide();
       }
       else if (service == 'Hotel') {
@@ -294,9 +292,7 @@
     $("#service-form").submit(function (e) {
       e.preventDefault();
     });
-    
-    
-     
+   
 
 $('.closeService').on("click",function(){
   $('#service-form, #extra-service-form ').trigger('reset');
@@ -353,10 +349,9 @@ $('.addService').on("click", function () {
         if((vehicle == 'Flight') && (from != '') && (to != '') && (sdate != '') && (fl_class != ''))
         {   
             $('.rq').show();
-            $('#Flightbody').append('<tr><td><input type="hidden" name="flightfrom[]" value="'+ from +'" >'+ from +'</td><td><input type="hidden" name="flightto[]" value="'+ to +'" >'+ to +'</td><td><input type="hidden" name="flightdate[]" value="'+ sdate +'" >'+ date +'/'+ time +'</td><td><input type="hidden" name="flightclass[]" value="'+ fl_class +'" >'+ fl_class +'</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary" style="font-size:12px;margin:0;">'+ preferences+'</p> <input name="preferences[]" type="hidden" value="'+preferences+'"></td></tr>');
+            $('#Flightbody').append('<tr><td><input type="hidden" name="flightfrom[]" value="'+ from +'" >'+ from +'</td><td><input type="hidden" name="flightto[]" value="'+ to +'" >'+ to +'</td><td><input type="hidden" name="flightdate[]" value="'+ sdate +'" >'+ date +'/'+ time +'</td><td><input type="hidden" name="flightclass[]" value="'+ fl_class +'" >'+ fl_class +'</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary preference" style="font-size:12px;margin:0;">'+ preferences +'</p> <input name="preferences[]" type="hidden" value="'+ preferences +'"></td></tr>');
             $("[data-bs-dismiss=modal]").trigger({ type: "click" });
             $('#service-form').trigger('reset');
-            $('.single, .round').hide();
 
         }else if ((vehicle == 'Train') && (from != '') && (to != '') && (sdate != '') && (tr_class != ''))
         {
@@ -365,7 +360,6 @@ $('.addService').on("click", function () {
             $('#Trainbody').append('<tr><td><input type="hidden" name="trainfrom[]" value="'+ from +'" >'+ from +'</td><td><input type="hidden" name="trainto[]" value="'+ to +'" >'+ to +'</td><td><input type="hidden" name="traindate[]" value="'+ sdate +'" >'+ date +'/'+ time +'</td><td><input type="hidden" name="trainclass[]" value="'+ tr_class +'" >'+ tr_class +'</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary" style="font-size:12px;margin:0;">'+ preferences+'</p> <input name="preferences[]" type="hidden" value="'+preferences+'"></td></tr>');
             $("[data-bs-dismiss=modal]").trigger({ type: "click" });
             $('#service-form').trigger('reset');
-            $('.single, .round').hide();
 
         }else if ((vehicle == 'Bus') && (from != '') && (to != '') && (sdate != '') && (bs_class != ''))
         {
@@ -373,7 +367,6 @@ $('.addService').on("click", function () {
             $('#Busbody').append('<tr><td><input type="hidden" name="busfrom[]" value="'+ from +'" >'+ from +'</td><td><input type="hidden" name="busto[]" value="'+ to +'" >'+ to +'</td><td><input type="hidden" name="busdate[]" value="'+ sdate +'" >'+ date +'/'+ time +'</td><td><input type="hidden" name="busclass[]" value="'+ bs_class +'" >'+ bs_class +'</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary" style="font-size:12px;margin:0;">'+ preferences+'</p> <input name="preferences[]" type="hidden" value="'+preferences+'"></td></tr>');
             $("[data-bs-dismiss=modal]").trigger({ type: "click" });
             $('#service-form').trigger('reset');
-            $('.single, .round').hide();
 
         }else if ((vehicle == 'Taxi') && (from != '') && (to != '') && (sdate != '') && (tx_class != ''))
         {
@@ -381,7 +374,6 @@ $('.addService').on("click", function () {
           $('#Taxibody').append('<tr><td><input type="hidden" name="taxifrom[]" value="'+ from +'" >'+ from +'</td><td><input type="hidden" name="taxito[]" value="'+ to +'" >'+ to +'</td><td><input type="hidden" name="taxidate[]" value="'+ sdate +'" >'+ date +'/'+ time +'</td><td><input type="hidden" name="taxiclass[]" value="'+ tx_class +'" >'+ tx_class +'</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary" style="font-size:12px;margin:0;">'+ preferences+'</p> <input name="preferences[]" type="hidden" value="'+preferences+'"></td></tr>');
             $("[data-bs-dismiss=modal]").trigger({ type: "click" });
             $('#service-form').trigger('reset');
-            $('.single, .round').hide();
         }
     }
     if(extra_service != '')
@@ -429,7 +421,7 @@ $('.addService').on("click", function () {
 
 
         default:
-          alert('Select Trip Type');
+          // alert('Select Trip Type');
           break;
       }
     }
@@ -438,7 +430,9 @@ $('.addService').on("click", function () {
 
  $("body").on("click",".remove",function(){
           alert('Are you sure for delete this request ?');
+          $(this).closest("tr").next("tr").remove();
           $(this).closest("tr").remove();
+          
         });
 
 </script>

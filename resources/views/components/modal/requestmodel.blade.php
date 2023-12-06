@@ -57,7 +57,7 @@
                 </select>
               </div>
 
-              <div class="col-6 taxi-form">
+              <!-- <div class="col-6 taxi-form">
                 <label>Car Type</label>
                 <select class="form-control" required name="tx_class" id="tx_class">
                   <option value=""> Select type</option>
@@ -65,7 +65,7 @@
                   <option value="Sedan">Sedan</option>
                   <option value="SUV">SUV</option>
                 </select>
-              </div>
+              </div> -->
 
               <div class="col-12"> 
                 <label>Preferences</label>

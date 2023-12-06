@@ -35,7 +35,7 @@
                            <h6 class="text-primary"> <i class="bx bxs-plane-alt"></i> Flight Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Origin</td>
                         <td>Destination</td>
                         <td>Date/Time</td>
@@ -45,6 +45,7 @@
                 <tbody id="Flightbody">
                     @foreach ($trip->flight as $flight)
                         <tr><td>{{ $flight->origin }}<td>{{ $flight->destination }}</td><td> {{ split_timestamp($flight->preferred_date)[0]; }} / {{ split_timestamp($flight->preferred_date)[1]; }}</td><td>{{ $flight->trip_class }}</td></tr>
+                        <tr><td colspan="4" class="text-primary" style="font-size:12px;margin:0;">{{ $flight->preferences }}</td></tr>
                     @endforeach
                 </tbody>
             </table>
@@ -57,7 +58,7 @@
                            <h6 class="text-primary"> <i class='bx bxs-train'></i> Train Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Origin</td>
                         <td>Destination</td>
                         <td>Date/Time</td>
@@ -67,6 +68,7 @@
                 <tbody id="Trainbody">
                     @foreach ($trip->train as $train)
                     <tr><td>{{ $train->origin }}</td><td>{{ $train->destination }}</td><td>{{ $train->preferred_date }} </td><td>{{ $train->trip_class }}</td></tr>
+                    <tr><td colspan="4" class="text-primary" style="font-size:12px;margin:0;">{{ $train->preferences }}</td></tr>
                     @endforeach
                 </tbody>
             </table>
@@ -79,7 +81,7 @@
                            <h6 class="text-primary"> <i class='bx bxs-bus' ></i> Bus Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Origin</td>
                         <td>Destination</td>
                         <td>Date/Time</td>
@@ -89,6 +91,7 @@
                 <tbody id="Busbody">
                     @foreach ($trip->bus as $bus)
                     <tr><td>{{ $bus->origin }}</td><td>{{ $bus->destination }}</td><td>{{ $bus->preferred_date }}</td><td>{{ $bus->trip_class }}</td></tr>
+                    <tr><td colspan="4" class="text-primary" style="font-size:12px;margin:0;">{{ $bus->preferences }}</td></tr>
                     @endforeach
                 </tbody>
             </table>
@@ -101,7 +104,7 @@
                            <h6 class="text-primary"> <i class='bx bxs-taxi' ></i> Taxi Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Pickup</td>
                         <td>Drop</td>
                         <td>Date/Time</td>
@@ -111,6 +114,7 @@
                 <tbody id="Taxibody">
                     @foreach ($trip->taxi as $taxi)
                     <tr><td>{{ $taxi->origin }}</td><td>{{ $taxi->destination }}</td><td>{{ $taxi->preferred_date }}</td><td>{{ $taxi->trip_taxi }}</td></tr>
+                    <tr><td colspan="4" class="text-primary" style="font-size:12px;margin:0;">{{ $taxi->preferences }}</td></tr>
                     @endforeach
                 </tbody>
             </table>
@@ -123,7 +127,7 @@
                            <h6 class="text-primary"> <i class='bx bxs-hotel' ></i> Accomadation Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Location</td>
                         <td>Check-In</td>
                         <td>Check-Out</td>
@@ -144,7 +148,7 @@
                            <h6 class="text-primary"> <i class='bx bx-rupee' ></i> Advance Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Amount</td>
                         <td>Purpose</td>
                     </tr>
@@ -165,7 +169,7 @@
                            <h6 class="text-primary"><i class='bx bx-broadcast'></i> Connectivity Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Connectivity</td>
                         
                     </tr>
@@ -185,7 +189,7 @@
                            <h6 class="text-primary"> <img src="{{asset('images/cu.svg')}}" style="background:#0072bc;"> Forex Request</h6>
                        </td> 
                     </tr>
-                    <tr>
+                    <tr class="fw-bold">
                         <td>Currency</td>
                         <td>Amount</td>
                     </tr>
@@ -201,31 +205,61 @@
             </table>
             @endif
           </div>
-          
+
           <div class="col-lg-12">
+            <div class="created-log bg-white p-3">
+                <div class="date-log d-flex justify-content-between">
+                    <p><span class="text-primary">Created at: </span>{{formatTime($trip->created_at)}}</p>
+                    <p><span class="text-primary">Modified at: </span>{{formatTime($trip->updated_at)}}</p>
+                </div>
+                @if($trip->remarks !== NULL)
+                <div class="remark"><p><span class="text-primary">Remarks: </span>{{$trip->remarks}}</p></div>
+                @endif
+            </div>
+          </div>
+
+          <div class=" remarkform col-lg-6 offset-3 mt-3">
+            
+          <form action="{{route('approver.remarks')}}" method="post" class="d-flex">
+          @csrf 
+          @method('POST')
+          <input type="hidden" name="tripid" id="tripid">
+          <input type="hidden" name="status" id="status">
+          <label><span id="displaystatus"></span> Remark </label>
+          <input type="text" name="remark" placeholder="Enter the remark" class="form-control" required>
+        
+          <input type="submit" name="submit" class="btn btn-primary"   value="Save">
+            
+          
+          </form>
+          </div>
+          
+          <div class="col-lg-12 mt-3">
               <center>
                 
                 @if($trip->status == 'pending')
-                        <a href="{{route('approver.approve',$trip->id)}}"  class="btn btn-success text-white"><i class="bi bi-check-circle-fill"></i> Approve</a>
-                        <a href="{{route('approver.reject',$trip->id)}}" class="btn btn-danger text-white"><i class="bi bi-x-circle-fill"></i> Reject</a>
-                        <button type="button" class="remark btn btn-warning text-white" data="{{$trip->id}}"><i class="bx bx-chat"></i> Clarification </button>
+                        <a href="#."  class="btnStatus btn btn-success text-white" data1="approved" data="{{$trip->id}}"><i class="bi bi-check-circle-fill"></i> Approve</a>
+                        <a href="#." data="{{$trip->id}}" class="btnStatus btn btn-danger text-white" data1="reject"><i class="bi bi-x-circle-fill"></i> Reject</a>
+                        <button type="button" class="btnStatus  btn btn-warning text-white" data1="clarification" data="{{$trip->id}}"><i class="bx bx-chat"></i> Clarification </button>
                         @elseif($trip->status == 'approved')
                         <p></p>
                         @elseif($trip->status == 'reject')
                         <p></p>
                         @elseif($trip->status == 'clarification')
-                        <a href="{{route('approver.approve',$trip->id)}}" class="btn btn-success text-white"><i class="bi bi-check-circle-fill"></i> Approve</a>
-                        <a href="{{route('approver.reject',$trip->id)}}" class="btn btn-danger text-white"><i class="bi bi-x-circle-fill"></i> Reject</a>
-                        <button type="button" class="remark btn btn-warning text-white" data="{{$trip->id}}"><i class="bx bx-chat"></i> Clarification </button>
-                        @endif
+                        <a href="#."  class="btnStatus btn btn-success text-white" data1="approved" data="{{$trip->id}}"><i class="bi bi-check-circle-fill"></i> Approve</a>
+                        <a href="#." data="{{$trip->id}}" class="btnStatus btn btn-danger text-white" data1="reject"><i class="bi bi-x-circle-fill"></i> Reject</a>
+                        <button type="button" class="btnStatus  btn btn-warning text-white" data1="clarification" data="{{$trip->id}}"><i class="bx bx-chat"></i> Clarification </button>
+                         @endif
                         <a href="{{ url()->previous() }}" class="btn btn-secondary text-center">Back</a>
             </center>
           </div>
+
+          
         </div>
       
     </section>
   </main>
-  <x-modal.clarificationmodel />
+  <!-- <x-modal.clarificationmodel /> -->
 @endsection
 @section('script')
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -233,12 +267,17 @@
 <script type="text/javascript">
   
 
-  $("body").on("click",".remark",function(){
+  $(".remarkform").hide();
 
+  $("body").on("click",".btnStatus",function(){
+$(".remarkform").show();
           var tripid = $(this).attr("data");
+          var status = $(this).attr("data1");
           
           $('#tripid').val(tripid);
-          $('#basicModal').modal('show');
+          $('#status').val(status);
+          $('#displaystatus').html('<span>'+ status + '</span>');
+        //   $('#basicModal').modal('show');
         });
 </script>
 @endsection    

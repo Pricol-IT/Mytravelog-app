@@ -259,11 +259,11 @@ class ApproverController extends Controller
 
     public function remarks(Request $request)
     {
-        $trip = Trip::find($request->tripid)->update(['status' => 'clarification','remarks' => $request->remark]);
+        $trip = Trip::find($request->tripid)->update(['status' => $request->status,'remarks' => $request->remark]);
         if($trip)
         {
         toastr()->success('Remarks Added Successfully');
-        return back();
+        return redirect()->route('approver.alltrip');
 
         }
         else

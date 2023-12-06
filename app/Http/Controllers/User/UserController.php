@@ -100,6 +100,7 @@ class UserController extends Controller
                 'destination' => $request->flightto[$i],
                 'trip_class' => $request->flightclass[$i],
                 'preferred_date' => $request->flightdate[$i],
+                'preferences' => $request->preferences[$i],
               ];
               Flight::create($flight);
             }
@@ -115,6 +116,7 @@ class UserController extends Controller
                 'destination' => $request->trainto[$i],
                 'trip_class' => $request->trainclass[$i],
                 'preferred_date' => $request->traindate[$i],
+                'preferences' => $request->preferences[$i],
               ];
               Train::create($train);
             }
@@ -130,6 +132,7 @@ class UserController extends Controller
                 'destination' => $request->busto[$i],
                 'trip_class' => $request->busclass[$i],
                 'preferred_date' => $request->busdate[$i],
+                'preferences' => $request->preferences[$i],
               ];
               Bus::create($bus);
             }
@@ -145,6 +148,7 @@ class UserController extends Controller
                 'destination' => $request->taxito[$i],
                 'trip_taxi' => $request->taxiclass[$i],
                 'preferred_date' => $request->taxidate[$i],
+                'preferences' => $request->preferences[$i],
               ];
               Taxi::create($taxi);
             }

@@ -57,3 +57,18 @@ if (! function_exists('approverNotificationsCount')) {
         return auth()->user()->notifications()->count();
     }
 }
+
+if (!function_exists('formatTime')) {
+ 
+    function formatTime($date, $format = 'F d, Y H:i A')
+    {
+        return Carbon::parse($date)->format($format);
+    }
+}
+
+if (!function_exists('dateFormat')) {
+    function dateFormat($date, $format = 'F Y')
+    {
+        return \Carbon\Carbon::createFromFormat($format, $date)->toDateTimeString();
+    }
+}
