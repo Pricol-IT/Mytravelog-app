@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 05:16 AM
+-- Generation Time: Dec 08, 2023 at 08:09 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,15 +38,6 @@ CREATE TABLE `accomadations` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `accomadations`
---
-
-INSERT INTO `accomadations` (`id`, `trip_id`, `tripid`, `location`, `checkin`, `checkout`, `status`, `created_at`, `updated_at`) VALUES
-(3, 5, '20230005', 'Coimbatore', '2023-11-26 17:38:00', '2023-11-28 17:38:00', 'pending', '2023-11-24 06:39:03', '2023-11-24 06:39:03'),
-(4, 8, '20230008', 'Mumbai', '2023-11-29 09:15:00', '2023-11-30 10:15:00', 'pending', '2023-11-26 23:16:58', '2023-11-26 23:16:58'),
-(5, 15, '20230015', 'Bangalore', '2023-12-06 18:44:00', '2023-12-08 12:45:00', 'pending', '2023-12-05 01:48:56', '2023-12-05 01:48:56');
 
 -- --------------------------------------------------------
 
@@ -111,15 +102,6 @@ CREATE TABLE `buses` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `buses`
---
-
-INSERT INTO `buses` (`id`, `trip_id`, `tripid`, `origin`, `destination`, `trip_class`, `preferences`, `preferred_date`, `status`, `ticket`, `created_at`, `updated_at`) VALUES
-(1, 2, '20230002', 'Chennai', 'Erode', 'Sleeper', NULL, '2023-11-28 15:51:00', 'pending', NULL, '2023-11-24 04:52:26', '2023-11-24 04:52:26'),
-(2, 7, '20230007', 'Coimbatore', 'Chennai', 'Sleeper', NULL, '2023-11-28 18:08:00', 'pending', NULL, '2023-11-24 07:08:50', '2023-11-24 07:08:50'),
-(3, 8, '20230008', 'Mumbai', 'Pune', 'Seater AC', NULL, '2023-11-29 10:14:00', 'pending', NULL, '2023-11-26 23:16:58', '2023-11-26 23:16:58');
-
 -- --------------------------------------------------------
 
 --
@@ -135,14 +117,6 @@ CREATE TABLE `connectivities` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `connectivities`
---
-
-INSERT INTO `connectivities` (`id`, `trip_id`, `tripid`, `connection`, `status`, `created_at`, `updated_at`) VALUES
-(3, 5, '20230005', 'sim provider', 'pending', '2023-11-24 06:39:03', '2023-11-24 06:39:03'),
-(4, 6, '20230006', 'demo', 'pending', '2023-11-24 06:41:26', '2023-11-24 06:41:26');
 
 -- --------------------------------------------------------
 
@@ -181,21 +155,6 @@ CREATE TABLE `flights` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `flights`
---
-
-INSERT INTO `flights` (`id`, `trip_id`, `tripid`, `origin`, `destination`, `trip_class`, `preferences`, `preferred_date`, `status`, `ticket`, `created_at`, `updated_at`) VALUES
-(1, 1, '20230001', 'Mumbai', 'coimbatore', 'Economy', NULL, '2023-11-25 18:00:00', 'pending', NULL, '2023-11-24 03:13:45', '2023-11-24 03:13:45'),
-(2, 2, '20230002', 'Mumbai', 'coimbatore', 'Economy', NULL, '2023-11-26 15:50:00', 'pending', NULL, '2023-11-24 04:52:26', '2023-11-24 04:52:26'),
-(5, 5, '20230005', 'Mumbai', 'coimbatore', 'Premium', NULL, '2023-11-25 17:38:00', 'pending', NULL, '2023-11-24 06:39:03', '2023-11-24 06:39:03'),
-(6, 8, '20230008', 'Coimbatore', 'Mumbai', 'Economy', NULL, '2023-11-28 12:11:00', 'pending', NULL, '2023-11-26 23:16:58', '2023-11-26 23:16:58'),
-(7, 9, '20230009', 'Mumbai', 'coimbatore', 'Business', NULL, '2023-11-28 14:13:00', 'pending', NULL, '2023-11-27 03:13:54', '2023-11-27 03:13:54'),
-(8, 10, '20230010', 'Coimbatore', 'Chennai', 'Business', NULL, '2023-11-29 12:23:00', 'pending', NULL, '2023-11-28 01:26:08', '2023-11-28 01:26:08'),
-(10, 12, '20230012', 'chennai', 'coimbatore', 'Business', NULL, '2023-11-29 12:33:00', 'pending', NULL, '2023-11-28 01:33:50', '2023-11-28 01:33:50'),
-(13, 15, '20230015', 'Mumbai', 'Bangalore', 'Business', NULL, '2023-12-06 12:43:00', 'pending', NULL, '2023-12-05 01:48:56', '2023-12-05 01:48:56'),
-(14, 15, '20230015', 'Bangalore', 'coimbatore', 'Business', NULL, '2023-12-08 12:47:00', 'pending', NULL, '2023-12-05 01:48:56', '2023-12-05 01:48:56');
-
 -- --------------------------------------------------------
 
 --
@@ -212,13 +171,6 @@ CREATE TABLE `forexes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `forexes`
---
-
-INSERT INTO `forexes` (`id`, `trip_id`, `tripid`, `currency`, `amount`, `status`, `created_at`, `updated_at`) VALUES
-(1, 5, '20230005', 'USD', '10000', 'pending', '2023-11-24 06:39:03', '2023-11-24 06:39:03');
 
 -- --------------------------------------------------------
 
@@ -303,9 +255,15 @@ CREATE TABLE `notifications` (
 INSERT INTO `notifications` (`id`, `type`, `notifiable_type`, `notifiable_id`, `data`, `read_at`, `created_at`, `updated_at`) VALUES
 ('06877508-5994-4a74-ba15-8056b77b4d61', 'App\\Notifications\\Approver\\TripAddedNodification', 'App\\Models\\User', 2, '{\"title\":\"New Trip Created By User1\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/approver\\/pendingtrip\"}', NULL, '2023-12-05 02:10:24', '2023-12-05 02:10:24'),
 ('4c5b94fe-452c-4dfa-94d9-05f127c8b1a4', 'App\\Notifications\\User\\NewTripNodification', 'App\\Models\\User', 1, '{\"title\":\"New Trip Submitted for Approval\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/user\\/mytrip\"}', NULL, '2023-12-05 01:48:57', '2023-12-05 01:48:57'),
+('763e8f41-19f4-4f00-a5c6-7d148ff5377c', 'App\\Notifications\\Approver\\TripAddedNodification', 'App\\Models\\User', 2, '{\"title\":\"New Trip Created By User1\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/approver\\/pendingtrip\"}', NULL, '2023-12-06 03:31:03', '2023-12-06 03:31:03'),
+('93e8391f-ad45-4df3-b116-e4947f1343ee', 'App\\Notifications\\Approver\\TripAddedNodification', 'App\\Models\\User', 2, '{\"title\":\"New Trip Created By User1\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/approver\\/pendingtrip\"}', NULL, '2023-12-07 23:49:23', '2023-12-07 23:49:23'),
+('9c6c4812-d62c-4dea-8b8c-a7a1e05642fd', 'App\\Notifications\\User\\NewTripNodification', 'App\\Models\\User', 1, '{\"title\":\"New Trip Submitted for Approval\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/user\\/mytrip\"}', NULL, '2023-12-06 03:31:03', '2023-12-06 03:31:03'),
 ('9f0879ca-dbff-4e7f-83f0-564ce0040974', 'App\\Notifications\\Approver\\TripAddedNodification', 'App\\Models\\User', 2, '{\"title\":\"New Trip Created By User1\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/approver\\/pendingtrip\"}', NULL, '2023-11-28 01:36:15', '2023-11-28 01:36:15'),
 ('ade782f8-2ea7-469c-87ba-b62122886a65', 'App\\Notifications\\User\\NewTripNodification', 'App\\Models\\User', 1, '{\"title\":\"New Trip Submitted for Approval\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/user\\/mytrip\"}', NULL, '2023-12-05 02:10:24', '2023-12-05 02:10:24'),
+('aff9cd78-fd5d-4206-821f-00f3f080651e', 'App\\Notifications\\User\\NewTripNodification', 'App\\Models\\User', 1, '{\"title\":\"New Trip Submitted for Approval\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/user\\/mytrip\"}', NULL, '2023-12-07 23:49:23', '2023-12-07 23:49:23'),
+('c1a09ec6-1d0d-4d1d-a990-aba4da273b83', 'App\\Notifications\\Approver\\TripAddedNodification', 'App\\Models\\User', 2, '{\"title\":\"New Trip Created By User1\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/approver\\/pendingtrip\"}', NULL, '2023-12-06 03:38:20', '2023-12-06 03:38:20'),
 ('c5bcc5d9-b554-43ec-a7b6-37befea9264d', 'App\\Notifications\\Approver\\TripAddedNodification', 'App\\Models\\User', 2, '{\"title\":\"New Trip Created By User1\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/approver\\/pendingtrip\"}', NULL, '2023-12-05 01:48:57', '2023-12-05 01:48:57'),
+('d528cded-9162-4be0-85af-5c4f03365629', 'App\\Notifications\\User\\NewTripNodification', 'App\\Models\\User', 1, '{\"title\":\"New Trip Submitted for Approval\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/user\\/mytrip\"}', NULL, '2023-12-06 03:38:20', '2023-12-06 03:38:20'),
 ('dbc996f2-3217-495b-a2ea-5500acdc3daa', 'App\\Notifications\\User\\NewTripNodification', 'App\\Models\\User', 1, '{\"title\":\"New Trip Submitted for Approval\",\"url\":\"http:\\/\\/127.0.0.1:8000\\/user\\/mytrip\"}', NULL, '2023-11-28 01:36:15', '2023-11-28 01:36:15');
 
 -- --------------------------------------------------------
@@ -419,15 +377,6 @@ CREATE TABLE `taxis` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `taxis`
---
-
-INSERT INTO `taxis` (`id`, `trip_id`, `tripid`, `origin`, `destination`, `trip_taxi`, `preferences`, `preferred_date`, `status`, `ticket`, `created_at`, `updated_at`) VALUES
-(1, 2, '20230002', 'Erode', 'Coimbatore', 'SUV', '', '2023-11-29 15:52:00', 'pending', NULL, '2023-11-24 04:52:26', '2023-11-24 04:52:26'),
-(2, 6, '20230006', 'Mumbai', 'coimbatore', 'Hatchback', '', '2023-11-09 17:41:00', 'pending', NULL, '2023-11-24 06:41:26', '2023-11-24 06:41:26'),
-(3, 10, '20230010', 'Airport', 'Mall', 'SUV', '', '2023-11-29 17:30:00', 'pending', NULL, '2023-11-28 01:26:08', '2023-11-28 01:26:08');
-
 -- --------------------------------------------------------
 
 --
@@ -449,14 +398,6 @@ CREATE TABLE `trains` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `trains`
---
-
-INSERT INTO `trains` (`id`, `trip_id`, `tripid`, `origin`, `destination`, `trip_class`, `preferences`, `preferred_date`, `status`, `ticket`, `created_at`, `updated_at`) VALUES
-(1, 2, '20230002', 'Coimbatore', 'Chennai', '1A', NULL, '2023-11-27 15:51:00', 'pending', NULL, '2023-11-24 04:52:26', '2023-11-24 04:52:26'),
-(2, 7, '20230007', 'Mumbai', 'coimbatore', '2A', NULL, '2023-11-25 18:07:00', 'pending', NULL, '2023-11-24 07:08:50', '2023-11-24 07:08:50');
-
 -- --------------------------------------------------------
 
 --
@@ -476,23 +417,6 @@ CREATE TABLE `trips` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `trips`
---
-
-INSERT INTO `trips` (`id`, `user_id`, `tripid`, `tripname`, `from_date`, `to_date`, `purpose`, `remarks`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, '20230001', 'Coimbatore Trip', '2023-11-25', '2023-11-28', 'Test Trip', NULL, 'approved', '2023-11-24 03:13:44', '2023-11-29 03:44:37'),
-(2, 1, '20230002', 'Coimbatore Trip1', '2023-11-27', '2023-11-30', 'Test Trip', NULL, 'approved', '2023-11-24 04:52:25', '2023-11-27 04:29:00'),
-(5, 1, '20230005', 'Coimbatore Trip', '2023-11-25', '2023-11-30', 'Test3 Trip', 'Flight Date', 'clarification', '2023-11-24 06:39:03', '2023-11-27 05:45:56'),
-(6, 1, '20230006', 'Coimbatore Trip', '2023-11-17', '2023-11-16', 'office', NULL, 'approved', '2023-11-24 06:41:26', '2023-11-27 04:04:20'),
-(7, 1, '20230007', 'New Trip', '2023-11-25', '2023-11-30', 'Office Trip', NULL, 'reject', '2023-11-24 07:08:50', '2023-11-27 04:11:36'),
-(8, 1, '20230008', 'Mumbai', '2023-11-28', '2023-11-30', 'Office Trip', NULL, 'reject', '2023-11-26 23:16:58', '2023-11-27 04:29:12'),
-(9, 2, '20230009', 'Mumbai Trip', '2023-11-28', '2023-11-30', 'Office Trip', NULL, 'approved', '2023-11-27 03:13:54', '2023-11-27 04:32:40'),
-(10, 1, '20230010', 'Chennai', '2023-11-29', '2023-12-01', 'official Trip', NULL, 'pending', '2023-11-28 01:26:08', '2023-11-28 01:26:08'),
-(12, 1, '20230012', 'Coimbatore Trip', '2023-11-29', '2023-11-30', 'Office Trip', NULL, 'pending', '2023-11-28 01:33:50', '2023-11-28 01:33:50'),
-(15, 1, '20230015', 'Bangalore', '2023-12-06', '2023-12-09', 'Office Trip', NULL, 'approved', '2023-12-05 01:48:56', '2023-12-05 01:56:42'),
-(16, 1, '20230016', 'demo', '2023-12-06', '2023-12-07', 'Test Trip', NULL, 'pending', '2023-12-05 02:10:24', '2023-12-05 02:10:24');
 
 -- --------------------------------------------------------
 
@@ -517,7 +441,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'User1', 'user@pricol.com', NULL, '$2y$12$w8fgtpQIcmFvqUedLmyzFOv1Y8E3eMc24E9VoGpgNXipG87IES4rm', 'user', NULL, '2023-11-22 04:54:21', '2023-11-22 04:54:21'),
+(1, 'User1', 'user@pricol.com', NULL, '$2y$12$w8fgtpQIcmFvqUedLmyzFOv1Y8E3eMc24E9VoGpgNXipG87IES4rm', 'user', 'KLMoRLikS7nu0L2Toa0fGeS7GsZZE8E0P9pdFFhz7s2KTwpWrfurHusCR6xJ', '2023-11-22 04:54:21', '2023-11-22 04:54:21'),
 (2, 'Approver', 'approver@pricol.com', NULL, '$2y$12$/EQin4EsqUz4mt3Rog4/SuWqOsj5y6vumaeJeoBnGiW2WSuyOP0mu', 'approver', NULL, '2023-11-27 01:11:12', '2023-11-27 01:11:12');
 
 --
@@ -684,7 +608,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accomadations`
 --
 ALTER TABLE `accomadations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -702,13 +626,13 @@ ALTER TABLE `advances`
 -- AUTO_INCREMENT for table `buses`
 --
 ALTER TABLE `buses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `connectivities`
 --
 ALTER TABLE `connectivities`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -720,13 +644,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `flights`
 --
 ALTER TABLE `flights`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `forexes`
 --
 ALTER TABLE `forexes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -756,19 +680,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `taxis`
 --
 ALTER TABLE `taxis`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `trains`
 --
 ALTER TABLE `trains`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
