@@ -108,12 +108,11 @@
                         <td>Pickup</td>
                         <td>Drop</td>
                         <td>Date/Time</td>
-                        <td>Taxi Type</td>
                     </tr>
                 </thead>
                 <tbody id="Taxibody">
                     @foreach ($trip->taxi as $taxi)
-                    <tr><td>{{ $taxi->origin }}</td><td>{{ $taxi->destination }}</td><td>{{ $taxi->preferred_date }}</td><td>{{ $taxi->trip_taxi }}</td></tr>
+                    <tr><td>{{ $taxi->origin }}</td><td>{{ $taxi->destination }}</td><td>{{ $taxi->preferred_date }}</td></tr>
                     <tr><td colspan="4" class="text-primary" style="font-size:12px;margin:0;">{{ $taxi->preferences }}</td></tr>
                     @endforeach
                 </tbody>

@@ -49,17 +49,7 @@
                     
                       <td> 
                         <a href="{{route('approver.summary',$trip->id)}}" class="btn btn-primary text-white"><i class="bi bi-arrow-right-circle"></i></a>
-                        @if($trip->status == 'pending')
-                        <a href="{{route('approver.approve',$trip->id)}}" class="btn btn-success text-white"><i class="bi bi-check-circle-fill"></i></a>
-                        <a href="{{route('approver.reject',$trip->id)}}" class="btn btn-danger text-white"><i class="bi bi-x-circle-fill"></i></a>
-                        @elseif($trip->status == 'approved')
-                        <p></p>
-                        @elseif($trip->status == 'reject')
-                          <p></p>
-                        @elseif($trip->status == 'clarification')
-                        <a href="{{route('approver.approve',$trip->id)}}" class="btn btn-success text-white"><i class="bi bi-check-circle-fill"></i></a>
-                        <a href="{{route('approver.reject',$trip->id)}}" class="btn btn-danger text-white"><i class="bi bi-x-circle-fill"></i></a>
-                        @endif
+                       
                      </td>
                     
                   </tr>

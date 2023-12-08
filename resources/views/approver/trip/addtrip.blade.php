@@ -143,7 +143,7 @@
                         <td>Pickup</td>
                         <td>Drop</td>
                         <td>Date/Time</td>
-                        <td>Taxi Type</td>
+                        
                         <td></td>
                     </tr>
                 </thead>
@@ -206,7 +206,7 @@
                 <thead>
                     <tr>
                        <td class="fw-bold" colspan="4">
-                           <h6 class="text-primary"> <img src="images/cu.svg" style="background:#0072bc;"> Forex Request</h6>
+                           <h6 class="text-primary"> <img src="{{asset('images/cu.svg')}}" style="background:#0072bc;"> Forex Request</h6>
                        </td> 
                     </tr>
                     <tr>
@@ -294,12 +294,12 @@
     });
    
 
-$('.closeService').on("click",function(){
+  $('.closeService').on("click",function(){
   $('#service-form, #extra-service-form ').trigger('reset');
   
-});
+ });
 
-$('.addService').on("click", function () {
+  $('.addService').on("click", function () {
     
     
 
@@ -333,6 +333,12 @@ $('.addService').on("click", function () {
       var checkIn = $('#checkIn').val();
 
       var checkOut = $('#checkOut').val();
+
+      var checkOutdate = checkOut.split('T')[0];
+    var checkOuttime = checkOut.split('T')[1];
+
+    var checkIndate = checkIn.split('T')[0];
+    var checkIntime = checkIn.split('T')[1];
 
       var amount = $('#amount').val();
 
@@ -371,7 +377,7 @@ $('.addService').on("click", function () {
         }else if ((vehicle == 'Taxi') && (from != '') && (to != '') && (sdate != '') && (tx_class != ''))
         {
           $('.rtx').show();
-          $('#Taxibody').append('<tr><td><input type="hidden" name="taxifrom[]" value="'+ from +'" >'+ from +'</td><td><input type="hidden" name="taxito[]" value="'+ to +'" >'+ to +'</td><td><input type="hidden" name="taxidate[]" value="'+ sdate +'" >'+ date +'/'+ time +'</td><td><input type="hidden" name="taxiclass[]" value="'+ tx_class +'" >'+ tx_class +'</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary" style="font-size:12px;margin:0;">'+ preferences+'</p> <input name="preferences[]" type="hidden" value="'+preferences+'"></td></tr>');
+          $('#Taxibody').append('<tr><td><input type="hidden" name="taxifrom[]" value="'+ from +'" >'+ from +'</td><td><input type="hidden" name="taxito[]" value="'+ to +'" >'+ to +'</td><td><input type="hidden" name="taxidate[]" value="'+ sdate +'" >'+ date +'/'+ time +'</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary" style="font-size:12px;margin:0;">'+ preferences+'</p> <input name="preferences[]" type="hidden" value="'+preferences+'"></td></tr>');
             $("[data-bs-dismiss=modal]").trigger({ type: "click" });
             $('#service-form').trigger('reset');
         }
@@ -382,7 +388,7 @@ $('.addService').on("click", function () {
         case 'Hotel':
           if ((location != '') && (checkIn != '') && (checkOut != '')) {
             $('.rh').show();
-            $('#Hotelbody').append('<tr><td><input type="hidden" name="location[]" value="'+ location +'" >'+ location +'</td><td><input type="hidden" name="checkin[]" value="'+ checkIn +'" >'+ checkIn +'</td><td><input type="hidden" name="checkout[]" value="'+ checkOut +'" >'+ checkOut +'</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>');
+            $('#Hotelbody').append('<tr><td><input type="hidden" name="location[]" value="'+ location +'" >'+ location +'</td><td><input type="hidden" name="checkin[]" value="'+ checkIn +'" >'+ checkIndate +" / "+ checkIntime +'</td><td><input type="hidden" name="checkout[]" value="'+ checkOut +'" >'+ checkOutdate + " / " +  checkOuttime +'</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>');
             $("[data-bs-dismiss=modal]").trigger({ type: "click" });
             $('#extra-service-form').trigger('reset');
             // console.log('passed')
@@ -426,7 +432,7 @@ $('.addService').on("click", function () {
       }
     }
 
-});
+  });
 
  $("body").on("click",".remove",function(){
           alert('Are you sure for delete this request ?');
