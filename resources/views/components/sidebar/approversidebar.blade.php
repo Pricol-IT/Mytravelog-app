@@ -29,12 +29,12 @@
         <ul id="document" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="#">
-              <i class="bi bi-circle"></i><span>Add Trip</span>
+              <i class="bi bi-circle"></i><span>Add Documents</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <i class="bi bi-circle"></i><span>My Trip</span>
+              <i class="bi bi-circle"></i><span>My Documents</span>
             </a>
           </li>
           
@@ -45,14 +45,14 @@
           <i class="bx bxs-wallet"></i><span>Expenses</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="expense" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
+          <!-- <li>
             <a href="#">
               <i class="bi bi-circle"></i><span>Add Trip</span>
             </a>
-          </li>
+          </li> -->
           <li>
             <a href="#">
-              <i class="bi bi-circle"></i><span>My Trip</span>
+              <i class="bi bi-circle"></i><span>My Trip Expenses</span>
             </a>
           </li>
           

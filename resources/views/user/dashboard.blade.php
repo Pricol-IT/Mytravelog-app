@@ -37,8 +37,8 @@
             <section class="section dashboard">
               <div class="row ">
                 <div class="  col-lg-6  col-md-6 ">
-                  <div class="urbox-card urbox rounded  shadow text-white mb-3 ">
-                    <div class="heading d-flex justify-content-between align-items-center mb-3">
+                  <div class="urbox-card urbox rounded  shadow text-white mb-3 d-flex align-items-center justify-content-center">
+                    <!-- <div class="heading d-flex justify-content-between align-items-center mb-3">
                         <h3>My Planned Trip</h3>
                         <a href="#" class="text-decoration-none text-white" style="cursor: pointer;">View More >>></a>
                     </div>
@@ -78,15 +78,16 @@
                             <div class=" shadow indicator m-2"></div>
                             <p>Booked <i class='bx bxs-chevron-right'></i></p>
                         </div>
-                    </div>
+                    </div> -->
+                    <h5 class="text-center">Coming Soon</h5>
                   </div>
                     
                 </div>
 
                 <div class="col-lg-6 col-md-6">
-                    <div class="urbox p-3 mb-3 rounded bg-theme shadow">
+                    <div class="urbox p-3 mb-3 rounded bg-theme shadow d-flex align-items-center justify-content-center">
                         <!-- Default Tabs -->
-                        <ul class="nav nav-tabs d-flex bg-theme divch"  id="myTabjustified"
+                        <!-- <ul class="nav nav-tabs d-flex bg-theme divch"  id="myTabjustified"
                             role="tablist">
                             <li class="nav-item flex-fill" role="presentation">
                                 <button class="nav-link w-100 active" id="Upcoming-tab" data-bs-toggle="tab"
@@ -160,7 +161,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <h5 class="text-center">Coming Soon</h5>
                     </div>
                 </div>
              </div>
