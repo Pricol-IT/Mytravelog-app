@@ -65,8 +65,9 @@ class UserController extends Controller
             'trip_fromdate' => $request->tfdate,
             'trip_todate' => $request->ttdate,
         ];
-        toastr()->success('TripId Generated Successfully');
-        return view('user.trip.addtrip',compact('tripDetails','trips'));
+      toastr()->success('TripId Generated Successfully');
+	return view('user.trip.addtrip',compact('tripDetails','trips'));
+
     }
 
     public function mytripDetails()
