@@ -34,6 +34,10 @@ Route::controller(UserController::class)->prefix('user')->middleware('requester'
     Route::post('/addtrip','addtrip')->name('addtrip');
     Route::put('/storetrip','storetrip')->name('storetrip');
     Route::get('/all_notifications', 'allNotification')->name('user.allnotify');
+    Route::post('/clarification','clarification')->name('user.clarification');
+    Route::get('/draft/{id}', 'draft')->name('user.draft');
+    Route::put('/storedraft','storedraft')->name('storedraft');
+    Route::get('/mysavedtrip', 'mysavedtrip')->name('user.mysavedtrip');
 
 });
 
@@ -52,4 +56,6 @@ Route::controller(ApproverController::class)->prefix('approver')->middleware('ap
     Route::get('/tripApproved/{id}','tripApproved')->name('approver.approve');
     Route::get('/tripReject/{id}','tripReject')->name('approver.reject');
     Route::post('/remarks','remarks')->name('approver.remarks');
+    Route::post('/clarification','clarification')->name('approver.clarification');
+
 });

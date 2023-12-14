@@ -45,6 +45,10 @@ class Trip extends Model
     {
         return $this->hasMany(Forex::class,'trip_id');
     }
+    public function history()
+    {
+        return $this->hasMany(History::class,'trip_id')->orderBy('id','desc');
+    }
 
     public function user()
     {

@@ -212,9 +212,36 @@
                     <p><span class="text-primary">Modified at: </span>{{formatTime($trip->updated_at)}}</p>
                 </div>
                 @if($trip->remarks !== NULL)
-                <div class="remark"><p><span class="text-primary">Remarks: </span>{{$trip->remarks}}</p></div>
+                <div class="remark"><p><b><span class="text-primary">Remarks : </span></b>{{$trip->remarks}}</p></div>
+                @endif
+               
+                @if(count($trip->history)!==0)
+                <div class="remark"><p><b><span class="text-primary">Clarification Messages : </span></b></p></div>
+                @forelse ($trip->history as $history)
+                <li class="d-inline"><p><span class="text-primary">{{ $history->name }}  :</span>  {{$history->remark}} </p> <p style="font-size:12px;">{{$history->created_at}}</p> </li>  
+                @empty
+                    <p></p>
+                @endforelse
+                
                 @endif
             </div>
+          </div>
+          <div class="clarificationform col-lg-6 offset-3 mt-3">
+            @if($trip->status == 'clarification')
+            <form action="{{route('user.clarification')}}" method="post" class="d-flex">
+            @csrf 
+            @method('POST')
+            <input type="hidden" name="trip_id" id="trip_id" value="{{$trip->id}}">
+            <input type="hidden" name="tripid" id="tripid" value="{{$trip->tripid}}">
+            <input type="hidden" name="status" id="clarificationStatus" value="{{$trip->tripid}}">
+            {{-- <label> Remark </label> --}}
+            <input type="text" name="remark" placeholder="type your message" class="form-control" required>
+          
+            <input type="submit" name="submit" class="btn btn-primary"   value="Reply">
+              
+            
+            </form>
+            @endif
           </div>
 
           <div class="col-lg-12 mt-2">
@@ -225,4 +252,13 @@
     </section>
   </main>
 @endsection
+@section('script')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+//$(".clarificationform").hide();
 
+ 
+
+</script>
+@endsection  

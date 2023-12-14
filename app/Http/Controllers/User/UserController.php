@@ -16,6 +16,7 @@ use App\Models\Advance;
 use App\Models\Accomadation;
 use App\Models\Connectivity;
 use App\Models\Forex;
+use App\Models\History;
 
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\User\NewTripNodification;
@@ -64,7 +65,10 @@ class UserController extends Controller
             'tripname' => $request->tripname,
             'trip_fromdate' => $request->tfdate,
             'trip_todate' => $request->ttdate,
+            'tripType' => $request->tripType
+
         ];
+        // return $tripDetails;
         toastr()->success('TripId Generated Successfully');
         return view('user.trip.addtrip',compact('tripDetails','trips'));
     }
@@ -72,7 +76,7 @@ class UserController extends Controller
     public function mytripDetails()
     {
         $user_id = auth()->user()->id;
-        $trips = Trip::where('user_id',$user_id)->orderBy('id','desc')->get();
+        $trips = Trip::where('user_id',$user_id)->where('status','!=','draft')->orderBy('id','desc')->get();
         return view('user.trip.mytrip',compact('trips'));
     }
 
@@ -146,7 +150,7 @@ class UserController extends Controller
                 'tripid' => $request->tripid,
                 'origin' => $request->taxifrom[$i],
                 'destination' => $request->taxito[$i],
-                'trip_taxi' => $request->taxiclass[$i],
+                // 'trip_taxi' => $request->taxiclass[$i],
                 'preferred_date' => $request->taxidate[$i],
                 'preferences' => $request->preferences[$i],
               ];
@@ -227,12 +231,62 @@ class UserController extends Controller
     public function viewsummary($id)
     {
         // $trip = Trip::find($id)->first();
-        $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation', 'advance', 'connectivity', 'forex'])->find($id);
+        $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation', 'advance', 'connectivity', 'forex', 'history'])->find($id);
 
-        return view('user.trip.summary', compact('trip'));
+        // return view('user.trip.summary', compact('trip'));
 
-         // return $trip;
+         return $trip;
     }
 
+    public function clarification(Request $request){
+      $user_id = auth()->user();
+       
+      $newRemark = [
+        'trip_id' => $request->trip_id,
+        'tripid' => $request->tripid,
+        'role' => $user_id->role,
+        'name'=> $user_id->name,
+        'remark'=> $request->remark,
+      ];
+
+      
+
+      $history = History::create($newRemark);
+      
+      if($history){
+        $trip = Trip::find($request->trip_id)->update(['status' =>'pending']);
+        toastr()->success('Clarification Remarks Added Successfully');
+        return redirect()->route('user.mytrip'); 
+
+        }
+        else
+        {
+            toastr()->danger('Something Went Wrong');
+        return back();            
+        }
+      
+        
+    }
+
+    public function draft($id)
+    {
+        // $trip = Trip::find($id)->first();
+        $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation', 'advance', 'connectivity', 'forex', 'history'])->find($id);
+
+        return view('user.trip.draft', compact('trip'));
+
+        //  return ($trip);
+    }
     
+    public function storedraft(Request $request)
+    {
+      return $request;
+    }
+
+    public function mysavedtrip()
+    {
+        $user_id = auth()->user()->id;
+        $trips = Trip::where('user_id',$user_id)->where('status','=','draft')->orderBy('id','desc')->get();
+        return view('user.trip.mysavedtrip',compact('trips'));
+    }
 }

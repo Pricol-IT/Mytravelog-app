@@ -205,6 +205,9 @@
             @endif
           </div>
 
+
+
+
           <div class="col-lg-12">
             <div class="created-log bg-white p-3">
                 <div class="date-log d-flex justify-content-between">
@@ -212,10 +215,24 @@
                     <p><span class="text-primary">Modified at: </span>{{formatTime($trip->updated_at)}}</p>
                 </div>
                 @if($trip->remarks !== NULL)
-                <div class="remark"><p><span class="text-primary">Remarks: </span>{{$trip->remarks}}</p></div>
+                <div class="remark"><p><b><span class="text-primary">Remarks : </span></b>{{$trip->remarks}}</p></div>
+                @endif
+               
+                @if($trip->history !== NULL)
+                <div class="remark"><p><b><span class="text-primary">Clarification Messages : </span></b></p></div>
+                @forelse ($trip->history as $history)
+                <li class="d-inline"><p><span class="text-primary">{{ $history->name }}  :</span>  {{$history->remark}} </p> <p style="font-size:12px;">{{$history->created_at}}</p> </li>  
+                @empty
+                    <p></p>
+                @endforelse
+                
                 @endif
             </div>
           </div>
+
+
+
+
 
           <div class=" remarkform col-lg-6 offset-3 mt-3">
             
@@ -232,6 +249,21 @@
           
           </form>
           </div>
+          <div class="clarificationform col-lg-6 offset-3 mt-3">
+            <form action="{{route('approver.clarification')}}" method="post" class="d-flex">
+            @csrf 
+            @method('POST')
+            <input type="hidden" name="trip_id" id="trip_id" value="{{$trip->id}}">
+            <input type="hidden" name="tripid" id="tripid" value="{{$trip->tripid}}">
+            <input type="hidden" name="status" id="clarificationStatus" value="{{$trip->tripid}}">
+            <label> Remark </label>
+            <input type="text" name="remark" placeholder="Enter the remark" class="form-control" required>
+          
+            <input type="submit" name="submit" class="btn btn-primary"   value="Save">
+              
+            
+            </form>
+          </div>
           
           <div class="col-lg-12 mt-3">
               <center>
@@ -239,7 +271,7 @@
                 @if($trip->status == 'pending')
                         <a href="#."  class="btnStatus btn btn-success text-white" data1="approved" data="{{$trip->id}}"><i class="bi bi-check-circle-fill"></i> Approve</a>
                         <a href="#." data="{{$trip->id}}" class="btnStatus btn btn-danger text-white" data1="reject"><i class="bi bi-x-circle-fill"></i> Reject</a>
-                        <button type="button" class="btnStatus  btn btn-warning text-white" data1="clarification" data="{{$trip->id}}"><i class="bx bx-chat"></i> Clarification </button>
+                        <button type="button" class="btnClarification   btn btn-warning text-white" data1="clarification" data="{{$trip->id}}"><i class="bx bx-chat"></i> Clarification </button>
                         @elseif($trip->status == 'approved')
                         <p></p>
                         @elseif($trip->status == 'reject')
@@ -247,7 +279,7 @@
                         @elseif($trip->status == 'clarification')
                         <a href="#."  class="btnStatus btn btn-success text-white" data1="approved" data="{{$trip->id}}"><i class="bi bi-check-circle-fill"></i> Approve</a>
                         <a href="#." data="{{$trip->id}}" class="btnStatus btn btn-danger text-white" data1="reject"><i class="bi bi-x-circle-fill"></i> Reject</a>
-                        <button type="button" class="btnStatus  btn btn-warning text-white" data1="clarification" data="{{$trip->id}}"><i class="bx bx-chat"></i> Clarification </button>
+                        <button type="button" class="btnClarification  btn btn-warning text-white" data1="clarification" data="{{$trip->id}}"><i class="bx bx-chat"></i> Clarification </button>
                          @endif
                         <a href="{{ url()->previous() }}" class="btn btn-secondary text-center">Back</a>
             </center>
@@ -270,11 +302,27 @@
 
   $("body").on("click",".btnStatus",function(){
 $(".remarkform").show();
+$(".clarificationform").hide();
           var tripid = $(this).attr("data");
           var status = $(this).attr("data1");
           
           $('#tripid').val(tripid);
           $('#status').val(status);
+          $('#displaystatus').html('<span>'+ status + '</span>');
+        //   $('#basicModal').modal('show');
+        });
+        
+        
+        $(".clarificationform").hide();
+
+  $("body").on("click",".btnClarification ",function(){
+$(".clarificationform").show();
+$(".remarkform").hide();
+          var tripid = $(this).attr("data");
+          var status = $(this).attr("data1");
+          
+          $('#tripid').val(tripid);
+          $('#clarificationStatus').val(status);
           $('#displaystatus').html('<span>'+ status + '</span>');
         //   $('#basicModal').modal('show');
         });

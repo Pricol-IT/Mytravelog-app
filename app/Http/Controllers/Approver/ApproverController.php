@@ -15,6 +15,7 @@ use App\Models\Advance;
 use App\Models\Accomadation;
 use App\Models\Connectivity;
 use App\Models\Forex;
+use App\Models\History;
 
 class ApproverController extends Controller
 {
@@ -201,7 +202,7 @@ class ApproverController extends Controller
     public function viewsummary($id)
     {
         // $trip = Trip::find($id)->first();
-        $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation', 'advance', 'connectivity', 'forex'])->find($id);
+        $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation', 'advance', 'connectivity', 'forex', 'history'])->find($id);
 
         return view('approver.trip.summary', compact('trip'));
 
@@ -271,6 +272,38 @@ class ApproverController extends Controller
             toastr()->danger('Something Went Wrong');
         return back();            
         }
+        
+    }
+
+    public function clarification(Request $request){
+      $user_id = auth()->user();
+       
+      $newRemark = [
+        'trip_id' => $request->trip_id,
+        'tripid' => $request->tripid,
+        'role' => $user_id->role,
+        'name'=> $user_id->name,
+        'remark'=> $request->remark,
+      ];
+
+      // return $newRemark;
+
+      $history = History::create($newRemark);
+      
+      if($history){
+        $trip = Trip::find($request->trip_id)->update(['status' =>'clarification']);
+        toastr()->success('Clarification Remarks Added Successfully');
+        return redirect()->route('approver.alltrip');
+        // $histories = History::orderBy('created_at','desc')->get();
+        // return view('approver.trip.summary', compact('histories')); 
+
+        }
+        else
+        {
+            toastr()->danger('Something Went Wrong');
+        return back();            
+        }
+      
         
     }
 }
