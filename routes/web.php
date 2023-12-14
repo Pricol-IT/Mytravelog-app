@@ -57,5 +57,8 @@ Route::controller(ApproverController::class)->prefix('approver')->middleware('ap
     Route::get('/tripReject/{id}','tripReject')->name('approver.reject');
     Route::post('/remarks','remarks')->name('approver.remarks');
     Route::post('/clarification','clarification')->name('approver.clarification');
+    Route::get('/draft/{id}', 'draft')->name('approver.draft');
+    Route::put('/storedraft','storedraft')->name('approver.storedraft');
+    Route::get('/mysavedtrip', 'mysavedtrip')->name('approver.mysavedtrip');
 
 });

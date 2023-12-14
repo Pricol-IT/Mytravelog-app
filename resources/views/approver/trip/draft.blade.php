@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('approver.layouts.app')
 @section('title')
     {{ __('Add Trip') }}
 @endsection
@@ -89,6 +89,7 @@
                     <div class="col-lg-6"><input type="text" name="purpose" required class=" form-control mb-3"
                             placeholder="Purpose Of Trip" value="{{ $trip->purpose }}"></div>
                 </div>
+                {{-- {{ $trip }} --}}
                 <div class="row" id="request">
                     <div class="col-lg-12">
                         <h4 class="mb-4">Request Summary</h4>
@@ -679,7 +680,7 @@
         $("body").on("click", ".saveAlert", function() {
             alert(
                 'All requests will now be forwarded to the approver for review. Edit options are no longer available.'
-                );
+            );
 
         });
 

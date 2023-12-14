@@ -54,7 +54,7 @@ class ApproverController extends Controller
     public function mytripDetails()
     {
         $user_id = auth()->user()->id;
-        $trips = Trip::where('user_id',$user_id)->orderBy('id','desc')->get();
+        $trips = Trip::where('user_id',$user_id)->where('status','!=','draft')->orderBy('id','desc')->get();
         return view('approver.trip.mytrip',compact('trips'));
     }
 
@@ -212,7 +212,7 @@ class ApproverController extends Controller
     public function OthersDetails()
     {
         $user_id = auth()->user()->id;
-        $trips = Trip::where('user_id','!=',$user_id)->orderBy('id','desc')->get();
+        $trips = Trip::where('user_id','!=',$user_id)->where('status','!=','draft')->orderBy('id','desc')->get();
         return view('approver.trip.alltrip',compact('trips'));
     }
 
@@ -304,6 +304,27 @@ class ApproverController extends Controller
         return back();            
         }
       
+      }
+        public function draft($id){
+        // $trip = Trip::find($id)->first();
+        $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation', 'advance', 'connectivity', 'forex', 'history'])->find($id);
+
+        return view('approver.trip.draft', compact('trip'));
+
+        //  return ($trip);
+    }
+    
+    public function storedraft(Request $request)
+    {
+      return $request;
+    }
+
+    public function mysavedtrip()
+    {
+        $user_id = auth()->user()->id;
+        $trips = Trip::where('user_id',$user_id)->where('status','=','draft')->orderBy('id','desc')->get();
+        return view('approver.trip.mysavedtrip',compact('trips'));
+    }
         
     }
-}
+
