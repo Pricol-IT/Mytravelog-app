@@ -62,3 +62,4 @@ Route::controller(ApproverController::class)->prefix('approver')->middleware('ap
     Route::get('/mysavedtrip', 'mysavedtrip')->name('approver.mysavedtrip');
 
 });
+
