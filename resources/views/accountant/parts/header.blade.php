@@ -1,7 +1,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('user.home') }}" class="logo d-flex align-items-center">
+        <a href="{{ route('accountant.home') }}" class="logo d-flex align-items-center">
             <img src="{{ asset('assets/img/logo.png') }}" alt="">
 
         </a>
@@ -16,25 +16,22 @@
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-bell"></i>
-                    <span class="badge bg-primary badge-number"> {{ userNotificationsCount() }}</span>
+                    {{-- <span class="badge bg-primary badge-number">{{ accountantNotificationsCount() }}</span> --}}
                 </a><!-- End Notification Icon -->
 
-
-
-
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                    <li class="dropdown-header">
-                        You have {{ userNotificationsCount() }} new notifications
+                    {{-- <li class="dropdown-header">
+                        You have {{ accountantNotificationsCount() }} new notifications
                         <!-- <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a> -->
                     </li>
                     @php
-                        $notifications = userNotifications();
+                        $notifications = accountantNotifications();
                     @endphp
                     @forelse($notifications as $notification)
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        @if ($notification->type == 'App\Notifications\User\NewTripNodification')
+                        @if ($notification->type == 'App\Notifications\Approver\TripAddedNodification')
                             <a href="{{ $notification->data['url'] }}">
                                 <li class="notification-item">
                                     <i class="bi bi-check-circle text-success"></i>
@@ -56,11 +53,9 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                    @endforelse
-
-
+                    @endforelse --}}
                     <li class="dropdown-footer">
-                        <a href="{{ route('user.allnotify') }}">Show all notifications</a>
+                        <a href="#">Show all notifications</a>
                     </li>
 
                 </ul><!-- End Notification Dropdown Items -->

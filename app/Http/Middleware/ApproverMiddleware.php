@@ -23,6 +23,10 @@ class ApproverMiddleware
             return redirect()->route('user.home');
         }
 
+        if (authUser()->role == 'accountant') {
+            return redirect()->route('accountant.home');
+        }
+
         return redirect()->route('login');
     }
 }

@@ -8,6 +8,7 @@ include base_path('routes/admin.php');
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Approver\ApproverController;
+use App\Http\Controllers\Accountant\AccountantController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,5 +62,10 @@ Route::controller(ApproverController::class)->prefix('approver')->middleware('ap
     Route::put('/storedraft','storedraft')->name('approver.storedraft');
     Route::get('/mysavedtrip', 'mysavedtrip')->name('approver.mysavedtrip');
 
+});
+
+Route::controller(AccountantController::class)->prefix('accountant')->middleware('accountant')->group(function () {
+    
+    Route::get('/dashboard', 'index')->name('accountant.home');
 });
 

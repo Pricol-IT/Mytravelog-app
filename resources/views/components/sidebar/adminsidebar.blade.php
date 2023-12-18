@@ -10,3 +10,9 @@
           <span>All Users</span>
       </a>
   </li>
+  <li class="nav-item">
+      <a class="nav-link " href="{{ route('service_master.index') }}">
+          <i class='bx bxs-plug'></i>
+          <span>Service Master</span>
+      </a>
+  </li>

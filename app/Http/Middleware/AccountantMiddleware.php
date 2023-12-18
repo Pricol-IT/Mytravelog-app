@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RequesterMiddleware
+class AccountantMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,8 @@ class RequesterMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // return $next($request);
 
-        if (authUser()->role == 'user') {
+        if (authUser()->role == 'accountant') {
             return $next($request);
         }
 
@@ -25,10 +24,10 @@ class RequesterMiddleware
             return redirect()->route('approver.home');
         }
 
-        if (authUser()->role == 'accountant') {
-            return redirect()->route('accountant.home');
+        if (authUser()->role == 'user') {
+            return redirect()->route('user.home');
         }
-
+        
         return redirect()->route('login');
     }
 }

@@ -262,7 +262,7 @@ class UserController extends Controller
         else
         {
             toastr()->danger('Something Went Wrong');
-        return back();            
+            return back();            
         }
       
         
