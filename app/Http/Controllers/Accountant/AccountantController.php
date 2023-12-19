@@ -5,6 +5,19 @@ namespace App\Http\Controllers\Accountant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use DB;
+use Carbon\Carbon;
+use App\Models\Trip;
+use App\Models\Flight;
+use App\Models\Train;
+use App\Models\Taxi;
+use App\Models\Bus;
+use App\Models\Advance;
+use App\Models\Accomadation;
+use App\Models\Connectivity;
+use App\Models\Forex;
+use App\Models\History;
+
 class AccountantController extends Controller
 {
     public function __construct()
@@ -64,5 +77,37 @@ class AccountantController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function allrequests()
+    {
+        $advances = Advance::with('trip')->whereHas('trip', function ($query) {
+            $query->where('status', 'approved');
+        })->orderBy('id', 'desc')->get();
+        return view('accountant.advance.allrequests', compact('advances'));
+        // return $advances;
+    }
+    public function notprocessed()
+    {
+        $advances = Advance::with('trip')->whereHas('trip', function ($query) {
+            $query->where('status', 'approved');
+        })->where('status', 'not processed')->orderBy('id', 'desc')->get();
+        return view('accountant.advance.notprocessed', compact('advances'));
+    }
+
+    public function inprogress()
+    {
+        $advances = Advance::with('trip')->whereHas('trip', function ($query) {
+            $query->where('status', 'approved');
+        })->where('status', 'inprogress')->orderBy('id', 'desc')->get();
+        return view('accountant.advance.inprogress', compact('advances'));
+    }
+
+    public function completed()
+    {
+        $advances = Advance::with('trip')->whereHas('trip', function ($query) {
+            $query->where('status', 'approved');
+        })->where('status', 'completed')->orderBy('id', 'desc')->get();
+        return view('accountant.advance.completed', compact('advances'));
     }
 }

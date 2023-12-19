@@ -264,7 +264,7 @@
                             </div>
                         @endif
 
-                        @if ($trip->history !== null)
+                        @if (count($trip->history) !== 0)
                             <div class="remark">
                                 <p><b><span class="text-primary">Clarification Messages : </span></b></p>
                             </div>
