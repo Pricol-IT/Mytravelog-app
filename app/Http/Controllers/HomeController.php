@@ -33,7 +33,15 @@ class HomeController extends Controller
         } elseif (auth('user')->check() && authUser()->role == 'approver') {
 
             return redirect()->route('approver.home');
+        } elseif (auth('user')->check() && authUser()->role == 'accountant') {
+
+            return redirect()->route('accountant.home');
+        } elseif (auth('user')->check() && authUser()->role == 'travels') {
+
+            return redirect()->route('travels.home');
         }
+
+
 
         return redirect('login');
     }

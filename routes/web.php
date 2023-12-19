@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Travels\TravelsController;
 use Illuminate\Support\Facades\Route;
 
 include base_path('routes/admin.php');
@@ -65,7 +66,12 @@ Route::controller(ApproverController::class)->prefix('approver')->middleware('ap
 });
 
 Route::controller(AccountantController::class)->prefix('accountant')->middleware('accountant')->group(function () {
-    
+
     Route::get('/dashboard', 'index')->name('accountant.home');
+});
+
+Route::controller(TravelsController::class)->prefix('travels')->middleware('travels')->group(function () {
+    
+    Route::get('/dashboard', 'index')->name('travels.home');
 });
 

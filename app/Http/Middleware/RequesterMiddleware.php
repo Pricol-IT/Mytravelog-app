@@ -29,6 +29,10 @@ class RequesterMiddleware
             return redirect()->route('accountant.home');
         }
 
+        if (authUser()->role == 'travels') {
+            return redirect()->route('travels.home');
+        }
+
         return redirect()->route('login');
     }
 }

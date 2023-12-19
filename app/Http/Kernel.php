@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'requester' => \App\Http\Middleware\RequesterMiddleware::class,
         'approver' => \App\Http\Middleware\ApproverMiddleware::class,
         'accountant' => \App\Http\Middleware\AccountantMiddleware::class,
+        'travels' => \App\Http\Middleware\TravelsMiddleware::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'precognitive' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
         'signed' => \App\Http\Middleware\ValidateSignature::class,
