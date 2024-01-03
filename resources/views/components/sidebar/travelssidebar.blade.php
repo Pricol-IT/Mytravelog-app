@@ -15,12 +15,13 @@
             </a>
         </li>
         <li>
+
             <a href="{{ route('travels.notprocessed') }}">
                 <i class="bi bi-circle"></i><span>Not Processed Requests</span>
             </a>
         </li>
         <li>
-            <a href="{{ route('travels.inprogress') }}">
+            <a href="{{ route('travels.inprogress') }}" title=" ">
                 <i class="bi bi-circle"></i><span>In-progress Requests</span>
             </a>
         </li>

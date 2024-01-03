@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
 use App\Models\Trip;
+use App\Models\User;
 use App\Models\Flight;
 use App\Models\Train;
 use App\Models\Taxi;
@@ -16,6 +17,10 @@ use App\Models\Accomadation;
 use App\Models\Connectivity;
 use App\Models\Forex;
 use App\Models\History;
+
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\User\NewTripNodification;
+use App\Notifications\Approver\TripAddedNodification;
 
 class ApproverController extends Controller
 {
@@ -66,6 +71,11 @@ class ApproverController extends Controller
 
   public function storetrip(Request $request)
   {
+    if ($request->submit == 'Save My Trip') {
+      $status = 'draft';
+    } else {
+      $status = 'pending';
+    }
 
     $user_id = auth()->user()->id;
     $tripDetails = [
@@ -75,6 +85,7 @@ class ApproverController extends Controller
       'from_date' => $request->from_date,
       'to_date' => $request->to_date,
       'purpose' => $request->purpose,
+      'status' => $status,
     ];
     $trip = Trip::create($tripDetails);
     $tripid = $trip->id;
@@ -186,12 +197,12 @@ class ApproverController extends Controller
       }
 
     }
-    if ($trip) {
+    if ($status == 'pending') {
       toastr()->success('Trip Submitted for Approval');
       return redirect()->route('approver.mytrip');
     } else {
-      toastr()->success('Something Went Wrong, Please try again!');
-      return back();
+      toastr()->success('Saved your trip');
+      return redirect()->route('approver.mysavedtrip');
     }
   }
 
@@ -307,9 +318,285 @@ class ApproverController extends Controller
     //  return ($trip);
   }
 
-  public function storedraft(Request $request)
+  public function storedraft(Request $request, $id)
   {
-    return $request;
+
+    if ($request->submit == 'Send for Approval') {
+      Trip::find($id)->update(['status' => 'pending']);
+      $status = 'pending';
+      return $status;
+    } else {
+      $status = 'draft';
+      return $status;
+    }
+
+    $user_id = auth()->user()->id;
+
+    $tripid = $id;
+
+    if ($request->flightfrom) {
+      $flight_id = Flight::where('trip_id', $id)->get();
+      if ($flight_id) {
+        Flight::where('trip_id', $id)->delete();
+        for ($i = 0; $i < count($request->flightfrom); $i++) {
+          $flight = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'origin' => $request->flightfrom[$i],
+            'destination' => $request->flightto[$i],
+            'trip_class' => $request->flightclass[$i],
+            'preferred_date' => $request->flightdate[$i],
+            'preferences' => $request->preferences[$i],
+          ];
+          Flight::create($flight);
+          // return $flights;
+
+        }
+      } else {
+
+        for ($i = 0; $i < count($request->flightfrom); $i++) {
+          $flight = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'origin' => $request->flightfrom[$i],
+            'destination' => $request->flightto[$i],
+            'trip_class' => $request->flightclass[$i],
+            'preferred_date' => $request->flightdate[$i],
+            'preferences' => $request->preferences[$i],
+          ];
+          Flight::create($flight);
+          // return $flight;
+        }
+      }
+    }
+
+
+    if ($request->trainfrom) {
+      $train_id = Train::where('trip_id', $id)->get();
+      if ($train_id) {
+        Train::where('trip_id', $id)->delete();
+        for ($i = 0; $i < count($request->trainfrom); $i++) {
+          $train = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'origin' => $request->trainfrom[$i],
+            'destination' => $request->trainto[$i],
+            'trip_class' => $request->trainclass[$i],
+            'preferred_date' => $request->traindate[$i],
+            'preferences' => $request->preferences[$i],
+          ];
+          Train::create($train);
+        }
+
+      } else {
+        for ($i = 0; $i < count($request->trainfrom); $i++) {
+          $train = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'origin' => $request->trainfrom[$i],
+            'destination' => $request->trainto[$i],
+            'trip_class' => $request->trainclass[$i],
+            'preferred_date' => $request->traindate[$i],
+            'preferences' => $request->preferences[$i],
+          ];
+          Train::create($train);
+        }
+      }
+    }
+
+
+    if ($request->busfrom) {
+      $bus_id = Bus::where('trip_id', $id)->get();
+      if ($bus_id) {
+        Bus::where('trip_id', $id)->delete();
+        for ($i = 0; $i < count($request->busfrom); $i++) {
+          $bus = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'origin' => $request->busfrom[$i],
+            'destination' => $request->busto[$i],
+            'trip_class' => $request->busclass[$i],
+            'preferred_date' => $request->busdate[$i],
+            'preferences' => $request->preferences[$i],
+          ];
+          Bus::create($bus);
+        }
+      } else {
+        for ($i = 0; $i < count($request->busfrom); $i++) {
+          $bus = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'origin' => $request->busfrom[$i],
+            'destination' => $request->busto[$i],
+            'trip_class' => $request->busclass[$i],
+            'preferred_date' => $request->busdate[$i],
+            'preferences' => $request->preferences[$i],
+          ];
+          Bus::create($bus);
+        }
+      }
+    }
+
+
+    if ($request->taxifrom) {
+      $taxi_id = Taxi::where('trip_id', $id)->get();
+      if ($taxi_id) {
+        Taxi::where('trip_id', $id)->delete();
+        for ($i = 0; $i < count($request->taxifrom); $i++) {
+          $taxi = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'origin' => $request->taxifrom[$i],
+            'destination' => $request->taxito[$i],
+            // 'trip_taxi' => $request->taxiclass[$i],
+            'preferred_date' => $request->taxidate[$i],
+            'preferences' => $request->preferences[$i],
+          ];
+          Taxi::create($taxi);
+        }
+
+      } else {
+        for ($i = 0; $i < count($request->taxifrom); $i++) {
+          $taxi = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'origin' => $request->taxifrom[$i],
+            'destination' => $request->taxito[$i],
+            // 'trip_taxi' => $request->taxiclass[$i],
+            'preferred_date' => $request->taxidate[$i],
+            'preferences' => $request->preferences[$i],
+          ];
+          Taxi::create($taxi);
+        }
+      }
+    }
+
+
+    if ($request->location) {
+      $hotel_id = Accomadation::where('trip_id', $id)->get();
+      if ($hotel_id) {
+        Accomadation::where('trip_id', $id)->delete();
+        for ($i = 0; $i < count($request->location); $i++) {
+          $hotel = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'location' => $request->location[$i],
+            'checkin' => $request->checkin[$i],
+            'checkout' => $request->checkout[$i],
+          ];
+          Accomadation::create($hotel);
+        }
+
+      } else {
+        for ($i = 0; $i < count($request->location); $i++) {
+          $hotel = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'location' => $request->location[$i],
+            'checkin' => $request->checkin[$i],
+            'checkout' => $request->checkout[$i],
+          ];
+          Accomadation::create($hotel);
+        }
+      }
+    }
+
+    if ($request->amount) {
+      $amount_id = Advance::where('trip_id', $id)->get();
+      if ($amount_id) {
+        Advance::where('trip_id', $id)->delete();
+        for ($i = 0; $i < count($request->amount); $i++) {
+          $advance = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'amount' => $request->amount[$i],
+            'purpose' => $request->apurpose[$i],
+          ];
+          Advance::create($advance);
+        }
+
+      } else {
+        for ($i = 0; $i < count($request->amount); $i++) {
+          $advance = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'amount' => $request->amount[$i],
+            'purpose' => $request->apurpose[$i],
+          ];
+          Advance::create($advance);
+        }
+      }
+    }
+
+
+    if ($request->network) {
+      $network_id = Connectivity::where('trip_id', $id)->get();
+      if ($network_id) {
+        Connectivity::where('trip_id', $id)->delete();
+        for ($i = 0; $i < count($request->network); $i++) {
+          $connect = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'connection' => $request->network[$i],
+          ];
+          Connectivity::create($connect);
+        }
+
+      } else {
+        for ($i = 0; $i < count($request->network); $i++) {
+          $connect = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'connection' => $request->network[$i],
+          ];
+          Connectivity::create($connect);
+        }
+      }
+    }
+
+
+    if ($request->currency) {
+      $currency_id = Forex::where('trip_id', $id)->get();
+      if ($currency_id) {
+        Forex::where('trip_id', $id)->delete();
+        for ($i = 0; $i < count($request->currency); $i++) {
+          $forex = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'currency' => $request->currency[$i],
+            'amount' => $request->forex_amount[$i],
+          ];
+          Forex::create($forex);
+        }
+
+      } else {
+        for ($i = 0; $i < count($request->currency); $i++) {
+          $forex = [
+            'trip_id' => $tripid,
+            'tripid' => $request->tripid,
+            'currency' => $request->currency[$i],
+            'amount' => $request->forex_amount[$i],
+          ];
+          Forex::create($forex);
+        }
+      }
+    }
+    if ($status == 'pending') {
+      $user = auth('user')->user();
+      Notification::send($user, new NewTripNodification());
+      $approvers = User::where('role', 'approver')->get();
+
+      foreach ($approvers as $approver) {
+        $approver->notify(new TripAddedNodification($user));
+      }
+      toastr()->success('Trip Submitted for Approval');
+      return redirect()->route('approver.mytrip');
+    } else {
+      toastr()->success('Saved your trip');
+      return redirect()->route('approver.mysavedtrip');
+    }
+    // return $id;
+    
   }
 
   public function mysavedtrip()

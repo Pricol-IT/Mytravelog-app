@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <form method="POST" action="{{ route('storedraft') }}">
+            <form method="POST" action="{{ route('storedraft', $trip->id) }}">
 
                 @csrf
                 @method('PUT')
@@ -414,7 +414,7 @@
                             <input type="submit" name="submit" class="btn btn-primary saveAlert"
                                 value="Send for Approval">
                             <input type="submit" name="submit" class="btn btn-secondary" value="Save My Trip">
-                            <a href="{{ route('user.home') }}" class="btn btn-danger">Cancel</a>
+                            <a href="{{ route('approver.home') }}" class="btn btn-danger">Cancel</a>
                         </center>
                     </div>
                 </div>

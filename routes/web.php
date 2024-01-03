@@ -22,13 +22,17 @@ use App\Http\Controllers\Accountant\AccountantController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
+
+Route::get('/', [HomeController::class, 'dashboard'])->name('home');
+
 Route::middleware('auth:user', 'verified')->group(function () {
     // Dashboard Route
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('user.dashboard');
 });
+
 Auth::routes();
 Route::controller(UserController::class)->prefix('user')->middleware('requester')->group(function () {
     Route::get('/dashboard', 'index')->name('user.home');
@@ -39,7 +43,7 @@ Route::controller(UserController::class)->prefix('user')->middleware('requester'
     Route::get('/all_notifications', 'allNotification')->name('user.allnotify');
     Route::post('/clarification', 'clarification')->name('user.clarification');
     Route::get('/draft/{id}', 'draft')->name('user.draft');
-    Route::put('/storedraft', 'storedraft')->name('storedraft');
+    Route::put('/storedraft/{id}', 'storedraft')->name('storedraft');
     Route::get('/mysavedtrip', 'mysavedtrip')->name('user.mysavedtrip');
 
 });
@@ -61,7 +65,7 @@ Route::controller(ApproverController::class)->prefix('approver')->middleware('ap
     Route::post('/remarks', 'remarks')->name('approver.remarks');
     Route::post('/clarification', 'clarification')->name('approver.clarification');
     Route::get('/draft/{id}', 'draft')->name('approver.draft');
-    Route::put('/storedraft', 'storedraft')->name('approver.storedraft');
+    Route::put('/storedraft/{id}', 'storedraft')->name('approver.storedraft');
     Route::get('/mysavedtrip', 'mysavedtrip')->name('approver.mysavedtrip');
 
 });
@@ -73,6 +77,8 @@ Route::controller(AccountantController::class)->prefix('accountant')->middleware
     Route::get('/notprocessed', 'notprocessed')->name('accountant.notprocessed');
     Route::get('/inprogress', 'inprogress')->name('accountant.inprogress');
     Route::get('/completed', 'completed')->name('accountant.completed');
+    Route::get('/viewsummary/{id}', 'viewsummary')->name('accountant.summary');
+    Route::get('/startproceed/{id}', 'startproceed')->name('accountant.startproceed');
 });
 
 Route::controller(TravelsController::class)->prefix('travels')->middleware('travels')->group(function () {
@@ -82,5 +88,6 @@ Route::controller(TravelsController::class)->prefix('travels')->middleware('trav
     Route::get('/notprocessed', 'notprocessed')->name('travels.notprocessed');
     Route::get('/inprogress', 'inprogress')->name('travels.inprogress');
     Route::get('/completed', 'completed')->name('travels.completed');
+    Route::get('/viewsummary/{id}', 'viewsummary')->name('travels.summary');
 });
 

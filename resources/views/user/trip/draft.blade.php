@@ -73,7 +73,9 @@
                     </div>
                 </div>
             </div>
-            <form method="POST" action="{{ route('storedraft') }}">
+
+
+            <form method="POST" action="{{ route('storedraft', $trip->id) }}">
 
                 @csrf
                 @method('PUT')
@@ -679,7 +681,7 @@
         $("body").on("click", ".saveAlert", function() {
             alert(
                 'All requests will now be forwarded to the approver for review. Edit options are no longer available.'
-                );
+            );
 
         });
 

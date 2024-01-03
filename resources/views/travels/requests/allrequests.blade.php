@@ -7,22 +7,22 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-4">
-                    {{-- <a href="{{ route('approver.pendingtrip') }}"> --}}
-                    <div class="card ">
-                        <div class="card-body">
-                            <h5 class="card-title">Not Processed</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="p-2 rounded-circle border border-primary text-primary">
-                                    <i class="bx bx-trip fs-4"></i>
-                                </div>
-                                <div class="ps-3">
-                                    {{-- <h6>{{ App\Models\Trip::where('status', 'pending')->count() }}</h6> --}}
-                                    <h6>6</h6>
+                    <a href="{{ route('travels.notprocessed') }}">
+                        <div class="card ">
+                            <div class="card-body">
+                                <h5 class="card-title">Not Processed</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="p-2 rounded-circle border border-primary text-primary">
+                                        <i class="bx bx-trip fs-4"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        {{-- <h6>{{ App\Models\Trip::where('status', 'pending')->count() }}</h6> --}}
+                                        <h6>6</h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {{-- </a> --}}
+                    </a>
                 </div>
 
                 <div class="col-lg-4">
@@ -128,11 +128,10 @@
                                                 <td><span class="bg-primary badge">Not Processed</span></td>
 
                                                 <td>
-                                                    {{-- <a href="{{ route('approver.summary', $trip->id) }}"
+                                                    <a href="{{ route('travels.summary', $trip->id) }}"
                                                         class="btn btn-primary text-white"><i
-                                                            class="bi bi-arrow-right-circle"></i></a> --}}
-                                                    <a href="#" class="btn btn-primary text-white"><i
                                                             class="bi bi-arrow-right-circle"></i></a>
+
 
                                                 </td>
                                             </tr>

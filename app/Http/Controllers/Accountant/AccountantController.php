@@ -50,9 +50,12 @@ class AccountantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function viewsummary(string $id)
     {
-        //
+        $advance = Advance::find($id);
+
+        return view('accountant.advance.summary', compact('advance'));
+        // return dd($advance);
     }
 
     /**
@@ -109,5 +112,16 @@ class AccountantController extends Controller
             $query->where('status', 'approved');
         })->where('status', 'completed')->orderBy('id', 'desc')->get();
         return view('accountant.advance.completed', compact('advances'));
+    }
+
+    public function startproceed( $id)
+    {
+        Advance::where('trip_id', $id)->update(['status' => 'inprogress']);
+        $advance = Advance::where('trip_id', $id)->get();
+        return view('accountant.advance.summary', compact('advance'));
+        // return redirect()->route('accountant.summary', ['id' => $id]);
+        // return $advance;
+        // return $id;
+
     }
 }

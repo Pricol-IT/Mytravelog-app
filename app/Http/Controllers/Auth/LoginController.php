@@ -31,6 +31,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+
     /**
      * Create a new controller instance.
      *
@@ -50,19 +51,19 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         // Define an array of session keys to retain and restore
-        
-    
+
+
         // Create an array to store the session data
-        
-    
+
+
         $this->guard()->logout();
-    
+
         $request->session()->invalidate();
-    
+
         $request->session()->regenerateToken();
-    
+
         // Restore specific session data
-    
+
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect()->route('login');

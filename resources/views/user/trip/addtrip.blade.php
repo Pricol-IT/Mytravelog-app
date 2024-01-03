@@ -244,7 +244,7 @@
                     <div class="col-lg-12">
                         <center>
                             <input type="submit" name="submit" class="btn btn-primary" value="Send for Approval">
-                            <input type="#" name="#" class="btn btn-secondary" value="Save My Trip">
+                            <input type="submit" name="submit" class="btn btn-secondary" value="Save My Trip">
                             <a href="{{ route('user.home') }}" class="btn btn-danger">Cancel</a>
                         </center>
                     </div>
@@ -505,6 +505,10 @@
             $(this).closest("tr").next("tr").remove();
             $(this).closest("tr").remove();
 
+        });
+        
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 @endsection

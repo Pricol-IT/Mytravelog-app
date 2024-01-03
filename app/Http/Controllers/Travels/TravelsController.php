@@ -52,9 +52,12 @@ class TravelsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function viewsummary($id)
     {
-        //
+        $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation'])->find($id);
+
+        return view('travels.requests.summary', compact('trip'));
+        // return $trip;
     }
 
     /**
