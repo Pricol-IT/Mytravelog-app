@@ -117,7 +117,7 @@
 
 
                                                 <td>
-                                                    <a href="{{ route('accountant.summary', $advance->id) }}"
+                                                    <a href="{{ route('accountant.expenses_summary', $advance->id) }}"
                                                         class="btn btn-primary text-white"><i
                                                             class="bi bi-arrow-right-circle"></i></a>
                                                     {{-- <a href="#" class="btn btn-primary text-white"><i

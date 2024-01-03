@@ -79,6 +79,12 @@ Route::controller(AccountantController::class)->prefix('accountant')->middleware
     Route::get('/completed', 'completed')->name('accountant.completed');
     Route::get('/viewsummary/{id}', 'viewsummary')->name('accountant.summary');
     Route::get('/startproceed/{id}', 'startproceed')->name('accountant.startproceed');
+
+    Route::get('/expenses/allrequests', 'expenses_allrequests')->name('accountant.expenses_allrequests');
+    Route::get('/expenses/notprocessed', 'expenses_notprocessed')->name('accountant.expenses_notprocessed');
+    Route::get('/expenses/inprogress', 'expenses_inprogress')->name('accountant.expenses_inprogress');
+    Route::get('/expenses/completed', 'expenses_completed')->name('accountant.expenses_completed');
+    Route::get('/expenses/viewsummary/{id}', 'expenses_viewsummary')->name('accountant.expenses_summary');
 });
 
 Route::controller(TravelsController::class)->prefix('travels')->middleware('travels')->group(function () {

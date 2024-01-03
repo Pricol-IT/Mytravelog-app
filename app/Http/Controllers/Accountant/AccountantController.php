@@ -124,4 +124,44 @@ class AccountantController extends Controller
         // return $id;
 
     }
+
+    public function expenses_allrequests()
+    {
+        $advances = Advance::with('trip')->whereHas('trip', function ($query) {
+            $query->where('status', 'approved');
+        })->orderBy('id', 'desc')->get();
+        return view('accountant.expenses.allrequests', compact('advances'));
+        // return $advances;
+    }
+    public function expenses_notprocessed()
+    {
+        $advances = Advance::with('trip')->whereHas('trip', function ($query) {
+            $query->where('status', 'approved');
+        })->where('status', 'not processed')->orderBy('id', 'desc')->get();
+        return view('accountant.expenses.notprocessed', compact('advances'));
+    }
+
+    public function expenses_inprogress()
+    {
+        $advances = Advance::with('trip')->whereHas('trip', function ($query) {
+            $query->where('status', 'approved');
+        })->where('status', 'inprogress')->orderBy('id', 'desc')->get();
+        return view('accountant.expenses.inprogress', compact('advances'));
+    }
+
+    public function expenses_completed()
+    {
+        $advances = Advance::with('trip')->whereHas('trip', function ($query) {
+            $query->where('status', 'approved');
+        })->where('status', 'completed')->orderBy('id', 'desc')->get();
+        return view('accountant.expenses.completed', compact('advances'));
+    }
+
+    public function expenses_viewsummary(string $id)
+    {
+        $advance = Advance::find($id);
+
+        return view('accountant.expenses.summary', compact('advance'));
+        // return dd($advance);
+    }
 }
