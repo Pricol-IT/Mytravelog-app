@@ -297,7 +297,12 @@
                 </div>
 
                 <div class="col-lg-12 mt-2">
-                    <center><a href="{{ route('user.mytrip') }}" class="btn btn-danger text-center">Back</a></center>
+                    <center>
+                        @if($trip->status == 'approved')
+                        <input type="submit" name="submit" class="btn btn-primary" value="Extend Trip">
+                        @endif
+                        <a href="{{ route('user.mytrip') }}" class="btn btn-danger text-center">Back</a>
+                    </center>
                 </div>
             </div>
 

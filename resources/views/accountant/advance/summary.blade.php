@@ -24,16 +24,19 @@
                     <h5><span class=" text-primary">Purpose Of Advance:</span> {{ $advance->purpose }}</h5>
                 </div>
             </div>
+            @if ($advance->status == 'not processed')
             <center>
-
-                <div type="submit" class="btnStatus btn btn-success text-white"><i class="bi bi-check-circle-fill"></i>
+                <form action="{{route('accountant.startproceed',$advance->trip_id)}}">
+                <button type="submit" class="btnStatus btn btn-success text-white"><i class="bi bi-check-circle-fill"></i>
                     Start proceed
-                </div>
-                {{-- <button type="submit">Start proceed</button> --}}
+                </button>
+            </form>
+                
 
                 <a href="{{ url()->previous() }}" class="btn btn-secondary text-center">Back</a>
             </center>
-
+            @endif
+@if ($advance->status == 'inprogress')
             <div class="row mt-2 p-2 bg-white">
                 <div class="col-lg-6 p-3">
                     <h5><span class="fw-bold"> UPI Id:</span> "sample@upi"</h5>
@@ -43,13 +46,13 @@
                     <h5><span class="fw-bold">IFSC code:</span> CB09545</h5>
                 </div>
                 <div class="col-lg-6 p-3">
-                    <form action="{{ route('approver.clarification') }}" method="post">
+                    <form action="{{ route('accountant.allrequests') }}" method="post">
                         @csrf
                         @method('POST')
                         <h5 class="fw-bold">Transaction details</h5>
                         <div class="form-group">
                             <label for="transferStatus">Transaction status</label>
-                            <select class="form-control" id="transferStatus">
+                            <select class="form-control" id="transferStatus" required>
                                 <option></option>
                                 <option>Amount transfered</option>
                                 <option>Transaction failed</option>
@@ -57,21 +60,24 @@
                         </div>
                         <div class="form-group">
                             <label for="transactionId">Transaction id</label>
-                            <input type="text" class="form-control" id="transactionID">
+                            <input type="text" class="form-control" id="transactionID" required>
                         </div>
                         <div class="form-group">
                             <label for="transactionDate">Transaction date</label>
-                            <input type="date" class="form-control" id="transactionDate">
+                            <input type="date" class="form-control" id="transactionDate" required>
                         </div>
                         <div class="form-group">
                             <label for="transactionTime">Transaction Time</label>
-                            <input type="time" class="form-control" id="transactionDate">
+                            <input type="time" class="form-control" id="transactionDate" required>
                         </div>
 
 
                 </div>
                 <center><input type="submit" name="submit" class="btn btn-primary" value="Submit"></center>
+            </form>
             </div>
+        
+            @endif
 
         </section>
     </main>

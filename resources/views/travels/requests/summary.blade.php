@@ -55,13 +55,23 @@
                                     <p><span class="fw-bold"> Destination:</span> {{ $flight->destination }}</p>
                                     <p><span class="fw-bold"> Status:</span> {{ $flight->status }}</p>
                                 </div>
-                                <div class="col-lg-8">
-                                    <label for="formFile" class="form-label">Upload Ticket</label>
+                                <div class="col-lg-6">
+                                    <label for="formFile" class="form-label">Upload Ticket:</label>
                                     <input class="form-control" type="file" id="formFile">
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
+                                    <label for="invoice" class="form-label">Invoice no:</label>
+                                    <input class="form-control" type="text" id="invoice">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="ticketcost" class="form-label">Ticket Cost:</label>
+                                    <input class="form-control" type="text" id="ticketcost">
+                                </div>
+<center>
+                                <div class="mt-3">
                                     <div class="btn btn-primary">Submit</div>
                                 </div>
+                            </center>
                             @endforeach
                         </div>
                     @endif
@@ -82,13 +92,23 @@
                                     <p><span class="fw-bold"> Destination:</span> {{ $train->destination }}</p>
                                     <p><span class="fw-bold"> Status:</span> {{ $train->status }}</p>
                                 </div>
-                                <div class="col-lg-8">
-                                    <label for="formFile" class="form-label">Upload Ticket</label>
+                                <div class="col-lg-6">
+                                    <label for="formFile" class="form-label">Upload Ticket:</label>
                                     <input class="form-control" type="file" id="formFile">
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
+                                    <label for="invoice" class="form-label">Invoice no:</label>
+                                    <input class="form-control" type="text" id="invoice">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="ticketcost" class="form-label">Ticket Cost:</label>
+                                    <input class="form-control" type="text" id="ticketcost">
+                                </div>
+<center>
+                                <div class="mt-3">
                                     <div class="btn btn-primary">Submit</div>
                                 </div>
+                            </center>
                             @endforeach
                         </div>
                     @endif
@@ -109,13 +129,23 @@
                                     <p><span class="fw-bold"> Destination:</span> {{ $bus->destination }}</p>
                                     <p><span class="fw-bold"> Status:</span> {{ $bus->status }}</p>
                                 </div>
-                                <div class="col-lg-8">
-                                    <label for="formFile" class="form-label">Upload Ticket</label>
+                                <div class="col-lg-6">
+                                    <label for="formFile" class="form-label">Upload Ticket:</label>
                                     <input class="form-control" type="file" id="formFile">
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
+                                    <label for="invoice" class="form-label">Invoice no:</label>
+                                    <input class="form-control" type="text" id="invoice">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="ticketcost" class="form-label">Ticket Cost:</label>
+                                    <input class="form-control" type="text" id="ticketcost">
+                                </div>
+<center>
+                                <div class="mt-3">
                                     <div class="btn btn-primary">Submit</div>
                                 </div>
+                            </center>
                             @endforeach
                         </div>
                     @endif

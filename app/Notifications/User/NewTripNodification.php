@@ -35,8 +35,8 @@ class NewTripNodification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('New Trip Submitted for Approval')
+                    ->action('Check My trips', url('user.mytrip'))
                     ->line('Thank you for using our application!');
     }
 

@@ -117,9 +117,9 @@ class AccountantController extends Controller
     public function startproceed( $id)
     {
         Advance::where('trip_id', $id)->update(['status' => 'inprogress']);
-        $advance = Advance::where('trip_id', $id)->get();
-        return view('accountant.advance.summary', compact('advance'));
-        // return redirect()->route('accountant.summary', ['id' => $id]);
+        // $advance = Advance::where('trip_id', $id)->get();
+        // return view('accountant.advance.summary', compact('advance'));
+        return back();
         // return $advance;
         // return $id;
 
