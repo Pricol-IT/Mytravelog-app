@@ -49,15 +49,18 @@
                         <i class='bx bxs-hotel'></i>
                         <h5>Accommodation</h5>
                     </div>
+                    @if ($trip['tripType'] === 'domestic')
                     <div class="service shadow text-center" id="Advance" data-bs-toggle="modal" data-bs-target="#extra-form-modal">
                         <i class='bx bx-rupee'></i>
                         <h5>Advance</h5>
                     </div>
+                    @endif
+                    @if ($trip['tripType'] === 'international')
                     <div class="service shadow text-center" id="Network" data-bs-toggle="modal" data-bs-target="#extra-form-modal">
                         <i class='bx bx-broadcast'></i>
                         <h5>Connectivity</h5>
                     </div>
-                    @if ($trip['tripType'] === 'international')
+
                     <div class="service shadow text-center" id="Forex" data-bs-toggle="modal" data-bs-target="#extra-form-modal">
                         <img src="{{ asset('images/cu.svg') }} ">
                         <h5>Forex</h5>
