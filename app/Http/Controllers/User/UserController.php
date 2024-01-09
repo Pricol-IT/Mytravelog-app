@@ -81,6 +81,7 @@ class UserController extends Controller
   {
     $user_id = auth()->user()->id;
     $trips = Trip::where('user_id', $user_id)->where('status', '!=', 'draft')->orderBy('id', 'desc')->get();
+    // return $trips;
     return view('user.trip.mytrip', compact('trips'));
   }
 
@@ -91,7 +92,7 @@ class UserController extends Controller
     } else {
       $status = 'pending';
     }
-
+    return $request;
     $user_id = auth()->user()->id;
     $tripDetails = [
       'user_id' => $user_id,
@@ -101,6 +102,7 @@ class UserController extends Controller
       'to_date' => $request->to_date,
       'purpose' => $request->purpose,
       'status' => $status,
+      'trip_type' => $request->trip_type,
     ];
     $trip = Trip::create($tripDetails);
     $tripid = $trip->id;
@@ -282,6 +284,7 @@ class UserController extends Controller
 
   public function storedraft(Request $request, $id)
   {
+    
     if ($request->submit == 'Send for Approval') {
       $trip = Trip::find($id)->update(['status' => 'pending']);
       $status = 'pending';
@@ -289,7 +292,7 @@ class UserController extends Controller
       $status = 'draft';
     }
 
-
+    // return $request;
     $user_id = auth()->user()->id;
 
     $tripid = $id;
@@ -563,6 +566,7 @@ class UserController extends Controller
   {
     $user_id = auth()->user()->id;
     $trips = Trip::where('user_id', $user_id)->where('status', '=', 'draft')->orderBy('id', 'desc')->get();
+    // return $trips;
     return view('user.trip.mysavedtrip', compact('trips'));
   }
 

@@ -52,14 +52,16 @@
                                         <option value="First">First class</option>
                                     </select>
                                 </div>
+                                @if ($tripDetails[0]['tripType'] === 'international')
                                 <div class="col-6 flight-form">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                            Tentative
+                                        <label class="form-check-label" for="flexCheckDefault" data-toggle="tooltip" data-placement="top" title="Visa Applied">
+                                            Visa
                                         </label>
                                     </div>
                                 </div>
+                                @endif
 
                                 <div class="col-6 train-form">
                                     <label>Class</label>
@@ -110,14 +112,16 @@
                                         <option value="First">First class</option>
                                     </select>
                                 </div>
+                                @if ($tripDetails[0]['tripType'] === 'international')
                                 <div class="col-6 flight-form">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                            Tentative
+                                        <label class="form-check-label" for="flexCheckDefault" data-toggle="tooltip" data-placement="top" title="Visa Applied">
+                                            Visa
                                         </label>
                                     </div>
                                 </div>
+                                @endif
 
                                 <div class="col-6 train-form">
                                     <label>Class</label>
@@ -166,14 +170,16 @@
                                         <option value="First">First class</option>
                                     </select>
                                 </div>
+                                @if ($tripDetails[0]['tripType'] === 'international')
                                 <div class="col-6 flight-form">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                            Tentative
+                                        <label class="form-check-label" for="flexCheckDefault" data-toggle="tooltip" data-placement="top" title="Visa Applied">
+                                            Visa
                                         </label>
                                     </div>
                                 </div>
+                                @endif
 
                                 <div class="col-6 train-form">
                                     <label>Class</label>
@@ -229,14 +235,17 @@
                                             <option value="First">First class</option>
                                         </select>
                                     </div>
+
+                                    @if ($tripDetails[0]['tripType'] === 'international')
                                     <div class="col-6 flight-form">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                                Tentative
+                                            <label class="form-check-label" for="flexCheckDefault" data-toggle="tooltip" data-placement="top" title="Visa Applied">
+                                                Visa
                                             </label>
                                         </div>
                                     </div>
+                                    @endif
 
                                     <div class="col-6 train-form">
                                         <label>Class</label>
@@ -268,20 +277,13 @@
 
 
 
-                        <!-- <div class="col-6 taxi-form">
-                <label>Car Type</label>
-                <select class="form-control" required name="tx_class" id="tx_class">
-                  <option value=""> Select type</option>
-                  <option value="Hatchback">Hatchback</option>
-                  <option value="Sedan">Sedan</option>
-                  <option value="SUV">SUV</option>
-                </select>
-              </div> -->
+
 
                         <div class="col-12 preferences">
                             <label>Preferences</label>
                             <textarea name="preferences" id="preferences" required class="form-control"></textarea>
                         </div>
+
 
                     </div>
 

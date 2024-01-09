@@ -40,7 +40,11 @@
                         <i class='bx bxs-bus'></i>
                         <h5>Book a Bus</h5>
                     </div>
-                    <div class="service shadow text-center" id="Taxi" data-bs-toggle="modal" data-bs-target="#form-modal">
+                    {{-- <div class="service shadow text-center" id="Taxi" data-bs-toggle="modal" data-bs-target="#form-modal">
+                        <i class='bx bxs-taxi'></i>
+                        <h5>Book a Taxi</h5>
+                    </div> --}}
+                    <div class="service shadow text-center" id="Taxi" data-bs-toggle="modal" data-bs-target="#extra-form-modal">
                         <i class='bx bxs-taxi'></i>
                         <h5>Book a Taxi</h5>
                     </div>
@@ -77,6 +81,7 @@
             <input type="hidden" name="tripname" value="{{ $trip['tripname'] }}">
             <input type="hidden" name="from_date" value="{{ $trip['trip_fromdate'] }}">
             <input type="hidden" name="to_date" value="{{ $trip['trip_todate'] }}">
+            <input type="hidden" name="trip_type" value="{{ $trip['tripType'] }}">
             @endforeach
             <div class="row">
                 <div class="col-lg-3">
@@ -290,6 +295,7 @@
             }
         });
 
+        var currentNumber = 0
         $("#addButton").click(function() {
             var clonedSection = $(".multicity-section:first").clone();
 
@@ -298,7 +304,17 @@
 
             clonedSection.find("input").val("");
             $(".multicity-area").append(clonedSection);
+
+            if (currentNumber >= 6) {
+                $("#addButton").hide()
+            } else {
+                $("#addButton").show()
+            }
+            // console.log(currentNumber);
+
         });
+
+
 
         $(".multicity-area").on("click", ".removeCloneButton", function() {
             $(this).closest(".multicity-section").remove();
@@ -306,32 +322,53 @@
             $(".multicity-section").each(function(index) {
                 $(this).find("h6 span").text(index + 1);
             });
+            $("#addButton").show()
+
         });
 
+
+        $('#carRental').change(function() {
+            if ($(this).is(':checked')) {
+                $('.carRentalSection').show();
+            } else {
+                $('.carRentalSection').hide();
+            }
+        });
+
+        $('#specialApproval').change(function() {
+            if ($(this).is(':checked')) {
+                $('.specialApprovalForm').show();
+            } else {
+                $('.specialApprovalForm').hide();
+            }
+        });
+        // console.log(service);
         if (service == 'Train') {
             $('.train-form').show();
-            $('.flight-form, .bus-form, .taxi-form').hide();
+            $('.flight-form, .bus-form').hide();
         } else if (service == 'Bus') {
             $('.bus-form').show();
-            $('.flight-form, .train-form, .taxi-form').hide();
+            $('.flight-form, .train-form').hide();
         } else if (service == 'Flight') {
             $('.flight-form').show();
-            $('.bus-form, .train-form, .taxi-form').hide();
+            $('.bus-form, .train-form').hide();
         } else if (service == 'Taxi') {
-            // $('.taxi-form').show();
-            $('.flight-form, .train-form, .bus-form').hide();
+            $('.taxi-form').show();
+            $('.carRentalSection').hide();
+            $('.advance-form, .network-form, .forex-form, .hotel-form').hide();
         } else if (service == 'Hotel') {
             $('.hotel-form').show();
-            $('.advance-form, .network-form, .forex-form').hide();
+            $('.advance-form, .network-form, .forex-form,.taxi-form').hide();
         } else if (service == 'Advance') {
             $('.advance-form').show();
-            $('.hotel-form, .network-form, .forex-form').hide();
+            $('.specialApprovalForm').hide();
+            $('.hotel-form, .network-form, .forex-form,.taxi-form').hide();
         } else if (service == 'Network') {
             $('.network-form').show();
-            $('.hotel-form, .advance-form, .forex-form').hide();
+            $('.hotel-form, .advance-form, .forex-form,.taxi-form').hide();
         } else if (service == 'Forex') {
             $('.forex-form').show();
-            $('.hotel-form, .advance-form, .network-form').hide();
+            $('.hotel-form, .advance-form, .network-form,.taxi-form').hide();
         }
     });
 
