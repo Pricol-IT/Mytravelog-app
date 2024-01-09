@@ -92,7 +92,7 @@ class UserController extends Controller
     } else {
       $status = 'pending';
     }
-    return $request;
+    // return $request;
     $user_id = auth()->user()->id;
     $tripDetails = [
       'user_id' => $user_id,
