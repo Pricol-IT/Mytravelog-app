@@ -152,14 +152,17 @@
                     <table class="table rtx">
                         <thead>
                             <tr>
-                                <td class="fw-bold" colspan="5">
+                                <td class="fw-bold" colspan="7">
                                     <h6 class="text-primary"> <i class='bx bxs-taxi'></i> Taxi Request</h6>
                                 </td>
                             </tr>
                             <tr class="fw-bold">
-                                <td>Pickup</td>
-                                <td>Drop</td>
-                                <td>Date/Time</td>
+                                <td>Airport To Hotel</td>
+                                <td>Hotel To Company</td>
+                                <td>No.of.days</td>
+                                <td>Class</td>
+                                <td>Pickup Date</td>
+                                <td>Drop Date</td>
                                 <td></td>
                             </tr>
                         </thead>
@@ -170,12 +173,13 @@
                     <table class="table rh">
                         <thead>
                             <tr>
-                                <td class="fw-bold" colspan="4">
+                                <td class="fw-bold" colspan="5">
                                     <h6 class="text-primary"> <i class='bx bxs-hotel'></i> Accommodation Request</h6>
                                 </td>
                             </tr>
                             <tr class="fw-bold">
                                 <td>Location</td>
+                                <td>Hotel Name</td>
                                 <td>Check-In</td>
                                 <td>Check-Out</td>
                                 <td></td>
@@ -194,7 +198,7 @@
                             </tr>
                             <tr class="fw-bold">
                                 <td>Amount</td>
-                                <td>Purpose</td>
+                                <td>Special Advance</td>
                                 <td></td>
                             </tr>
                         </thead>
@@ -385,8 +389,6 @@
 
     $('.addService').on("click", function() {
 
-
-
         var vehicle = $('.vehicle').val();
 
         var from = [];
@@ -429,39 +431,69 @@
             bs_class.push(inputValue);
         });
 
-
-        // var from = $('#from').val();
-        // var to = $('#to').val();
         var preferences = $('#preferences').val();
-        // var sdate = $('#date').val();
-        // var date = sdate.split('T')[0];
-        // var time = sdate.split('T')[1];
-        // var tr_class = $('#tr_class').val();
 
 
-        // var fl_class = $('#fl_class').val();
 
-        // var bs_class = $('#bs_class').val();
+        // extra service section
+        var extra_service = $('.extraService').val();
+
+        if ($('#airportToHotel').is(':checked')) {
+            var airportToHotel = 'yes';
+        } else {
+            var airportToHotel = 'no';
+        }
+
+        if ($('#hotelToCompany').is(':checked')) {
+            var hotelToCompany = 'yes';
+        } else {
+            var hotelToCompany = 'no';
+        }
+
+        if ($('#carRental').is(':checked')) {
+            var carRental = 'yes';
+        } else {
+            var carRental = 'no';
+        }
+
+        var noOfDays = $('#noOfDays').val();
 
         var tx_class = $('#tx_class').val();
 
-        var extra_service = $('.extraService').val()
+        var pickupDate = $('#pickupDate').val();
+        var pickupDateDate = pickupDate.split('T')[0];
+        var pickupDateTime = pickupDate.split('T')[1];
+
+        var dropDate = $('#dropDate').val();
+        var dropDateDate = dropDate.split('T')[0];
+        var dropDateTime = dropDate.split('T')[1];
+
+
 
         var location = $('#location').val();
 
+        var hotelName = $('#hotelName').val();
+
         var checkIn = $('#checkIn').val();
-
-        var checkOut = $('#checkOut').val();
-
-        var checkOutdate = checkOut.split('T')[0];
-        var checkOuttime = checkOut.split('T')[1];
-
         var checkIndate = checkIn.split('T')[0];
         var checkIntime = checkIn.split('T')[1];
 
-        var amount = $('#amount').val();
+        var checkOut = $('#checkOut').val();
+        var checkOutdate = checkOut.split('T')[0];
+        var checkOuttime = checkOut.split('T')[1];
 
-        var purpose = $('#purpose').val();
+
+
+        var amount = $('#amount').val();
+        if ($('#specialApproval').is(':checked')) {
+            var specialApproval = 'yes';
+        } else {
+            var specialApproval = 'no';
+        }
+        var splAdvance = $('#splAdvance').val();
+
+
+
 
         var network = $('#network').val();
 
@@ -538,76 +570,28 @@
         }
 
 
-        // if (from != '') {
-        //     if ((vehicle == 'Flight') && (from != '') && (to != '') && (sdate != '') && (fl_class != '')) {
-        //         $('.rq').show();
-        //         $('#Flightbody').append('<tr><td><input type="hidden" name="flightfrom[]" value="' + from +
-        //             '" >' + from + '</td><td><input type="hidden" name="flightto[]" value="' + to + '" >' +
-        //             to + '</td><td><input type="hidden" name="flightdate[]" value="' + sdate + '" >' +
-        //             date + '/' + time + '</td><td><input type="hidden" name="flightclass[]" value="' +
-        //             fl_class + '" >' + fl_class +
-        //             '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary preference" style="font-size:12px;margin:0;">' +
-        //             preferences + '</p> <input name="preferences[]" type="hidden" value="' + preferences +
-        //             '"></td></tr>');
-        //         $("[data-bs-dismiss=modal]").trigger({
-        //             type: "click"
-        //         });
-        //         $('#service-form').trigger('reset');
 
-        //     } else if ((vehicle == 'Train') && (from != '') && (to != '') && (sdate != '') && (tr_class !=
-        //             '')) {
-
-        //         $('.rt').show();
-        //         $('#Trainbody').append('<tr><td><input type="hidden" name="trainfrom[]" value="' + from +
-        //             '" >' + from + '</td><td><input type="hidden" name="trainto[]" value="' + to + '" >' +
-        //             to + '</td><td><input type="hidden" name="traindate[]" value="' + sdate + '" >' + date +
-        //             '/' + time + '</td><td><input type="hidden" name="trainclass[]" value="' + tr_class +
-        //             '" >' + tr_class +
-        //             '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary" style="font-size:12px;margin:0;">' +
-        //             preferences + '</p> <input name="preferences[]" type="hidden" value="' + preferences +
-        //             '"></td></tr>');
-        //         $("[data-bs-dismiss=modal]").trigger({
-        //             type: "click"
-        //         });
-        //         $('#service-form').trigger('reset');
-
-        //     } else if ((vehicle == 'Bus') && (from != '') && (to != '') && (sdate != '') && (bs_class != '')) {
-        //         $('.rb').show();
-        //         $('#Busbody').append('<tr><td><input type="hidden" name="busfrom[]" value="' + from + '" >' +
-        //             from + '</td><td><input type="hidden" name="busto[]" value="' + to + '" >' + to +
-        //             '</td><td><input type="hidden" name="busdate[]" value="' + sdate + '" >' + date + '/' +
-        //             time + '</td><td><input type="hidden" name="busclass[]" value="' + bs_class + '" >' +
-        //             bs_class +
-        //             '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary" style="font-size:12px;margin:0;">' +
-        //             preferences + '</p> <input name="preferences[]" type="hidden" value="' + preferences +
-        //             '"></td></tr>');
-        //         $("[data-bs-dismiss=modal]").trigger({
-        //             type: "click"
-        //         });
-        //         $('#service-form').trigger('reset');
-
-        //     } else if ((vehicle == 'Taxi') && (from != '') && (to != '') && (sdate != '') && (tx_class != '')) {
-        //         $('.rtx').show();
-        //         $('#Taxibody').append('<tr><td><input type="hidden" name="taxifrom[]" value="' + from + '" >' +
-        //             from + '</td><td><input type="hidden" name="taxito[]" value="' + to + '" >' + to +
-        //             '</td><td><input type="hidden" name="taxidate[]" value="' + sdate + '" >' + date + '/' +
-        //             time +
-        //             '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr><tr><td colspan="5 "><p class="text-primary" style="font-size:12px;margin:0;">' +
-        //             preferences + '</p> <input name="preferences[]" type="hidden" value="' + preferences +
-        //             '"></td></tr>');
-        //         $("[data-bs-dismiss=modal]").trigger({
-        //             type: "click"
-        //         });
-        //         $('#service-form').trigger('reset');
-        //     }
-        // }
         if (extra_service != '') {
             switch (extra_service) {
+                case 'Taxi':
+                    $('.rtx').show();
+                    if (carRental != 'yes') {
+                        $('#Taxibody').append('<tr><td><input type="hidden" name="taxiRequest[]" value="' + extra_service + '" ><input type="hidden" name="airportToHotel[]" value="' + airportToHotel + '" >' + airportToHotel + '</td><td><input type="hidden" name="hotelToCompany[]" value="' + hotelToCompany + '" >' + hotelToCompany + '</td><td> <input type="hidden" name="noOfDays[]" value="' + noOfDays + '" >' + "-" + '</td><td> <input type="hidden" name="tx_class[]" value="' + tx_class + '" >' + "-" + '</td><td><input type="hidden" name="pickupDate[]" value="' + pickupDate + '" >' + "-" + '</td><td> <input type="hidden" name="dropDate[]" value="' + dropDate + '" >' + "-" + '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>');
+                    } else {
+                        $('#Taxibody').append('<tr><td><input type="hidden" name="taxiRequest[]" value="' + extra_service + '" ><input type="hidden" name="airportToHotel[]" value="' + airportToHotel + '" >' + airportToHotel + '</td><td><input type="hidden" name="hotelToCompany[]" value="' + hotelToCompany + '" >' + hotelToCompany + '</td><td> <input type="hidden" name="noOfDays[]" value="' + noOfDays + '" >' + noOfDays + '</td><td> <input type="hidden" name="tx_class[]" value="' + tx_class + '" >' + tx_class + '</td><td><input type="hidden" name="pickupDate[]" value="' + pickupDate + '" >' + pickupDateDate + '/' + pickupDateTime + '</td><td> <input type="hidden" name="dropDate[]" value="' + dropDate + '" >' + dropDateDate + '/' + dropDateTime + '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>');
+                    }
+                    $("[data-bs-dismiss=modal]").trigger({
+                        type: "click"
+                    });
+                    $('#service-form').trigger('reset');
+
                 case 'Hotel':
                     if ((location != '') && (checkIn != '') && (checkOut != '')) {
                         $('.rh').show();
                         $('#Hotelbody').append('<tr><td><input type="hidden" name="location[]" value="' +
                             location + '" >' + location +
+                            '</td><td><input type="hidden" name="hotelName[]" value="' +
+                            hotelName + '" >' + hotelName +
                             '</td><td><input type="hidden" name="checkin[]" value="' + checkIn + '" >' +
                             checkIndate + " / " + checkIntime +
                             '</td><td><input type="hidden" name="checkout[]" value="' + checkOut + '" >' +
@@ -623,14 +607,23 @@
                     break;
 
                 case 'Advance':
-                    if ((amount != '') && (purpose != '')) {
+                    if ((amount != '')) {
                         $('.ra').show();
-                        $('#Advancebody').append('<tr><td><input type="hidden" name="amount[]" value="' +
-                            amount + '" >' + amount +
-                            '</td><td><input type="hidden" name="apurpose[]" value="' + purpose + '" >' +
-                            purpose +
-                            '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
-                        );
+                        if (specialApproval != 'no') {
+                            $('#Advancebody').append('<tr><td><input type="hidden" name="specialApproval[]" value="' + specialApproval + '" ><input type="hidden" name="amount[]" value="' +
+                                amount + '" >' + amount +
+                                '</td><td><input type="hidden" name="splAdvance[]" value="' + splAdvance + '" >' +
+                                splAdvance +
+                                '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                            );
+                        } else {
+                            $('#Advancebody').append('<tr><td><input type="hidden" name="specialApproval[]" value="' + specialApproval + '" ><input type="hidden" name="amount[]" value="' +
+                                amount + '" >' + amount +
+                                '</td><td><input type="hidden" name="splAdvance[]" value="' + 0 + '" >' +
+                                "-" +
+                                '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                            );
+                        }
                         $("[data-bs-dismiss=modal]").trigger({
                             type: "click"
                         });

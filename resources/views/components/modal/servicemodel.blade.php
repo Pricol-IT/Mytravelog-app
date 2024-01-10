@@ -11,19 +11,19 @@
                     <div class="row">
                         <div class="row taxi-form">
                             <div class="col-6 p-2">
-                                <input class="form-check-input" type="checkbox" value="airport pickup" id="airportPickup">
-                                <label class="form-check-label" for="airportPickup">
+                                <input class="form-check-input airportToHotel" name="airportToHotel" type="checkbox" id="airportToHotel">
+                                <label class="form-check-label" for="airportToHotel">
                                     Airport <i class="bi bi-arrow-left-right"></i> Hotel
                                 </label>
                             </div>
                             <div class="col-6 p-2">
-                                <input class="form-check-input" type="checkbox" value="hotel pickup" id="hotelPickup">
-                                <label class="form-check-label" for="hotelPickup">
+                                <input class="form-check-input hotelToCompany" type="checkbox" name="hotelToCompany" id="hotelToCompany">
+                                <label class="form-check-label" for="hotelToCompany">
                                     Hotel <i class="bi bi-arrow-left-right"></i> Company
                                 </label>
                             </div>
                             <div class="col-6 p-2">
-                                <input class="form-check-input" type="checkbox" value="Car Rental" id="carRental">
+                                <input class="form-check-input carRental" type="checkbox" id="carRental">
                                 <label class="form-check-label" for="carRental">
                                     Car Rental
                                 </label>
@@ -33,7 +33,7 @@
                             <hr class="carRentalSection">
                             <div class="col-6 carRentalSection">
                                 <label>Number of days</label>
-                                <input type="text" required class="form-control" name="location" id="location" placeholder="Enter No.of.days">
+                                <input type="number" class="form-control noOfDays" name="noOfDays" id="noOfDays" placeholder="Enter No.of.days">
                             </div>
                             <div class="col-6 carRentalSection">
                                 <label>Class</label>
@@ -46,22 +46,22 @@
                             </div>
                             <div class="col-6 carRentalSection">
                                 <label>Pickup Date and Time</label>
-                                <input type="datetime-local" required class="form-control" name="date" id="date">
+                                <input type="datetime-local" required class="form-control pickupDate" name="pickupDate" id="pickupDate">
                             </div>
                             <div class="col-6 carRentalSection">
                                 <label>Drop Date and Time</label>
-                                <input type="datetime-local" required class="form-control" name="date" id="date">
+                                <input type="datetime-local" required class="form-control dropDate" name="dropDate" id="dropDate">
                             </div>
                         </div>
 
 
                         <div class="col-6 hotel-form">
                             <label>Location</label>
-                            <input type="text" required class="form-control" name="location" id="location" placeholder="preferred location">
+                            <input type="text" required class="form-control location" name="location" id="location" placeholder="preferred location">
                         </div>
                         <div class="col-6 hotel-form">
                             <label>Hotel name</label>
-                            <input type="text" required class="form-control" name="hotelName" id="hotelName" placeholder="preferred hotel name">
+                            <input type="text" required class="form-control hotelName" name="hotelName" id="hotelName" placeholder="preferred hotel name">
                         </div>
                         <div class="col-6 mb-2 hotel-form">
                             <label>Check In</label>
@@ -71,20 +71,21 @@
                             <label>Check Out</label>
                             <input type="datetime-local" required class="form-control" name="checkOut" id="checkOut">
                         </div>
+
+
                         <div class="col-6 mb-2 advance-form">
                             <label>Amount</label>
-                            <input min="5000" max="10000" type="number" id="amount" class="form-control" placeholder="Enter the Amount" />
-                            {{-- <input type="text" required class="form-control" name="amount" id="amount" placeholder="Enter the Amount"> --}}
+                            <input min="5000" max="10000" type="number" id="amount" class="form-control amount" placeholder="Enter the Amount" required/>
                             <small class="text-muted">Your advance eligibility is ₹10,000.</small>
                         </div>
                         <div class="col-6 advance-form">
-                            <input class="form-check-input" type="checkbox" value="special approval" id="specialApproval">
+                            <input class="form-check-input specialApproval" type="checkbox" name="specialApproval" id="specialApproval">
                             <label class="form-check-label" for="specialApproval">
                                 Special Approval
                             </label><br>
                             <small class="text-muted"><i class="bi bi-info-circle"></i> if request is over the advance limit use special approval</small>
                             <label class="specialApprovalForm">Amount</label>
-                            <input type="text" required class="form-control specialApprovalForm" name="splAdvance" id="splAdvance" placeholder="Enter the amount">
+                            <input type="text" required class="form-control specialApprovalForm" name="splAdvance" id="splAdvance" placeholder="Enter the Excess amount">
                         </div>
                         {{-- <div class="col-6 mb-2 advance-form">
                             <label>Purpose</label>

@@ -151,16 +151,17 @@ class UserController extends Controller
       }
 
     }
-    if ($request->taxifrom) {
-      for ($i = 0; $i < count($request->taxifrom); $i++) {
+    if ($request->taxiRequest) {
+      for ($i = 0; $i < count($request->taxiRequest); $i++) {
         $taxi = [
           'trip_id' => $tripid,
           'tripid' => $request->tripid,
-          'origin' => $request->taxifrom[$i],
-          'destination' => $request->taxito[$i],
-          // 'trip_taxi' => $request->taxiclass[$i],
-          'preferred_date' => $request->taxidate[$i],
-          'preferences' => $request->preferences[$i],
+          'airport_to_hotel' => $request->airportToHotel[$i],
+          'hotel_to_company' => $request->hotelToCompany[$i],
+          'no_of_days' => $request->noOfDays[$i],
+          'class' => $request->tx_class[$i],
+          'pick_date' => $request->pickupDate[$i],
+          'drop_date' => $request->dropDate[$i],
         ];
         Taxi::create($taxi);
       }
@@ -172,6 +173,7 @@ class UserController extends Controller
           'trip_id' => $tripid,
           'tripid' => $request->tripid,
           'location' => $request->location[$i],
+          'hotel_name'=> $request->hotelName[$i],
           'checkin' => $request->checkin[$i],
           'checkout' => $request->checkout[$i],
         ];
@@ -185,7 +187,8 @@ class UserController extends Controller
           'trip_id' => $tripid,
           'tripid' => $request->tripid,
           'amount' => $request->amount[$i],
-          'purpose' => $request->apurpose[$i],
+          'special_approval' => $request->specialApproval[$i],
+          'special_amount' => $request->splAdvance[$i],
         ];
         Advance::create($advance);
       }
