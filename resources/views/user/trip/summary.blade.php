@@ -210,19 +210,21 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 <h6 class="text-primary"><i class='bx bx-broadcast'></i> Connectivity Request</h6>
                             </td>
                         </tr>
                         <tr class="fw-bold">
-                            <td>Connectivity</td>
+                            <td>International roaming</td>
+                            <td>Mobile Number</td>
 
                         </tr>
                     </thead>
                     <tbody id="Networkbody">
                         @foreach ($trip->connectivity as $connectivity)
                         <tr>
-                            <td>{{ $connectivity->connection }}</td>
+                            <td>{{ $connectivity->international_roaming }}</td>
+                            <td>{{ $connectivity->mobile_number }}</td>
                         </tr>
                         @endforeach
                     </tbody>

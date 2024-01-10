@@ -214,7 +214,8 @@
                                 </td>
                             </tr>
                             <tr class="fw-bold">
-                                <td>Connectivity</td>
+                                <td>International roaming</td>
+                                <td>Mobile Number</td>
                                 <td></td>
                             </tr>
                         </thead>
@@ -245,7 +246,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <center>
-                        <input type="submit" name="submit" class="btn btn-primary" value="Send for Approval">
+                        <input type="submit" name="submit" class="btn btn-primary saveAlert" value="Send for Approval">
                         <input type="submit" name="submit" class="btn btn-secondary" value="Save My Trip">
                         <a href="{{ route('user.home') }}" class="btn btn-danger">Cancel</a>
                     </center>
@@ -493,9 +494,9 @@
         var splAdvance = $('#splAdvance').val();
 
 
-
-
         var network = $('#network').val();
+        var phoneno = $('#phoneno').val();
+
 
         var currency = $('#currency').val();
 
@@ -637,6 +638,8 @@
                         $('.rc').show();
                         $('#Networkbody').append('<tr><td><input type="hidden" name="network[]" value="' +
                             network + '" >' + network +
+                            '</td><td><input type="hidden" name="phoneno[]" value="' +
+                                phoneno + '" >' + phoneno +
                             '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
                         );
                         $("[data-bs-dismiss=modal]").trigger({

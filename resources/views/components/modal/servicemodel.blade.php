@@ -94,11 +94,11 @@
 
                         <div class="col-6 mb-2 network-form">
                             <label>International roaming</label>
-                            <input type="text" required class="form-control" name="network" id="network" placeholder="Enter the no.of.days">
+                            <input type="number" required class="form-control" name="network" id="network" placeholder="Enter the no.of.days">
                         </div>
                         <div class="col-6 mb-2 network-form">
                             <label>Mobile Number</label>
-                            <input type="text" required class="form-control" name="phoneno" id="phoneno" placeholder="Mobile number">
+                            <input type="number" required class="form-control" name="phoneno" id="phoneno" placeholder="Mobile number">
                         </div>
                         <div class="col-6 mb-2 forex-form">
                             <label>convert currency to</label>
