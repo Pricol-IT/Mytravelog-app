@@ -20,7 +20,7 @@
                                 <input class="form-check-input" type="radio" name="tripmode" id="return" value="return">
                                 <label class="form-check-label" for="return">Round trip</label>
                             </div>
-                            @if ($tripDetails[0]['tripType'] === 'international')
+                            @if ($tripDetails[0]['trip_type'] === 'international')
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="tripmode" id="multicity" value="multicity">
                                 <label class="form-check-label" for="multicity">Multi-city</label>
@@ -52,7 +52,7 @@
                                         <option value="First">First class</option>
                                     </select>
                                 </div>
-                                @if ($tripDetails[0]['tripType'] === 'international')
+                                @if ($tripDetails[0]['trip_type'] === 'international')
                                 <div class="col-6 flight-form">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -112,7 +112,7 @@
                                         <option value="First">First class</option>
                                     </select>
                                 </div>
-                                @if ($tripDetails[0]['tripType'] === 'international')
+                                @if ($tripDetails[0]['trip_type'] === 'international')
                                 <div class="col-6 flight-form">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -170,7 +170,7 @@
                                         <option value="First">First class</option>
                                     </select>
                                 </div>
-                                @if ($tripDetails[0]['tripType'] === 'international')
+                                @if ($tripDetails[0]['trip_type'] === 'international')
                                 <div class="col-6 flight-form">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -236,7 +236,7 @@
                                         </select>
                                     </div>
 
-                                    @if ($tripDetails[0]['tripType'] === 'international')
+                                    @if ($tripDetails[0]['trip_type'] === 'international')
                                     <div class="col-6 flight-form">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">

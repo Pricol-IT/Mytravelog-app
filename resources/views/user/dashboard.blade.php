@@ -16,14 +16,14 @@
                     <div class="col-lg-6">
                         <div class="d-flex">
                             <div class="form-check m-2">
-                                <input class="form-check-input" type="radio" name="tripType" id="domestic"
+                                <input class="form-check-input" type="radio" name="trip_type" id="domestic"
                                     value="domestic" required>
                                 <label class="form-check-label" for="domestic">
                                     Domestic
                                 </label>
                             </div>
                             <div class="form-check m-2">
-                                <input class="form-check-input" type="radio" name="tripType" id="international"
+                                <input class="form-check-input" type="radio" name="trip_type" id="international"
                                     value="international" required>
                                 <label class="form-check-label" for="international">
                                     International

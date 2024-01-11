@@ -35,8 +35,6 @@ class UserController extends Controller
   public function index()
   {
 
-    // $user_id = auth()->user()->id;
-    // $trips = Trip::where('user_id',$user_id)->get();
     $trips = DB::table('trips')
       ->select('status', DB::raw('count(*) as total'))
       ->where('user_id', auth()->user()->id)
@@ -69,7 +67,7 @@ class UserController extends Controller
       'tripname' => $request->tripname,
       'trip_fromdate' => $request->tfdate,
       'trip_todate' => $request->ttdate,
-      'tripType' => $request->tripType
+      'trip_type' => $request->trip_type
 
     ];
     // return $tripDetails;

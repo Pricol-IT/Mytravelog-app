@@ -27,7 +27,7 @@
                         <h5>Book a Flight</h5>
                     </div>
 
-                    @if ($trip['tripType'] === 'domestic')
+                    @if ($trip['trip_type'] === 'domestic')
                     <div class="service shadow text-center" id="Train" data-bs-toggle="modal" data-bs-target="#form-modal">
                         <i class='bx bxs-train'></i>
                         <h5>Book a Train</h5>
@@ -49,13 +49,13 @@
                         <i class='bx bxs-hotel'></i>
                         <h5>Accommodation</h5>
                     </div>
-                    @if ($trip['tripType'] === 'domestic')
+                    @if ($trip['trip_type'] === 'domestic')
                     <div class="service shadow text-center" id="Advance" data-bs-toggle="modal" data-bs-target="#extra-form-modal">
                         <i class='bx bx-rupee'></i>
                         <h5>Advance</h5>
                     </div>
                     @endif
-                    @if ($trip['tripType'] === 'international')
+                    @if ($trip['trip_type'] === 'international')
                     <div class="service shadow text-center" id="Network" data-bs-toggle="modal" data-bs-target="#extra-form-modal">
                         <i class='bx bx-broadcast'></i>
                         <h5>Connectivity</h5>
@@ -77,7 +77,7 @@
             <input type="hidden" name="tripname" value="{{ $trip['tripname'] }}">
             <input type="hidden" name="from_date" value="{{ $trip['trip_fromdate'] }}">
             <input type="hidden" name="to_date" value="{{ $trip['trip_todate'] }}">
-            <input type="hidden" name="trip_type" value="{{ $trip['tripType'] }}">
+            <input type="hidden" name="trip_type" value="{{ $trip['trip_type'] }}">
             @endforeach
             <div class="row">
                 <div class="col-lg-3">

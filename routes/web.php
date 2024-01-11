@@ -43,7 +43,7 @@ Route::controller(UserController::class)->prefix('user')->middleware('requester'
     Route::get('/all_notifications', 'allNotification')->name('user.allnotify');
     Route::post('/clarification', 'clarification')->name('user.clarification');
     Route::get('/draft/{id}', 'draft')->name('user.draft');
-    Route::put('/storedraft/{id}', 'storedraft')->name('storedraft');
+    Route::put('/storedraft/{id}', 'storedraft')->name('user.storedraft');
     Route::get('/mysavedtrip', 'mysavedtrip')->name('user.mysavedtrip');
 
 });

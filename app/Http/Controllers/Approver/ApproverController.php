@@ -44,9 +44,11 @@ class ApproverController extends Controller
 
     return view('approver.dashboard', compact('trips', 'upcomingtrips', 'recenttrips'));
   }
+  
 
   public function addtrip(Request $request)
   {
+    // $this->addtriptrait($request);
     $id = DB::select("SHOW TABLE STATUS LIKE 'trips'");
     $next_id = $id[0]->Auto_increment;
     $padded_id = str_pad($next_id, 4, '0', STR_PAD_LEFT);
@@ -57,7 +59,7 @@ class ApproverController extends Controller
       'tripname' => $request->tripname,
       'trip_fromdate' => $request->tfdate,
       'trip_todate' => $request->ttdate,
-      'tripType' => $request->tripType
+      'trip_type' => $request->trip_type
       
     ];
     toastr()->success('TripId Generated Successfully');
@@ -88,6 +90,7 @@ class ApproverController extends Controller
       'to_date' => $request->to_date,
       'purpose' => $request->purpose,
       'status' => $status,
+      'trip_type' => $request->trip_type,
     ];
     $trip = Trip::create($tripDetails);
     $tripid = $trip->id;
@@ -141,11 +144,12 @@ class ApproverController extends Controller
         $taxi = [
           'trip_id' => $tripid,
           'tripid' => $request->tripid,
-          'origin' => $request->taxifrom[$i],
-          'destination' => $request->taxito[$i],
-          'trip_taxi' => $request->taxiclass[$i],
-          'preferred_date' => $request->taxidate[$i],
-          'preferences' => $request->preferences[$i],
+          'airport_to_hotel' => $request->airportToHotel[$i],
+          'hotel_to_company' => $request->hotelToCompany[$i],
+          'no_of_days' => $request->noOfDays[$i],
+          'class' => $request->tx_class[$i],
+          'pick_date' => $request->pickupDate[$i],
+          'drop_date' => $request->dropDate[$i],
         ];
         Taxi::create($taxi);
       }
@@ -157,6 +161,7 @@ class ApproverController extends Controller
           'trip_id' => $tripid,
           'tripid' => $request->tripid,
           'location' => $request->location[$i],
+          'hotel_name'=> $request->hotelName[$i],
           'checkin' => $request->checkin[$i],
           'checkout' => $request->checkout[$i],
         ];
@@ -170,7 +175,8 @@ class ApproverController extends Controller
           'trip_id' => $tripid,
           'tripid' => $request->tripid,
           'amount' => $request->amount[$i],
-          'purpose' => $request->apurpose[$i],
+          'special_approval' => $request->specialApproval[$i],
+          'special_amount' => $request->splAdvance[$i],
         ];
         Advance::create($advance);
       }
@@ -181,7 +187,8 @@ class ApproverController extends Controller
         $connect = [
           'trip_id' => $tripid,
           'tripid' => $request->tripid,
-          'connection' => $request->network[$i],
+          'international_roaming' => $request->network[$i],
+          'mobile_number' => $request->phoneno[$i],
         ];
         Connectivity::create($connect);
       }
@@ -326,10 +333,10 @@ class ApproverController extends Controller
     if ($request->submit == 'Send for Approval') {
       Trip::find($id)->update(['status' => 'pending']);
       $status = 'pending';
-      return $status;
+      // return $status;
     } else {
       $status = 'draft';
-      return $status;
+      // return $status;
     }
 
     $user_id = auth()->user()->id;
@@ -448,11 +455,12 @@ class ApproverController extends Controller
           $taxi = [
             'trip_id' => $tripid,
             'tripid' => $request->tripid,
-            'origin' => $request->taxifrom[$i],
-            'destination' => $request->taxito[$i],
-            // 'trip_taxi' => $request->taxiclass[$i],
-            'preferred_date' => $request->taxidate[$i],
-            'preferences' => $request->preferences[$i],
+            'airport_to_hotel' => $request->airportToHotel[$i],
+            'hotel_to_company' => $request->hotelToCompany[$i],
+            'no_of_days' => $request->noOfDays[$i],
+            'class' => $request->tx_class[$i],
+            'pick_date' => $request->pickupDate[$i],
+            'drop_date' => $request->dropDate[$i],
           ];
           Taxi::create($taxi);
         }
@@ -462,11 +470,12 @@ class ApproverController extends Controller
           $taxi = [
             'trip_id' => $tripid,
             'tripid' => $request->tripid,
-            'origin' => $request->taxifrom[$i],
-            'destination' => $request->taxito[$i],
-            // 'trip_taxi' => $request->taxiclass[$i],
-            'preferred_date' => $request->taxidate[$i],
-            'preferences' => $request->preferences[$i],
+            'airport_to_hotel' => $request->airportToHotel[$i],
+            'hotel_to_company' => $request->hotelToCompany[$i],
+            'no_of_days' => $request->noOfDays[$i],
+            'class' => $request->tx_class[$i],
+            'pick_date' => $request->pickupDate[$i],
+            'drop_date' => $request->dropDate[$i],
           ];
           Taxi::create($taxi);
         }
@@ -483,6 +492,7 @@ class ApproverController extends Controller
             'trip_id' => $tripid,
             'tripid' => $request->tripid,
             'location' => $request->location[$i],
+            'hotel_name'=> $request->hotelName[$i],
             'checkin' => $request->checkin[$i],
             'checkout' => $request->checkout[$i],
           ];
@@ -495,6 +505,7 @@ class ApproverController extends Controller
             'trip_id' => $tripid,
             'tripid' => $request->tripid,
             'location' => $request->location[$i],
+            'hotel_name'=> $request->hotelName[$i],
             'checkin' => $request->checkin[$i],
             'checkout' => $request->checkout[$i],
           ];
@@ -512,7 +523,8 @@ class ApproverController extends Controller
             'trip_id' => $tripid,
             'tripid' => $request->tripid,
             'amount' => $request->amount[$i],
-            'purpose' => $request->apurpose[$i],
+            'special_approval' => $request->specialApproval[$i],
+            'special_amount' => $request->splAdvance[$i],
           ];
           Advance::create($advance);
         }
@@ -523,7 +535,8 @@ class ApproverController extends Controller
             'trip_id' => $tripid,
             'tripid' => $request->tripid,
             'amount' => $request->amount[$i],
-            'purpose' => $request->apurpose[$i],
+            'special_approval' => $request->specialApproval[$i],
+            'special_amount' => $request->splAdvance[$i],
           ];
           Advance::create($advance);
         }
@@ -539,7 +552,8 @@ class ApproverController extends Controller
           $connect = [
             'trip_id' => $tripid,
             'tripid' => $request->tripid,
-            'connection' => $request->network[$i],
+            'international_roaming' => $request->network[$i],
+            'mobile_number' => $request->phoneno[$i],
           ];
           Connectivity::create($connect);
         }
@@ -549,7 +563,8 @@ class ApproverController extends Controller
           $connect = [
             'trip_id' => $tripid,
             'tripid' => $request->tripid,
-            'connection' => $request->network[$i],
+            'international_roaming' => $request->network[$i],
+            'mobile_number' => $request->phoneno[$i],
           ];
           Connectivity::create($connect);
         }
