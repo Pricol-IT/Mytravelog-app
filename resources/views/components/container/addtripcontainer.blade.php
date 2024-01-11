@@ -1,7 +1,6 @@
 <div>
     <!-- Order your soul. Reduce your wants. - Augustine -->
     <div class="container">
-
         @foreach ($tripDetails as $trip)
         <div class="row mb-4 tbox rounded">
             <div class="col-lg-4 col-md-6 mb-1">
@@ -36,10 +35,6 @@
                         <i class='bx bxs-bus'></i>
                         <h5>Book a Bus</h5>
                     </div>
-                    {{-- <div class="service shadow text-center" id="Taxi" data-bs-toggle="modal" data-bs-target="#form-modal">
-                        <i class='bx bxs-taxi'></i>
-                        <h5>Book a Taxi</h5>
-                    </div> --}}
                     <div class="service shadow text-center" id="Taxi" data-bs-toggle="modal" data-bs-target="#extra-form-modal">
                         <i class='bx bxs-taxi'></i>
                         <h5>Book a Taxi</h5>
