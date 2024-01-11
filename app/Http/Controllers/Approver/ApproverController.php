@@ -57,6 +57,8 @@ class ApproverController extends Controller
       'tripname' => $request->tripname,
       'trip_fromdate' => $request->tfdate,
       'trip_todate' => $request->ttdate,
+      'tripType' => $request->tripType
+      
     ];
     toastr()->success('TripId Generated Successfully');
     return view('approver.trip.addtrip', compact('tripDetails', 'trips'));
