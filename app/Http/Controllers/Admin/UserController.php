@@ -4,15 +4,36 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.user.index');
+        $query = User::orderBy('id',"desc");
+    //  return $request;
+
+        // if($request->sort_by == 'latest' && $request->has('sort_by')  && $request->sort_by != null)
+        // {
+        //     // return $request;
+        //     $query->latest();
+        // }else{
+        //     $query->oldest();
+        //     // return $request;
+        // }
+        if($request->has('role_by')  && $request->role_by != '')
+        {
+            $query->where('role', $request->role_by);
+        }
+        if($request->has('status')  && $request->status != '')
+        {
+            $query->where('account_status', $request->status);
+        }
+        $users = $query->get();
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -34,7 +55,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }

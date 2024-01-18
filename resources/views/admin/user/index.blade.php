@@ -1,61 +1,132 @@
 @extends('admin.layouts.app')
 @section('title')
-    {{ __('all users') }}
+{{ __('all users') }}
 @endsection
 @section('main')
-    <main id="main" class="main">
-        <div class="container">
-            <div class="card">
-                <div class="card-header">
-                    <div class=" d-flex justify-content-between">
-                        <h4 class="card-title p-0">All Users List</h4>
+<main id="main" class="main">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div class=" d-flex justify-content-between">
+                    <h4 class="card-title p-0">All Users List</h4>
+                    <div class="button">
                         <a href="{{ route('user.create') }}" class="btn btn-primary"><i class='bx bx-plus'></i>New User</a>
+                        @if (request('status') || request('role_by') || request('search'))
+                        <a href="{{route('user.index')}}" class="btn btn-danger">Reset</a>
+                        @endif
                     </div>
-                </div>
-
-                <form id="formSubmit" action="#" method="GET" onchange="this.submit();">
-                    <div class="card-body border-bottom row p-3">
-                        <div class="col-lg-4 col-md-6 col-12">
-
-                            <label>Search</label>
-                            <input type="text" class="form-control" id="searchbar" placeholder="Enter mail or username">
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-12 ">
-                            <label>Sort By</label>
-                            <select name="sort_by" class="form-control select2bs4 w-100-p">
-                                <option selected value="latest" selected>
-                                    Latest
-                                </option>
-                                <option value="oldest">
-                                    Oldest
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-
-                <div class="card-body table-responsive p-0">
-                    <table class="ll-table table table-hover text-nowrap">
-                        <thead>
-                            <tr>
-                                <th>Emp Id</th>
-                                <th>User</th>
-                                <th>Role/Position</th>
-                                <th>Account Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                    </table>
                 </div>
             </div>
 
+            <form id="formSubmit" action="{{route('user.index')}}" method="GET" onchange="this.submit();">
+                <div class="card-body border-bottom row p-3">
+                    <div class="col-lg-4 col-md-6 col-12">
+
+                        <label>Search</label>
+                        <input type="text" name="search" class="form-control" id="searchbar" placeholder="Enter mail or username">
+                    </div>
+                    {{-- <div class="col-lg-4 col-md-6 col-12 ">
+                        <label>Sort By</label>
+                        <select name="sort_by" class="form-control">
+                            <option value="latest">
+                                Latest
+                            </option>
+                            <option value="oldest">
+                                Oldest
+                            </option>
+                        </select>
+                    </div> --}}
+                    <div class="col-lg-4 col-md-6 col-12 ">
+                        <label>Status</label>
+                        <select name="status" class="form-control">
+                            <option value="" {{ request('status')== '' ? 'selected' : ''}}>
+                                All
+                            </option>
+                            <option value="active" {{ request('status')== 'active' ? 'selected' : ''}}>
+                                Active
+                            </option>
+                            <option value="inactive" {{ request('status')== 'inactive' ? 'selected' : ''}}>
+                                Inactive
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12 ">
+                        <label>Role By</label>
+                        <select name="role_by" class="form-control">
+                            <option value="" {{ request('role_by')== '' ? 'selected' : ''}}>
+                                All
+                            </option>
+                            <option value="user" {{ request('role_by')== 'user' ? 'selected' : ''}}>
+                                User
+                            </option>
+                            <option value="approver" {{ request('role_by')== 'approver' ? 'selected' : ''}}>
+                                Approver
+                            </option>
+                            <option value="travels" {{ request('role_by')== 'travels' ? 'selected' : ''}}>
+                                Travels
+                            </option>
+                            <option value="accountant" {{ request('role_by')== 'accountant' ? 'selected' : ''}}>
+                                Accountant
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+            <div class="card-body table-responsive p-0">
+                <table class=" table datatable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Emp Id</th>
+                            <th>User</th>
+                            <th>Role/Position</th>
+                            <th>Account Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($users as $user)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$user->emp_id}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->role}}</td>
+                            <td>{{$user->account_status}}</td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <a href="{{route('user.show', $user->id)}}" class="btn btn-sm btn-primary">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="{{route('user.edit',$user->id)}}" class="btn btn-sm btn-warning">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form method="post" action="{{ route('user.destroy',$user->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6" class="text-center">record not found</td>
+                        </tr>
+                        @endforelse
+
+                    </tbody>
+                </table>
+            </div>
         </div>
 
+    </div>
 
 
 
 
 
 
-    </main><!-- End #main -->
+
+</main><!-- End #main -->
 @endsection
