@@ -7,7 +7,8 @@
     <div class="content">
         <div class="container-fluid">
 
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{route('user.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title p-0">Create New User</h4>
@@ -21,30 +22,31 @@
                                 Account Details
                             </div>
                             <div class="card-body row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-2">
                                     <div class="form-group">
                                         <label class="class mb-2" for="for">
                                             Name
                                             <span class="form-label-required text-danger">*</span>
                                         </label>
-                                        <input type="text" name="name" id="id" class="form-control class " value placeholder="Name">
+                                        <input type="text" name="name" id="name" class="form-control class " value placeholder="Enter your full name" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-2">
                                     <div class="form-group">
                                         <label class="class mb-2" for="for">
                                             Employee Id
                                             <span class="form-label-required text-danger">*</span>
                                         </label>
-                                        <input type="text" name="text" id="id" class="form-control class " value placeholder="Emp id">
+                                        <input type="text" name="empid" id="empid" class="form-control class " value placeholder="Emp id" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-2">
                                     <div class="form-group">
                                         <label class="class mb-2" for="for">
                                             Role
+                                            <span class="form-label-required text-danger">*</span>
                                         </label>
-                                        <select class="form-control" required name="Role" id="Role">
+                                        <select class="form-control" required name="role" id="role" required>
                                             <option value=""> Select Role</option>
                                             <option value="user">User</option>
                                             <option value="approver">Approver</option>
@@ -52,21 +54,23 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-2">
                                     <div class="form-group">
                                         <label class="class mb-2" for="for">
                                             Email
                                             <span class="form-label-required text-danger">*</span>
                                         </label>
-                                        <input type="email" name="email" id="id" class="form-control class " value placeholder="Email">
+                                        <input type="email" name="email" id="email" class="form-control class " value placeholder="Email" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-2">
                                     <div class="form-group">
                                         <label class="class mb-2" for="for">
                                             Password
+                                            <span class="form-label-required text-danger">*</span>
                                         </label>
-                                        <input type="password" name="password" id="id" class="form-control class " value placeholder="Password">
+
+                                        <input type="password" name="password" id="password" class="form-control class " value placeholder="Password" required>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +88,7 @@
                                             Designation
                                             <span class="form-label-required text-danger">*</span>
                                         </label>
-                                        <input type="text" name="Designation" id="id" class="form-control class " value placeholder="Designation">
+                                        <input type="text" name="designation" id="designation" class="form-control class " value placeholder="designation">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -92,7 +96,7 @@
                                         <label class="class mb-2" for="for">
                                             Department
                                         </label>
-                                        <input type="text" name="department" id="id" class="form-control class " value placeholder="department">
+                                        <input type="text" name="department" id="department" class="form-control class " value placeholder="department">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -101,7 +105,7 @@
                                             Grade
                                             <span class="form-label-required text-danger">*</span>
                                         </label>
-                                        <input type="text" name="Grade" id="id" class="form-control class " value placeholder="Grade">
+                                        <input type="text" name="grade" id="grade" class="form-control class " value placeholder="Grade">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -109,7 +113,7 @@
                                         <label class="class mb-2" for="for">
                                             Company
                                         </label>
-                                        <input type="text" name="department" id="id" class="form-control class " value placeholder="Company">
+                                        <input type="text" name="company" id="company" class="form-control class " value placeholder="Company">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -117,7 +121,7 @@
                                         <label class="class mb-2" for="for">
                                             Reporting To
                                         </label>
-                                        <input type="text" name="Reporting To" id="id" class="form-control class " value placeholder="Reporting To">
+                                        <input type="text" name="repostingto" id="repostingto" class="form-control class " value placeholder="Reporting To">
                                     </div>
                                 </div>
 
@@ -140,7 +144,7 @@
                                                 <label class="class mb-2" for="for">
                                                     Location
                                                 </label>
-                                                <input type="text" name="location" id="id" class="form-control class " value placeholder="location">
+                                                <input type="text" name="location" id="location" class="form-control class " value placeholder="location">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -148,7 +152,7 @@
                                                 <label class="class mb-2" for="for">
                                                     Date of Birth
                                                 </label>
-                                                <input type="text" name="dob" id="id" class="form-control class " value placeholder="dob">
+                                                <input type="date" name="dob" id="dob" class="form-control class " value placeholder="dob">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -164,7 +168,7 @@
                                                 <label class="class mb-2" for="for">
                                                     Aadhar No
                                                 </label>
-                                                <input type="text" name="aadhar" id="id" class="form-control class " value placeholder="aadhar">
+                                                <input type="text" name="aadharno" id="aadharno" class="form-control class " value placeholder="aadhar">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -172,7 +176,7 @@
                                                 <label class="class mb-2" for="for">
                                                     Mobile No
                                                 </label>
-                                                <input type="text" name="mobile_no" id="id" class="form-control class " value placeholder="Mobile No">
+                                                <input type="text" name="mobilenumber" id="mobilenumber" class="form-control class " value placeholder="Mobile No">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -180,7 +184,7 @@
                                                 <label class="class mb-2" for="for">
                                                     Passport No
                                                 </label>
-                                                <input type="text" name="passport_no" id="id" class="form-control class " value placeholder="Passport No">
+                                                <input type="text" name="passportno" id="passportno" class="form-control class " value placeholder="Passport No">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -206,7 +210,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="btn btn-primary">Submit</div>
+                    <input type="submit" class="btn btn-primary" value='Submit'>
                     <a href="{{ route('user.index') }}" class="btn btn-danger">Cancel</a>
                 </div>
             </form>

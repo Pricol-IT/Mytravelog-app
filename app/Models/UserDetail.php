@@ -10,6 +10,7 @@ class UserDetail extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'designation',
         'department',
         'grade',
@@ -22,4 +23,3 @@ class UserDetail extends Model
         'mobilenumber',
     ];
 }
-
