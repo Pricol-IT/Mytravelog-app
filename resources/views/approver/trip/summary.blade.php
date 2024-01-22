@@ -285,7 +285,7 @@
 
 
 
-                <div class=" remarkform col-lg-6 offset-3 mt-3">
+                {{-- <div class=" remarkform col-lg-6 offset-3 mt-3">
 
                     <form action="{{ route('approver.remarks') }}" method="post" class="d-flex">
                         @csrf
@@ -300,7 +300,7 @@
 
 
                     </form>
-                </div>
+                </div> --}}
                 <div class="clarificationform col-lg-6 offset-3 mt-3">
                     <form action="{{ route('approver.clarification') }}" method="post" class="d-flex">
                         @csrf
@@ -357,19 +357,19 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        $(".remarkform").hide();
+        // $(".remarkform").hide();
 
-        $("body").on("click", ".btnStatus", function() {
-            $(".remarkform").show();
-            $(".clarificationform").hide();
-            var tripid = $(this).attr("data");
-            var status = $(this).attr("data1");
+        // $("body").on("click", ".btnStatus", function() {
+        //     $(".remarkform").show();
+        //     $(".clarificationform").hide();
+        //     var tripid = $(this).attr("data");
+        //     var status = $(this).attr("data1");
 
-            $('#tripid').val(tripid);
-            $('#status').val(status);
-            $('#displaystatus').html('<span>' + status + '</span>');
-            //   $('#basicModal').modal('show');
-        });
+        //     $('#tripid').val(tripid);
+        //     $('#status').val(status);
+        //     $('#displaystatus').html('<span>' + status + '</span>');
+        //     //   $('#basicModal').modal('show');
+        // });
 
 
         $(".clarificationform").hide();

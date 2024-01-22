@@ -218,12 +218,13 @@ class UserController extends Controller
     }
     if ($status == 'pending') {
       $user = auth('user')->user();
+      //  $user->userdetail->repostingto;
+       $approver = User::where('emp_id',$user->userdetail->repostingto )->first();
+      
       Notification::send($user, new NewTripNodification());
-      $approvers = User::where('role', 'approver')->get();
 
-      foreach ($approvers as $approver) {
-        $approver->notify(new TripAddedNodification($user));
-      }
+      $approver->notify(new TripAddedNodification($user));
+
       toastr()->success('Trip Submitted for Approval');
       return redirect()->route('user.mytrip');
     } else {

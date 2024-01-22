@@ -42,12 +42,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $input = $request->validate([
             'name'=> 'required',
             'email'=> 'required',
             'password'=> 'required',
             'role'=>'required',
-            'emp_id'=>'required|unique:user,empid',
+            'empid'=>'required|unique:users,emp_id',
             'designation'=>'required',
             'department'=> 'required',
             'grade'=> 'required',
@@ -57,6 +58,7 @@ class UserController extends Controller
             'dob'=> 'required',
             'mobilenumber'=> 'required',
         ]);
+        //  return $input;
         $userLoginDetails =[
             'name' => $request->name,
             'email'=> $request->email,
@@ -64,7 +66,7 @@ class UserController extends Controller
             'role'=> $request->role,
             'emp_id'=> $request->empid,
         ];
-        // return $userLoginDetails;
+       
         $user = User::create($userLoginDetails);
         $user_id = $user->id;
         $userDetails = UserDetail::create([

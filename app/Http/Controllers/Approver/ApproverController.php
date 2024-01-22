@@ -17,6 +17,7 @@ use App\Models\Accomadation;
 use App\Models\Connectivity;
 use App\Models\Forex;
 use App\Models\History;
+use App\Models\UserDetail;
 
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\User\NewTripNodification;
@@ -227,36 +228,41 @@ class ApproverController extends Controller
 
   public function OthersDetails()
   {
-    $user_id = auth()->user()->id;
-    $trips = Trip::where('user_id', '!=', $user_id)->where('status', '!=', 'draft')->orderBy('id', 'desc')->get();
+    $user = auth()->user();
+$userlist= UserDetail::select('id','user_id')->where('repostingto', $user->emp_id)->get();
+    $trips = Trip::whereIn('user_id', $userlist->pluck('user_id'))->where('user_id', '!=', $user->id)->where('status', '!=', 'draft')->orderBy('id', 'desc')->get();
     return view('approver.trip.alltrip', compact('trips'));
   }
 
   public function pendingDetails()
   {
-    $user_id = auth()->user()->id;
-    $trips = Trip::where('user_id', '!=', $user_id)->where('status', 'pending')->orderBy('id', 'desc')->get();
+    $user = auth()->user();
+$userlist= UserDetail::select('id','user_id')->where('repostingto', $user->emp_id)->get();
+    $trips = Trip::whereIn('user_id', $userlist->pluck('user_id'))->where('user_id', '!=', $user->id)->where('status', 'pending')->orderBy('id', 'desc')->get();
     return view('approver.trip.pending', compact('trips'));
   }
 
   public function approvalDetails()
   {
-    $user_id = auth()->user()->id;
-    $trips = Trip::where('user_id', '!=', $user_id)->where('status', 'approved')->orderBy('id', 'desc')->get();
+    $user = auth()->user();
+$userlist= UserDetail::select('id','user_id')->where('repostingto', $user->emp_id)->get();
+    $trips = Trip::whereIn('user_id', $userlist->pluck('user_id'))->where('user_id', '!=', $user->id)->where('status', 'approved')->orderBy('id', 'desc')->get();
     return view('approver.trip.approved', compact('trips'));
   }
 
   public function rejectDetails()
   {
-    $user_id = auth()->user()->id;
-    $trips = Trip::where('user_id', '!=', $user_id)->where('status', 'reject')->orderBy('id', 'desc')->get();
+    $user = auth()->user();
+$userlist= UserDetail::select('id','user_id')->where('repostingto', $user->emp_id)->get();
+    $trips = Trip::whereIn('user_id', $userlist->pluck('user_id'))->where('user_id', '!=', $user->id)->where('status', 'reject')->orderBy('id', 'desc')->get();
     return view('approver.trip.rejected', compact('trips'));
   }
 
   public function clarificationDetails()
   {
-    $user_id = auth()->user()->id;
-    $trips = Trip::where('user_id', '!=', $user_id)->where('status', 'clarification')->orderBy('id', 'desc')->get();
+    $user = auth()->user();
+$userlist= UserDetail::select('id','user_id')->where('repostingto', $user->emp_id)->get();
+    $trips = Trip::whereIn('user_id', $userlist->pluck('user_id'))->where('user_id', '!=', $user->id)->where('status', 'clarification')->orderBy('id', 'desc')->get();
     return view('approver.trip.clarification', compact('trips'));
   }
 
@@ -624,4 +630,3 @@ class ApproverController extends Controller
   }
 
 }
-
