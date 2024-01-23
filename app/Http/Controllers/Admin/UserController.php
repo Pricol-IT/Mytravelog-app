@@ -29,17 +29,13 @@ class UserController extends Controller
         return view('admin.user.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         return view('admin.user.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
         // return $request;
@@ -99,7 +95,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::with('userdetail')->find($id);
+       return view('admin.user.view', compact('user'));
     }
 
     /**
@@ -107,7 +104,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::with('userdetail')->find($id);
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -115,7 +113,48 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $input = $request->validate([
+            'name'=> 'required',
+            'email'=> 'required',
+            // 'password'=> 'required',
+            'role'=>'required',
+            'empid'=>'required',
+            'designation'=>'required',
+            'department'=> 'required',
+            'grade'=> 'required',
+            'company'=> 'required',
+            'repostingto'=> 'required',
+            'location'=> 'required',
+            'dob'=> 'required',
+            'mobilenumber'=> 'required',
+        ]);
+
+        //  return $input;
+        $userLoginDetails =[
+            'name' => $request->name,
+            'email'=> $request->email,
+            'role'=> $request->role,
+            'emp_id'=> $request->empid
+        ];
+        if($request->password !== null){
+            $userLoginDetails['password'] = Hash::make($request->password);
+        }
+    //    return $userLoginDetails;
+        $user = User::find($id)->update([$userLoginDetails]);
+        $userDetails = UserDetail::where('user_id',$id)->update([
+            'user_id'=>$id,
+            'designation'=> $request->designation,
+            'department'=> $request->department,
+            'grade'=> $request->grade,
+            'company'=> $request->company,
+            'repostingto'=> $request->repostingto,
+            'location'=> $request->location,
+            'dob'=> $request->dob,
+            'aadharno'=> $request->aadharno,
+            'passportno'=> $request->passportno,
+            'mobilenumber'=> $request->mobilenumber,
+        ]);
+        return redirect()->route('user.index');
     }
 
     /**

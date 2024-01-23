@@ -1,224 +1,277 @@
 @extends('admin.layouts.app')
 @section('title')
-    {{ __('Edit User') }}
+{{ __('Edit User') }}
 @endsection
 @section('main')
-    <main id="main" class="main">
-        <div class="content">
-            <div class="container-fluid">
+<main id="main" class="main">
+    <div class="content">
+        <div class="container-fluid">
 
-                <form action="#" method="POST" enctype="multipart/form-data">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title p-0">Create</h4>
+            <form action="{{route('user.update',$user->id)}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('put')
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title p-0">Create New User</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Account Details
+                            </div>
+                            <div class="card-body row">
+
+                                <div class="col-md-12 mb-2">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            Name
+                                            <span class="form-label-required text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="name" id="name" class="form-control class " value="{{$user->name}}" placeholder="Enter your full name">
+                                        @if ($errors->has('name'))
+                                        <span class="error text-danger">{{ $errors->first('name') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            Employee Id
+                                            <span class="form-label-required text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="empid" id="empid" class="form-control class " value="{{$user->emp_id}}" placeholder="Emp id" readonly>
+                                        @if ($errors->has('empid'))
+                                        <span class="error text-danger">{{ $errors->first('empid') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            Role
+                                            <span class="form-label-required text-danger">*</span>
+                                        </label>
+                                        <select class="form-control" name="role" id="role">
+                                            <option value=""> Select Role</option>
+                                            <option value="user" {{$user->role == 'user' ? 'selected' : ''}}>User</option>
+                                            <option value="approver" {{$user->role == 'approver' ? 'selected' : ''}}>Approver</option>
+                                            <option value="travels" {{$user->role  == 'travels' ? 'selected' : ''}}>Travel Desk</option>
+                                            <option value="accountant" {{$user->role == 'accountant' ? 'selected' : ''}}>Accountant</option>
+                                        </select>
+                                        @if ($errors->has('role'))
+                                        <span class="error text-danger">{{ $errors->first('role') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            Email
+                                            <span class="form-label-required text-danger">*</span>
+                                        </label>
+                                        <input type="email" name="email" id="email" class="form-control class " value="{{$user->email}}" placeholder="Email">
+                                        @if ($errors->has('email'))
+                                        <span class="error text-danger">{{ $errors->first('email') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            New Password
+                                            <span class="form-label-required text-danger">*</span>
+                                        </label>
+                                        <input type="password" name="password" id="password" class="form-control class " value="" placeholder="Password">
+                                        @if ($errors->has('password'))
+                                        <span class="error text-danger">{{ $errors->first('password') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                Work Details
+                            </div>
+                            <div class="card-body row">
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    Account Details
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            Department
+                                        </label>
+                                        <input type="text" name="department" id="department" class="form-control class " value="{{$user->userdetail->department}}" placeholder="department">
+                                    </div>
                                 </div>
-                                <div class="card-body row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="class mb-2" for="for">
-                                                Name
-                                                <span class="form-label-required text-danger">*</span>
-                                            </label>
-                                            <input type="text" name="name" id="id" class="form-control class "
-                                                value placeholder="Name">
-                                        </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            Designation
+                                            <span class="form-label-required text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="designation" id="designation" class="form-control class " value="{{$user->userdetail->designation}}" placeholder="designation">
+                                        @if ($errors->has('designation'))
+                                        <span class="error text-danger">{{ $errors->first('designation') }}</span>
+                                        @endif
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="class mb-2" for="for">
-                                                Email
-                                                <span class="form-label-required text-danger">*</span>
-                                            </label>
-                                            <input type="email" name="email" id="id" class="form-control class "
-                                                value placeholder="Email">
-                                        </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            Company
+                                        </label>
+                                        <input type="text" name="company" id="company" class="form-control class " value="{{$user->userdetail->company}}" placeholder="Company">
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="class mb-2" for="for">
-                                                Password
-                                            </label>
-                                            <input type="password" name="password" id="id"
-                                                class="form-control class " value placeholder="Password">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            Grade
+                                            <span class="form-label-required text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="grade" id="grade" class="form-control class " value="{{$user->userdetail->grade}}" placeholder="Grade">
+                                        @if ($errors->has('grade'))
+                                        <span class="error text-danger">{{ $errors->first('grade') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="class mb-2" for="for">
+                                            Reporting To
+                                        </label>
+                                        <span class="form-label-required text-danger">*</span>
+                                        <input type="text" name="repostingto" id="repostingto" class="form-control class " value="{{$user->userdetail->repostingto}}" placeholder="Reporting To">
+                                        @if ($errors->has('repostingto'))
+                                        <span class="error text-danger">{{ $errors->first('repostingto') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Additional Details
+                            </div>
+                            <div class="card-body row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="class mb-2" for="for">
+                                                    Location
+                                                </label>
+                                                <span class="form-label-required text-danger">*</span>
+                                                <input type="text" name="location" id="location" class="form-control class " value="{{$user->userdetail->location}}" placeholder="location">
+                                                @if ($errors->has('location'))
+                                                <span class="error text-danger">{{ $errors->first('location') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="class mb-2" for="for">
+                                                    Date of Birth
+                                                </label>
+                                                <span class="form-label-required text-danger">*</span>
+                                                <input type="date" name="dob" id="dob" class="form-control class " value="{{$user->userdetail->dob}}" placeholder="dob">
+                                                @if ($errors->has('dob'))
+                                                <span class="error text-danger">{{ $errors->first('dob') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="class mb-2" for="for">
+                                                    Gender
+                                                </label>
+                                                <input type="text" name="gender" id="id" class="form-control class " value="" placeholder="gender">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="class mb-2" for="for">
+                                                    Aadhar No
+                                                </label>
+                                                <input type="text" name="aadharno" id="aadharno" class="form-control class " value="{{$user->userdetail->aadharno}}" placeholder="aadhar">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="class mb-2" for="for">
+                                                    Mobile No
+                                                </label>
+                                                <span class="form-label-required text-danger">*</span>
+                                                <input type="text" name="mobilenumber" id="mobilenumber" class="form-control class " value="{{$user->userdetail->mobilenumber}}" placeholder="Mobile No">
+                                                @if ($errors->has('mobilenumber'))
+                                                <span class="error text-danger">{{ $errors->first('mobilenumber') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="class mb-2" for="for">
+                                                    Passport No
+                                                </label>
+                                                <input type="text" name="passportno" id="passportno" class="form-control class " value="{{$user->userdetail->passportno}}" placeholder="Passport No">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="class mb-2" for="for">
+                                                    Passport Expiry Date
+                                                </label>
+                                                <input type="text" name="passport_expiry_date" id="id" class="form-control class " value="" placeholder="Passport Expiry Date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="class mb-2" for="for">
+                                                    Present Address
+                                                </label>
+                                                <input type="text" name="present_address" id="id" class="form-control class " value="" placeholder="Present Address">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    Work Details
-                                </div>
-                                <div class="card-body row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="class mb-2" for="for">
-                                                Employee Code
-                                                <span class="form-label-required text-danger">*</span>
-                                            </label>
-                                            <input type="text" name="emp-code" id="id" class="form-control class "
-                                                value placeholder="Employee Code">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="class mb-2" for="for">
-                                                Designation
-                                                <span class="form-label-required text-danger">*</span>
-                                            </label>
-                                            <input type="text" name="Designation" id="id"
-                                                class="form-control class " value placeholder="Designation">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="class mb-2" for="for">
-                                                Department
-                                            </label>
-                                            <input type="text" name="department" id="id"
-                                                class="form-control class " value placeholder="department">
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="class mb-2" for="for">
-                                                Company
-                                            </label>
-                                            <input type="text" name="company" id="id" class="form-control class "
-                                                value placeholder="company">
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    Account Details
-                                </div>
-                                <div class="card-body row">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Grade
-                                                    </label>
-                                                    <input type="text" name="grade" id="id"
-                                                        class="form-control class " value placeholder="grade">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Reporting To
-                                                    </label>
-                                                    <input type="text" name="reporting To" id="id"
-                                                        class="form-control class " value placeholder="reporting To">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Location
-                                                    </label>
-                                                    <input type="text" name="location" id="id"
-                                                        class="form-control class " value placeholder="location">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Date of Birth
-                                                    </label>
-                                                    <input type="text" name="dob" id="id"
-                                                        class="form-control class " value placeholder="dob">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Gender
-                                                    </label>
-                                                    <input type="text" name="gender" id="id"
-                                                        class="form-control class " value placeholder="gender">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Aadhar No
-                                                    </label>
-                                                    <input type="text" name="aadhar" id="id"
-                                                        class="form-control class " value placeholder="aadhar">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Mobile No
-                                                    </label>
-                                                    <input type="text" name="mobile_no" id="id"
-                                                        class="form-control class " value placeholder="Mobile No">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Passport No
-                                                    </label>
-                                                    <input type="text" name="passport_no" id="id"
-                                                        class="form-control class " value placeholder="Passport No">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Passport Expiry Date
-                                                    </label>
-                                                    <input type="text" name="passport_dxpiry_date" id="id"
-                                                        class="form-control class " value
-                                                        placeholder="Passport Expiry Date">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="class mb-2" for="for">
-                                                        Present Address
-                                                    </label>
-                                                    <input type="text" name="present_address" id="id"
-                                                        class="form-control class " value placeholder="Present Address">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="btn btn-primary">Submit</div>
-                        <a href="{{ route('user.index') }}" class="btn btn-danger">Cancel</a>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-primary" value='Submit'>
+                    <a href="{{ route('user.index') }}" class="btn btn-danger">Cancel</a>
+                </div>
+            </form>
         </div>
-
-    </main><!-- End #main -->
-@endsection
+    </div </main><!-- End #main -->
+    @endsection
