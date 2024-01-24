@@ -67,6 +67,7 @@ Route::controller(ApproverController::class)->prefix('approver')->middleware('ap
     Route::get('/draft/{id}', 'draft')->name('approver.draft');
     Route::put('/storedraft/{id}', 'storedraft')->name('approver.storedraft');
     Route::get('/mysavedtrip', 'mysavedtrip')->name('approver.mysavedtrip');
+    Route::post('/tripStatus', 'tripStatus')->name('approver.tripStatus');
 
 });
 
@@ -96,4 +97,3 @@ Route::controller(TravelsController::class)->prefix('travels')->middleware('trav
     Route::get('/completed', 'completed')->name('travels.completed');
     Route::get('/viewsummary/{id}', 'viewsummary')->name('travels.summary');
 });
-

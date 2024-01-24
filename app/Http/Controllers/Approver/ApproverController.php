@@ -76,6 +76,8 @@ class ApproverController extends Controller
 
   public function storetrip(Request $request)
   {
+    
+    // Return $request;
     if ($request->submit == 'Save My Trip') {
       $status = 'draft';
     } else {
@@ -140,8 +142,8 @@ class ApproverController extends Controller
       }
 
     }
-    if ($request->taxifrom) {
-      for ($i = 0; $i < count($request->taxifrom); $i++) {
+    if ($request->taxiRequest) {
+      for ($i = 0; $i < count($request->taxiRequest); $i++) {
         $taxi = [
           'trip_id' => $tripid,
           'tripid' => $request->tripid,
@@ -453,11 +455,11 @@ $userlist= UserDetail::select('id','user_id')->where('repostingto', $user->emp_i
     }
 
 
-    if ($request->taxifrom) {
+    if ($request->taxiRequest) {
       $taxi_id = Taxi::where('trip_id', $id)->get();
       if ($taxi_id) {
         Taxi::where('trip_id', $id)->delete();
-        for ($i = 0; $i < count($request->taxifrom); $i++) {
+        for ($i = 0; $i < count($request->taxiRequest); $i++) {
           $taxi = [
             'trip_id' => $tripid,
             'tripid' => $request->tripid,
@@ -472,7 +474,7 @@ $userlist= UserDetail::select('id','user_id')->where('repostingto', $user->emp_i
         }
 
       } else {
-        for ($i = 0; $i < count($request->taxifrom); $i++) {
+        for ($i = 0; $i < count($request->taxiRequest); $i++) {
           $taxi = [
             'trip_id' => $tripid,
             'tripid' => $request->tripid,

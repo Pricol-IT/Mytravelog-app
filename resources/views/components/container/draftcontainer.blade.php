@@ -35,7 +35,7 @@
                         <i class='bx bxs-bus'></i>
                         <h5>Book a Bus</h5>
                     </div>
-                   
+
                     <div class="service shadow text-center" id="Taxi" data-bs-toggle="modal" data-bs-target="#extra-form-modal">
                         <i class='bx bxs-taxi'></i>
                         <h5>Book a Taxi</h5>
@@ -203,10 +203,11 @@
 
                         </tbody>
                     </table>
+                    {{-- {{$trip->taxi}} --}}
                     <table class="table rtx">
                         <thead>
                             <tr>
-                                <td class="fw-bold" colspan="5">
+                                <td class="fw-bold" colspan="7">
                                     <h6 class="text-primary"> <i class='bx bxs-taxi'></i> Taxi Request</h6>
                                 </td>
                             </tr>
@@ -243,7 +244,7 @@
                     <table class="table rh">
                         <thead>
                             <tr>
-                                <td class="fw-bold" colspan="4">
+                                <td class="fw-bold" colspan="5">
                                     <h6 class="text-primary"> <i class='bx bxs-hotel'></i> Accommodation Request</h6>
                                 </td>
                             </tr>
@@ -354,7 +355,7 @@
                             <tr>
                                 <td><input type="hidden" name="currency[]" value="{{ $forex->currency }}">{{ $forex->currency }}
                                 </td>
-                                <td><input type="hidden" name="forex_amount[]" value="{{ $forex->currency }}">{{ $forex->amount }}
+                                <td><input type="hidden" name="forex_amount[]" value="{{ $forex->amount }}">{{ $forex->amount }}
                                 </td>
                                 <td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button>
                                 </td>
