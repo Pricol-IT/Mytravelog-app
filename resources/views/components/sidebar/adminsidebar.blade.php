@@ -16,3 +16,9 @@
           <span>Service Master</span>
       </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link " href="{{ route('domestic_policy.index') }}">
+        <i class='bx bxs-check-shield'></i>
+        <span>Domestic policy</span>
+    </a>
+</li>

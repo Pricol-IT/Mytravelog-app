@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\DomesticPolicyController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
@@ -41,8 +42,9 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('service_master', ServiceController::class);
 
+    Route::resource('domestic_policy', DomesticPolicyController::class); 
+
 
 
 
 });
-
