@@ -28,3 +28,9 @@
         <span>City Tier</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link " href="{{ route('grade.index') }}">
+        <i class='bx bxs-check-shield'></i>
+        <span>Grade</span>
+    </a>
+</li>

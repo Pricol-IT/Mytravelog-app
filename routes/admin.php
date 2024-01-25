@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\DomesticPolicyController;
 use App\Http\Controllers\Admin\CityTierController;
+use App\Http\Controllers\Admin\GradeController;
+use App\Http\Controllers\Admin\InternationalPolicyController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
@@ -45,6 +47,10 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('domestic_policy', DomesticPolicyController::class); 
 
-    Route::resource('city_tier', CityTierController::class); 
+    Route::resource('city_tier', CityTierController::class);
+
+    Route::resource('grade', GradeController::class); 
+
+    Route::resource('international_policy', InternationalPolicyController::class); 
 
 });
