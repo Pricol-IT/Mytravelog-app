@@ -22,3 +22,9 @@
         <span>Domestic policy</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link " href="{{ route('city_tier.index') }}">
+        <i class='bx bxs-check-shield'></i>
+        <span>City Tier</span>
+    </a>
+</li>

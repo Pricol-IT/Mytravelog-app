@@ -163,7 +163,7 @@
                 </div>
                 <div>
                     <input type="submit" class="btn btn-primary" value='Submit'>
-                    <a href="{{ route('user.index') }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('domestic_policy.index') }}" class="btn btn-danger">Cancel</a>
                 </div>
             </form>
         </div>
