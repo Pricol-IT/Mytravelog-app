@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('international_policies', function (Blueprint $table) {
             $table->id();
+            $table->string('components');
+            $table->string('level');
+            $table->string('us');
+            $table->string('uk');
+            $table->string('europe');
+            $table->string('asean');
+            $table->string('brazil');
+            $table->string('mexico');
+            $table->string('india');
             $table->timestamps();
         });
     }

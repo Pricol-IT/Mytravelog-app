@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\InternationalPolicy;
+use DB;
 class InternationalPolicyController extends Controller
 {
     /**
@@ -12,7 +13,8 @@ class InternationalPolicyController extends Controller
      */
     public function index()
     {
-        //
+        $internationalpolicies = InternationalPolicy::distinct()->get(['components']);
+        return view("admin.international_policy.index", compact("internationalpolicies"));
     }
 
     /**
@@ -20,7 +22,7 @@ class InternationalPolicyController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.international_policy.create");
     }
 
     /**
@@ -28,7 +30,29 @@ class InternationalPolicyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $category=['Senior Management','Middle Management','Junior Management','CXOs & Directors'];
+        
+        for ($i = 0; $i < count($category); $i++) {
+            $internationalpolicy = InternationalPolicy::create([
+                'components'=> $request->components,
+                'level'=> $category[$i],
+                'us'=> $request->us[$i],
+                'uk'=> $request->uk[$i],
+                'europe'=> $request->europe[$i],
+                'asean'=> $request->asean[$i],
+                'brazil'=> $request->brazil[$i],
+                'mexico'=> $request->mexico[$i],
+                'india'=> $request->india[$i],
+            ]);
+        }
+        
+        if ($internationalpolicy){
+            return redirect()->route('international_policy.index');
+        } else{
+            return back();
+        }
+        
     }
 
     /**
@@ -36,7 +60,8 @@ class InternationalPolicyController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $internationalpolicy = InternationalPolicy::find($id);
+        return view('admin.international_policy.view', compact("internationalpolicy"));
     }
 
     /**
@@ -44,7 +69,8 @@ class InternationalPolicyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $internationalpolicy = InternationalPolicy::find($id);
+        return view('admin.international_policy.edit', compact("internationalpolicy"));
     }
 
     /**
