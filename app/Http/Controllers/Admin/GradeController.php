@@ -8,18 +8,14 @@ use App\Models\Grade;
 
 class GradeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $grades = Grade::all();
         return view("admin.grade.index", compact("grades"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         return view("admin.grade.create");

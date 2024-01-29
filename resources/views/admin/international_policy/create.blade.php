@@ -33,9 +33,7 @@
                                                 </label>
                                                 <span class="form-label-required text-danger">*</span>
                                                 <input type="text" name="components" id="components" class="form-control class " value="{{old('components')}}" placeholder="Enter the compontent name">
-                                                @if ($errors->has('components'))
-                                                <span class="error text-danger">{{ $errors->first('components') }}</span>
-                                                @endif
+                                               
                                             </div>
                                         </div>
 
@@ -117,7 +115,7 @@
 
                                         
                                         <div class="card-footer mt-2">
-                                            <h4 class="card-title p-0">Junior Management</h4>
+                                            <h4 class="card-title p-0">Middle Management</h4>
                                         </div>
                                         <div class="col-md-3 mt-2">
                                             <div class="form-group">
@@ -193,7 +191,7 @@
 
                                         
                                         <div class="card-footer mt-2">
-                                            <h4 class="card-title p-0">Junior Management</h4>
+                                            <h4 class="card-title p-0">Senior Management</h4>
                                         </div>
                                         <div class="col-md-3 mt-2">
                                             <div class="form-group">
@@ -269,7 +267,7 @@
 
                                         
                                         <div class="card-footer mt-2">
-                                            <h4 class="card-title p-0">Junior Management</h4>
+                                            <h4 class="card-title p-0">CXOs & Directors</h4>
                                         </div>
                                         <div class="col-md-3 mt-2">
                                             <div class="form-group">

@@ -8,30 +8,23 @@ use App\Models\InternationalPolicy;
 use DB;
 class InternationalPolicyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $internationalpolicies = InternationalPolicy::distinct()->get(['components']);
         return view("admin.international_policy.index", compact("internationalpolicies"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         return view("admin.international_policy.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+  
     public function store(Request $request)
     {
         // return $request;
-        $category=['Senior Management','Middle Management','Junior Management','CXOs & Directors'];
+        $category=['Junior Management','Middle Management','Senior Management','CXOs & Directors'];
         
         for ($i = 0; $i < count($category); $i++) {
             $internationalpolicy = InternationalPolicy::create([
@@ -58,32 +51,51 @@ class InternationalPolicyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $components)
     {
-        $internationalpolicy = InternationalPolicy::find($id);
-        return view('admin.international_policy.view', compact("internationalpolicy"));
+        $internationalpolicies = InternationalPolicy::where('components',$components)->get();
+        // return $internationalpolicies;
+        return view('admin.international_policy.view', compact("internationalpolicies"));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    
+    public function edit(string $components)
     {
-        $internationalpolicy = InternationalPolicy::find($id);
-        return view('admin.international_policy.edit', compact("internationalpolicy"));
+        $internationalpolicies = InternationalPolicy::where('components',$components)->get();
+        // return $internationalpolicies;
+        return view('admin.international_policy.edit', compact("internationalpolicies"));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+  
+    public function update(Request $request, string $components)
     {
-        //
+        $category=['Junior Management','Middle Management','Senior Management','CXOs & Directors'];
+
+        $id = InternationalPolicy::where('components',$components)->get();
+
+        // return $id[0]->id;
+        
+        for ($i = 0; $i < count($category); $i++) {
+            $internationalpolicy = InternationalPolicy::find($id[$i]->id)->update([
+                'components'=> $request->components,
+                'level'=> $category[$i],
+                'us'=> $request->us[$i],
+                'uk'=> $request->uk[$i],
+                'europe'=> $request->europe[$i],
+                'asean'=> $request->asean[$i],
+                'brazil'=> $request->brazil[$i],
+                'mexico'=> $request->mexico[$i],
+                'india'=> $request->india[$i],
+            ]);
+        }
+        
+        if ($internationalpolicy){
+            return redirect()->route('international_policy.index');
+        } else{
+            return back();
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
