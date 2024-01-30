@@ -43,6 +43,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-12">
+                    <center>
+                        <a href="{{ route('grade.index') }}" class="btn btn-danger text-center">Back</a>
+                    </center>
+                </div>
             </div>
         </div>
 

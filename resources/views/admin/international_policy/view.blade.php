@@ -82,6 +82,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-12">
+                    <center>
+                        <a href="{{ route('international_policy.index') }}" class="btn btn-danger text-center">Back</a>
+                    </center>
+                </div>
             </div>
         </div>
 
