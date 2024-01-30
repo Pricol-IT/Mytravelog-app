@@ -1,5 +1,6 @@
 <div>
     <!-- Order your soul. Reduce your wants. - Augustine -->
+    
     <div class="container">
         @foreach ($tripDetails as $trip)
         <div class="row mb-4 tbox rounded">

@@ -4,7 +4,15 @@
 @endsection
 @section('main')
 <main id="main" class="main">
-
+    @php
+    // $user_grade = auth()->user()->userdetail->grade;
+    // $select_key = App\Models\Grade::where('levels',auth()->user()->userdetail->grade)->pluck('select_column');
+    $column = explode (",", App\Models\Grade::where('levels',auth()->user()->userdetail->grade)->pluck('select_column')[0]);
+    $select_data = App\Models\DomesticPolicy::select($column[0],$column[1],$column[2])->get();
+    @endphp
+    {{-- {{$user_grade}} --}}
+    {{-- {{$select_key}} --}}
+    {{$select_data}}
     <x-container.addtripcontainer :tripDetails="$tripDetails" />
 
 </main><!-- End #main -->
