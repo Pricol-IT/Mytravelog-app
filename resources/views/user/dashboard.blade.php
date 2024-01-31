@@ -14,8 +14,8 @@
                     <h5 class="fw-bold">Create New Trip</h5>
                 </div>
                 <div class="col-lg-6">
-                    <input type="hidden" name="trip_type" value="domestic">
-                    @if (in_array(ucfirst(auth()->user()->userdetail->grade),['L5','L6','L7','L8']))
+                    {{-- <input type="hidden" name="trip_type" value="domestic">
+                    @if (in_array(ucfirst(auth()->user()->userdetail->grade),['L5','L6','L7','L8'])) --}}
                     <div class="d-flex">
                         <div class="form-check m-2">
                             <input class="form-check-input" type="radio" name="trip_type" id="domestic" value="domestic" required>
@@ -30,7 +30,7 @@
                             </label>
                         </div>
                     </div>
-                    @endif
+                    {{-- @endif --}}
                 </div>
             </div>
             <div class="row pb-sm-1 pb-lg-0">
