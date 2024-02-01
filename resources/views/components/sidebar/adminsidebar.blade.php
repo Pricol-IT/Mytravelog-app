@@ -19,7 +19,7 @@
 
   <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bx bxs-check-shield"></i><span>GrPolicy</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bx bxs-check-shield"></i><span>Grade & Policy</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li class="nav-item">

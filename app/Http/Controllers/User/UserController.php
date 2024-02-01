@@ -587,4 +587,6 @@ class UserController extends Controller
     $trips = Trip::where('user_id', $user_id)->where('status', '=', 'approved')->whereDate('date', '>=', now())->orderBy('date', 'asc')->get();
     return view('user.dashboard', compact('trips'));
   }
+
+  
 }

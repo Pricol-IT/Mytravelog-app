@@ -20,11 +20,12 @@
             <div class="col-lg-12">
                 <h4 class="mb-4">Services</h4>
                 <div class="service_card">
-
+@if (!in_array(ucfirst($usergrade),['L5','L6','L7','L8']))
                     <div class="service shadow text-center" id="Flight" data-bs-toggle="modal" data-bs-target="#form-modal">
                         <i class='bx bxs-plane-alt'></i>
                         <h5>Book a Flight</h5>
                     </div>
+@endif
 
                     @if ($trip['trip_type'] === 'domestic')
                     <div class="service shadow text-center" id="Train" data-bs-toggle="modal" data-bs-target="#form-modal">

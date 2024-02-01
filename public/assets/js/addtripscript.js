@@ -140,6 +140,7 @@ $('.addService').on("click", function() {
         to.push(inputValue);
     });
 
+    
     var sdate = [];
     var date = [];
     var time = [];
