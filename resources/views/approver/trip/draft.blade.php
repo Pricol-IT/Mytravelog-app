@@ -12,12 +12,18 @@
     'trip_fromdate' => $trip->tfdate,
     'trip_todate' => $trip->ttdate,
     'trip_type' => $trip->trip_type
-    ]
-    @endphp
-    <x-container.draftcontainer :trip="$trip" />
+    ];
+    $usergrade = auth()->user()->userdetail->grade;
+    $column = explode (",", App\Models\Grade::where('levels',$usergrade)->pluck('select_column')[0]);
+    $selectdata = App\Models\DomesticPolicy::select('id',$column[0],$column[1],$column[2])->get();
+    $tier1=0;
+    $tier2=0;
+    $tier3=0;
+    for ($x = 4; $x
+    <= 9; $x++) { $dataArray=json_decode($selectdata[$x], true); $valuesArray=array_values($dataArray); $tier1+=$valuesArray[1]; $tier2+=$valuesArray[2]; $tier3+=$valuesArray[3]; } @endphp <x-container.draftcontainer :trip="$trip" :usergrade="$usergrade" :tier="[$tier3,$tier2,$tier1]" />
 </main><!-- End #main -->
-<x-modal.requestmodel :tripDetails="$tripDetails" />
-<x-modal.servicemodel />
+<x-modal.requestmodel :tripDetails="$tripDetails" :usergrade="$usergrade" />
+<x-modal.servicemodel :tier="[$tier3,$tier2,$tier1]" />
 @endsection
 
 @section('script')

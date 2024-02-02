@@ -345,7 +345,7 @@
                 <button type="button" class="btnClarification  btn btn-warning text-white" data1="clarification" data="{{ $trip->id }}"><i class="bx bx-chat"></i>
                     Clarification </button>
                 @endif
-                <a href="{{ url()->previous() }}" class="btn btn-secondary text-center">Back</a>
+                <a href="{{ route('approver.alltrip')}}" class="btn btn-secondary text-center">Back</a>
                 @endif
             </center>
         </div>
