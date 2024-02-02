@@ -7,10 +7,8 @@
     
     @php
     $usergrade = auth()->user()->userdetail->grade;
-    // $select_key = App\Models\Grade::where('levels',auth()->user()->userdetail->grade)->pluck('select_column');
     $column = explode (",", App\Models\Grade::where('levels',$usergrade)->pluck('select_column')[0]);
     $selectdata = App\Models\DomesticPolicy::select('id',$column[0],$column[1],$column[2])->get();
-    // print_r($column);
     $tier1=0;
     $tier2=0;
     $tier3=0;
@@ -20,16 +18,8 @@
         $tier1+=$valuesArray[1];
         $tier2+=$valuesArray[2];
         $tier3+=$valuesArray[3];
-        // print_r ($valuesArray); 
     } 
     @endphp
-     {{-- {{$usergrade}} 
-    {{$select_key}} 
-     {{$selectdata}}  
-     
-    {{$tier1}}
-    {{$tier2}}
-    {{$tier3}}  --}}
 
    
     <x-container.addtripcontainer :tripDetails="$tripDetails" :usergrade="$usergrade" :tier="[$tier3,$tier2,$tier1]" />

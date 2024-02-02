@@ -11,12 +11,14 @@ class draftcontainer extends Component
     /**
      * Create a new component instance.
      */
-    public $trip;
+    public $trip,$usergrade,$tier;
     public $routeName;
     public $homeRouteName;
-    public function __construct($trip)
+    public function __construct($trip,$usergrade,$tier)
     {
         $this->trip = $trip;
+        $this->usergrade = $usergrade;
+        $this->tier = $tier;
         $this->routeName = $this->getRouteName();
         $this->homeRouteName = $this->getHomeRouteName();
     }
