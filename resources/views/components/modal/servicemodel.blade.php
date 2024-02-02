@@ -5,7 +5,7 @@
                 <h5 class="modal-title "></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-           
+
             <div class="modal-body">
                 <form id='extra-service-form' action="#">
                     <input type="hidden" value="" class="extraService">
@@ -76,8 +76,8 @@
 
                         <div class="col-6 mb-2 advance-form">
                             <label>Amount</label>
-                            <input min="5000" max="10000" type="number" id="amount" class="form-control amount" placeholder="Enter the Amount" required />
-                            <small class="text-muted">Your advance eligibility is ₹10,000.</small>
+                            <input min="{{$tier[0]}}" max="{{$tier[2]}}" type="number" id="amount" class="form-control amount" placeholder="Enter the Amount" required />
+                            <small class="text-muted">Your advance eligibility for <br>Tier 1 => {{$tier[2]}} <br>Tier 2 => {{$tier[1]}} <br>Tier 3 => {{$tier[0]}}.</small>
                         </div>
                         <div class="col-6 advance-form">
                             <input class="form-check-input specialApproval" type="checkbox" name="specialApproval" id="specialApproval">

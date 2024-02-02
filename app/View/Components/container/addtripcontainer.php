@@ -11,15 +11,14 @@ class addtripcontainer extends Component
     /**
      * Create a new component instance.
      */
-    public $tripDetails,$usergrade;
-    public $selectdata;
+    public $tripDetails,$usergrade,$tier;
     public $routeName;
     public $homeRouteName;
-    public function __construct($tripDetails,$usergrade,$selectdata)
+    public function __construct($tripDetails,$usergrade,$tier)
     {
         $this->tripDetails = $tripDetails;
         $this->usergrade = $usergrade;
-        $this->selectdata = $selectdata;  
+        $this->tier = $tier;
         $this->routeName = $this->getRouteName();
         $this->homeRouteName = $this->getHomeRouteName();
     }

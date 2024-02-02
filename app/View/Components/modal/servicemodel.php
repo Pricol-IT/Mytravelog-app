@@ -11,9 +11,11 @@ class servicemodel extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+
+     public $tier;
+    public function __construct($tier)
     {
-        //
+        $this->tier = $tier;
     }
 
     /**

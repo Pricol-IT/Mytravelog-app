@@ -9,10 +9,12 @@
             <div class="card-header">
                 <div class=" d-flex justify-content-between">
                     <h4 class="card-title p-0">International Policy table</h4>
+                    @if(auth('admin')->user()->role == "super admin")
                     <div class="button">
                         <a href="{{ route('international_policy.create') }}" class="btn btn-primary"><i class='bx bx-plus'></i>Create New Grade</a>
 
                     </div>
+                    @endif
                 </div>
             </div>
 
@@ -43,11 +45,13 @@
                                     <a href="{{route('international_policy.edit',$internationalpolicy->components)}}" class="btn btn-sm btn-warning">
                                         <i class="bi bi-pencil"></i>
                                     </a>
+                                    @if(auth('admin')->user()->role == "super admin")
                                     <form method="post" action="{{ route('international_policy.destroy',$internationalpolicy->components) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                                     </form>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

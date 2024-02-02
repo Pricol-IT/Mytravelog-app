@@ -8,11 +8,13 @@
         <div class="card">
             <div class="card-header">
                 <div class=" d-flex justify-content-between">
-                    <h4 class="card-title p-0">Grade table</h4>
+                    <h4 class="card-title p-0">Grade System table</h4>
+                    @if(auth('admin')->user()->role == "super admin")
                     <div class="button">
                         <a href="{{ route('grade.create') }}" class="btn btn-primary"><i class='bx bx-plus'></i>Create New Grade</a>
 
                     </div>
+                    @endif
                 </div>
             </div>
 
@@ -46,11 +48,13 @@
                                     <a href="{{route('grade.edit',$grade->id)}}" class="btn btn-sm btn-warning">
                                         <i class="bi bi-pencil"></i>
                                     </a>
+                                    @if(auth('admin')->user()->role == "super admin")
                                     <form method="post" action="{{ route('grade.destroy',$grade->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                                     </form>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

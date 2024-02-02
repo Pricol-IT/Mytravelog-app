@@ -1,4 +1,5 @@
 <div>
+   
     <!-- Order your soul. Reduce your wants. - Augustine -->
 
     <div class="container">
@@ -17,6 +18,7 @@
             </div>
         </div>
         @endforeach
+       
         <div class="row sws mb-4">
             <div class="col-lg-12">
                 <h4 class="mb-4">Services</h4>

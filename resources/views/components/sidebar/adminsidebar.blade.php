@@ -34,7 +34,7 @@
           </li>
           <li class="nav-item">
               <a class="nav-link " href="{{ route('grade.index') }}">
-                  <i class="bi bi-circle"></i><span>Grade</span>
+                  <i class="bi bi-circle"></i><span>Grade System</span>
               </a>
           </li>
           <li class="nav-item">

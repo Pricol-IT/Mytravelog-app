@@ -9,10 +9,12 @@
             <div class="card-header">
                 <div class=" d-flex justify-content-between">
                     <h4 class="card-title p-0">Cities tier table</h4>
+                    @if(auth('admin')->user()->role == "super admin")
                     <div class="button">
                         <a href="{{ route('city_tier.create') }}" class="btn btn-primary"><i class='bx bx-plus'></i>Create New Policy</a>
 
                     </div>
+                    @endif
                 </div>
             </div>
 
@@ -46,11 +48,13 @@
                                     <a href="{{route('city_tier.edit',$city->id)}}" class="btn btn-sm btn-warning">
                                         <i class="bi bi-pencil"></i>
                                     </a>
+                                    @if(auth('admin')->user()->role == "super admin")
                                     <form method="post" action="{{ route('city_tier.destroy',$city->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                                     </form>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

@@ -45,7 +45,7 @@ Route::controller(UserController::class)->prefix('user')->middleware('requester'
     Route::get('/draft/{id}', 'draft')->name('user.draft');
     Route::put('/storedraft/{id}', 'storedraft')->name('user.storedraft');
     Route::get('/mysavedtrip', 'mysavedtrip')->name('user.mysavedtrip');
-
+    
 });
 
 Route::controller(ApproverController::class)->prefix('approver')->middleware('approver')->group(function () {

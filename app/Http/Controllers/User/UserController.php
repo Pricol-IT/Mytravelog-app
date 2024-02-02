@@ -31,7 +31,7 @@ class UserController extends Controller
     $this->middleware('auth');
   }
 
-
+  public $city = ['City A', 'City B', 'City C'];
   public function index()
   {
 
@@ -70,9 +70,10 @@ class UserController extends Controller
       'trip_type' => $request->trip_type
 
     ];
+    $city= ['City A', 'City B', 'City C'];
     // return $tripDetails;
     toastr()->success('TripId Generated Successfully');
-    return view('user.trip.addtrip', compact('tripDetails', 'trips'));
+    return view('user.trip.addtrip', compact('tripDetails', 'trips', 'city'));
   }
 
   public function mytripDetails()
@@ -588,5 +589,11 @@ class UserController extends Controller
     return view('user.dashboard', compact('trips'));
   }
 
-  
+  public function add(Request $request)
+    {
+        $selectedCity = $request->input('selectedCity');
+        $this->city[] = $selectedCity;
+
+        return response()->json(['cities' => $this->city]);
+    }
 }
