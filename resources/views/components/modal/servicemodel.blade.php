@@ -114,7 +114,25 @@
                         <div class="col-6 mb-2 forex-form">
                             <label>Amount</label>
                             <input type="text" required class="form-control" name="forex_amount" id="forex_amount" placeholder="Enter the Amount">
+
                         </div>
+
+                        {{-- {{$allowance[0]}} --}}
+                        @foreach ( $allowance as $data )
+                        <div class="col-6 mb-2 forex-form">
+                            <p>{{$data->components}}</p>
+                            <p>US = {{$data->us}},<br>
+                                UK = {{$data->uk}},<br>
+                                Europe = {{$data->europe}},<br>
+                                Asean = {{$data->asean}},<br>
+                                brazil = {{$data->brazil}},<br>
+                                Mexico = {{$data->mexico}},<br>
+                                India = {{$data->india}}</p>
+                        </div>
+                        @endforeach
+                        {{-- @foreach ($allowance as $data) @foreach ($data->getAttributes() as $key => $value) {{ ucfirst($key) }} = {{ $value }},<br> @endforeach <br> @endforeach --}}
+
+
                     </div>
                     <br>
                     <center>
