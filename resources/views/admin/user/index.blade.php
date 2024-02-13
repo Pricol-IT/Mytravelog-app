@@ -11,6 +11,7 @@
                     <h4 class="card-title p-0">All Users List</h4>
                     <div class="button">
                         <a href="{{ route('user.create') }}" class="btn btn-primary"><i class='bx bx-plus'></i>New User</a>
+                        <a href="{{ route('user.bulkupload') }}" class="btn btn-primary"></i>Bulk Upload</a>
                         @if (request('status') || request('role_by') || request('search'))
                         <a href="{{route('user.index')}}" class="btn btn-danger">Reset</a>
                         @endif

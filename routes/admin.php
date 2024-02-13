@@ -42,6 +42,8 @@ Route::prefix('admin')->group(function () {
 
 
     Route::resource('user', UserController::class); 
+    Route::get('bulkupload', [UserController::class,'bulkUpload'])->name('user.bulkupload');
+    Route::post('import', [UserController::class,'import'])->name('user.import');
 
     Route::resource('service_master', ServiceController::class);
 

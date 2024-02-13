@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -164,4 +166,24 @@ class UserController extends Controller
     {
         //
     }
+
+    public function bulkupload(){
+        return view('admin.user.bulkupload');
+    }
+    public function import(Request $request) 
+{
+    $request->validate([
+        'uploadfile' => 'required|mimes:csv,xlsx,xls',
+    ]);
+
+    try {
+        Excel::import(new UsersImport, $request->uploadfile);
+
+        toastr('Users imported successfully');
+        return back();
+    } catch (\Throwable $th) {
+        toastr($th->getMessage());
+        return back();
+    }
+}
 }
