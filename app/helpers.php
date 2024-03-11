@@ -85,3 +85,18 @@ if (!function_exists('getRouteName')) {
         }
     }
 }
+
+
+
+if (!function_exists('getHomeRouteName')) {
+
+    function getHomeRouteName()
+    {
+        // Assuming you have a 'role' attribute on your user model
+        if (auth()->check() && auth()->user()->role == 'approver') {
+            return 'approver.home';
+        } else {
+            return 'user.home';
+        }
+    }
+}

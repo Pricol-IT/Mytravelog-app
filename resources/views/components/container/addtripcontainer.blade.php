@@ -75,6 +75,7 @@
         </div>
         @php
             $route=getRouteName();
+            $homeroute=getHomeRouteName();
         @endphp
         <form method="POST" action="{{ route($route) }}">
             @csrf
@@ -251,7 +252,7 @@
                     <center>
                         <input type="submit" name="submit" class="btn btn-primary saveAlert" value="Send for Approval">
                         <input type="submit" name="submit" class="btn btn-secondary" value="Save My Trip">
-                        <a href="{{ route($homeRouteName) }}" class="btn btn-danger">Cancel</a>
+                        <a href="{{ route($homeroute) }}" class="btn btn-danger">Cancel</a>
                     </center>
                 </div>
             </div>
