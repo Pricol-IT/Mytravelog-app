@@ -31,7 +31,7 @@
         $tier3+=$valuesArray[3];
         }
         @endphp
-    <x-container.addtripcontainer :tripDetails="$tripDetails"  :usergrade="$usergrade" :tier="[$tier3,$tier2,$tier1]" />
+    <x-container.addtripcontainer :tripDetails="$tripDetails" :usergrade="$usergrade" :tier="[$tier3,$tier2,$tier1]" />
 </main><!-- End #main -->
 <x-modal.requestmodel :tripDetails="$tripDetails" :usergrade="$usergrade" />
 <x-modal.servicemodel :tier="[$tier3,$tier2,$tier1]" :allowance="$allowance"/>
