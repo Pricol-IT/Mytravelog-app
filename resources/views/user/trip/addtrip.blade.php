@@ -22,16 +22,16 @@
     {{$internationalstaydata}}
     {{$internationalallowancedata}} --}}
     @php
-    for ($x = 4; $x<= 9; $x++) 
-    { 
-        $dataArray=json_decode($selectdata[$x], true); 
-        $valuesArray=array_values($dataArray); 
-        $tier1+=$valuesArray[1]; 
-        $tier2+=$valuesArray[2]; 
-        $tier3+=$valuesArray[3]; 
-        } 
-        @endphp 
-    <x-container.addtripcontainer :tripDetails="$tripDetails" :routeName="$routeName" :usergrade="$usergrade" :tier="[$tier3,$tier2,$tier1]" />
+    for ($x = 4; $x<= 9; $x++)
+    {
+        $dataArray=json_decode($selectdata[$x], true);
+        $valuesArray=array_values($dataArray);
+        $tier1+=$valuesArray[1];
+        $tier2+=$valuesArray[2];
+        $tier3+=$valuesArray[3];
+        }
+        @endphp
+    <x-container.addtripcontainer :tripDetails="$tripDetails"  :usergrade="$usergrade" :tier="[$tier3,$tier2,$tier1]" />
 </main><!-- End #main -->
 <x-modal.requestmodel :tripDetails="$tripDetails" :usergrade="$usergrade" />
 <x-modal.servicemodel :tier="[$tier3,$tier2,$tier1]" :allowance="$allowance"/>
