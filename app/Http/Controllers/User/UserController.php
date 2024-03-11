@@ -219,12 +219,14 @@ class UserController extends Controller
     }
     if ($status == 'pending') {
       $user = auth('user')->user();
-      //  $user->userdetail->repostingto;
+    //   return $user->userdetail->repostingto;
        $approver = User::where('emp_id',$user->userdetail->repostingto )->first();
-      
-      Notification::send($user, new NewTripNodification());
 
-      $approver->notify(new TripAddedNodification($user));
+      Notification::send($user, new NewTripNodification());
+        // return $approver;
+        if($approver){
+            $approver->notify(new TripAddedNodification($user));
+        }
 
       toastr()->success('Trip Submitted for Approval');
       return redirect()->route('user.mytrip');
@@ -288,7 +290,7 @@ class UserController extends Controller
 
   public function storedraft(Request $request, $id)
   {
-    
+
     if ($request->submit == 'Send for Approval') {
       $trip = Trip::find($id)->update(['status' => 'pending']);
       $status = 'pending';
