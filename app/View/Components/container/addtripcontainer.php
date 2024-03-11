@@ -19,7 +19,7 @@ class addtripcontainer extends Component
         $this->tripDetails = $tripDetails;
         $this->usergrade = $usergrade;
         $this->tier = $tier;
-        $this->routeName = $this->getRouteName();
+        // $this->routeName = $this->getRouteName();
         $this->homeRouteName = $this->getHomeRouteName();
     }
 
