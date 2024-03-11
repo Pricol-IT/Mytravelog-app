@@ -11,18 +11,18 @@
             <div class="logo p-3 text-center" style="color:#0072BC;"><h1>MyTravelog</h1></div>
             <div class="welcome-text p-1"><h3>Welcome</h3>
             <p>Login to our MyTravelog</p></div>
-           
+
             <form method="POST" action="{{ route('login') }}">
                         @csrf
                 <div class="form-group p-1">
                   <!-- <label for="username" class="d-none"></label> -->
-                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Username">
-                  
+                  <input id="emp_id" type="text" class="form-control @error('emp_id') is-invalid @enderror" name="emp_id" value="{{ old('emp_id') }}" required placeholder="Username">
+
                 </div>
                 <div class="form-group pt-2">
                   <!-- <label for="exampleInputPassword1" class="d-none"></label> -->
                   <input  class="form-control" type="password" name="password" autocomplete="current-password"  placeholder="Password" id="id_password">
-                 
+
                 </div>
                 <div class="form-group p-2">
                 <div class="fs-6"><p class="m-0 p-1">

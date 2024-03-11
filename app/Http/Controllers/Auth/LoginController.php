@@ -68,4 +68,9 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect()->route('login');
     }
+
+    public function username()
+    {
+        return 'emp_id';
+    }
 }
