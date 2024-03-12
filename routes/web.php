@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Approver\ApproverController;
 use App\Http\Controllers\Accountant\AccountantController;
+use App\Http\Controllers\User\ExpenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,19 +35,31 @@ Route::middleware('auth:user', 'verified')->group(function () {
 });
 
 Auth::routes();
-Route::controller(UserController::class)->prefix('user')->middleware('requester')->group(function () {
-    Route::get('/dashboard', 'index')->name('user.home');
-    Route::get('/mytrip', 'mytripDetails')->name('user.mytrip');
-    Route::get('/viewsummary/{id}', 'viewsummary')->name('user.summary');
-    Route::post('/addtrip', 'addtrip')->name('addtrip');
-    Route::put('/storetrip', 'storetrip')->name('storetrip');
-    Route::get('/all_notifications', 'allNotification')->name('user.allnotify');
-    Route::post('/clarification', 'clarification')->name('user.clarification');
-    Route::get('/draft/{id}', 'draft')->name('user.draft');
-    Route::put('/storedraft/{id}', 'storedraft')->name('user.storedraft');
-    Route::get('/mysavedtrip', 'mysavedtrip')->name('user.mysavedtrip');
-    
+
+
+Route::prefix('user')->middleware('requester')->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('user.home');
+        Route::get('/mytrip', 'mytripDetails')->name('user.mytrip');
+        Route::get('/viewsummary/{id}', 'viewsummary')->name('user.summary');
+        Route::post('/addtrip', 'addtrip')->name('addtrip');
+        Route::put('/storetrip', 'storetrip')->name('storetrip');
+        Route::get('/all_notifications', 'allNotification')->name('user.allnotify');
+        Route::post('/clarification', 'clarification')->name('user.clarification');
+        Route::get('/draft/{id}', 'draft')->name('user.draft');
+        Route::put('/storedraft/{id}', 'storedraft')->name('user.storedraft');
+        Route::get('/mysavedtrip', 'mysavedtrip')->name('user.mysavedtrip');
+    });
+
+    Route::controller(ExpenseController::class)->group(function () {
+        Route::get('/expense/mytrip', 'mytripexpenses')->name('user.mytripexpenses');
+        Route::get('/expense/viewsummary/{id}', 'viewexpensesummary')->name('user.expensesummary');
+        Route::get('/expense/addexpense', 'addexpense')->name('addexpense');
+        Route::put('/expense/storetrip', 'storeexpense')->name('storeexpense');
+    });
 });
+
+
 
 Route::controller(ApproverController::class)->prefix('approver')->middleware('approver')->group(function () {
 

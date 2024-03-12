@@ -7,6 +7,10 @@ $(".service").click(function () {
         return "Book a " + service;
     });
 
+    $(".modal-expense-title").text(function () {
+        return "Claim a " + service + " cost";
+    });
+
     $(".onward-form").hide();
     $(".return-form").hide();
     $(".multicity-form").hide();
@@ -530,6 +534,222 @@ $(".addService").on("click", function () {
                             forex_amount +
                             '" >' +
                             forex_amount +
+                            '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                    );
+                    $("[data-bs-dismiss=modal]").trigger({
+                        type: "click",
+                    });
+                    $("#extra-service-form").trigger("reset");
+                    // console.log('passed')
+                }
+                break;
+
+            default:
+                // alert('Select Trip Type');
+                break;
+        }
+    }
+});
+
+$(".addExpense").on("click", function () {
+    var vehicle = $(".vehicle").val();
+
+    var from = $("#from").val();
+
+    var to = $("#to").val();
+
+    var cost = $("#cost").val();
+
+    var ticket = $("#ticket").val();
+
+
+
+    var efrom = $("#efrom").val();
+
+    var eto = $("#eto").val();
+
+    var ecost = $("#ecost").val();
+
+    var eticket = $("#eticket").val();
+
+    // extra service section
+    var extra_service = $(".extraService").val();
+
+    var location = $("#location").val();
+
+    var hotelName = $("#hotelName").val();
+
+    var network = $("#network").val();
+
+
+    if (vehicle != "") {
+        switch (vehicle) {
+            case "Flight":
+                $(".rq").show();
+                $("#Flightbody").append(
+                    '<tr><td><input type="hidden" name="service[]" value="' +
+                        vehicle +
+                        '"><input type="hidden" name="from[]" value="' +
+                        from +
+                        '">' +
+                        from +
+                        '</td><td><input type="hidden" name="to[]" value="' +
+                        to +
+                        '">' +
+                        to +
+                        '</td><td><input type="hidden" name="cost[]" value="' +
+                        cost +
+                        '">' +
+                        cost +
+                        '</td><td><input  type="file" name="ticket[]" value="' +
+                        ticket +
+                        '"></td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                );
+                $("[data-bs-dismiss=modal]").trigger({
+                    type: "click",
+                });
+                $("#service-form").trigger("reset");
+                break;
+
+            case "Train":
+                $(".rt").show();
+                $("#Trainbody").append(
+                    '<tr><td><input type="hidden" name="service[]" value="' +
+                        vehicle +
+                        '"><input type="hidden" name="from[]" value="' +
+                        from +
+                        '">' +
+                        from +
+                        '</td><td><input type="hidden" name="to[]" value="' +
+                        to +
+                        '">' +
+                        to +
+                        '</td><td><input type="hidden" name="cost[]" value="' +
+                        cost +
+                        '">' +
+                        cost +
+                        '</td><td><input type="hidden" name="ticket[]" value="' +
+                        ticket +
+                        '">' +
+                        ticket +
+                        '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                );
+                $("[data-bs-dismiss=modal]").trigger({
+                    type: "click",
+                });
+                $("#service-form").trigger("reset");
+
+                break;
+
+            case "Bus":
+                $(".rb").show();
+                $("#Busbody").append(
+                    '<tr><td><input type="hidden" name="service[]" value="' +
+                        vehicle +
+                        '"><input type="hidden" name="from[]" value="' +
+                        from +
+                        '">' +
+                        from +
+                        '</td><td><input type="hidden" name="to[]" value="' +
+                        to +
+                        '">' +
+                        to +
+                        '</td><td><input type="hidden" name="cost[]" value="' +
+                        cost +
+                        '">' +
+                        cost +
+                        '</td><td><input type="hidden" name="ticket[]" value="' +
+                        ticket +
+                        '">' +
+                        ticket +
+                        '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                );
+                $("[data-bs-dismiss=modal]").trigger({
+                    type: "click",
+                });
+                $("#service-form").trigger("reset");
+
+                break;
+        }
+    }
+
+    if (extra_service != "") {
+        switch (extra_service) {
+            case "Taxi":
+                $(".rtx").show();
+                $("#Taxibody").append(
+                    '<tr><td><input type="hidden" name="service[]" value="' +
+                        extra_service +
+                        '"><input type="hidden" name="from[]" value="' +
+                        efrom +
+                        '">' +
+                        efrom +
+                        '</td><td><input type="hidden" name="to[]" value="' +
+                        eto +
+                        '">' +
+                        eto +
+                        '</td><td><input type="hidden" name="cost[]" value="' +
+                        ecost +
+                        '">' +
+                        ecost +
+                        '</td><td><input type="hidden" name="ticket[]" value="' +
+                        eticket +
+                        '">' +
+                        eticket +
+                        '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                );
+
+                $("[data-bs-dismiss=modal]").trigger({
+                    type: "click",
+                });
+                $("#service-form").trigger("reset");
+
+            case "Hotel":
+                if (location != "") {
+                    $(".rh").show();
+                    $("#Hotelbody").append(
+                        '<tr><td><input type="hidden" name="location[]" value="' +
+                            location +
+                            '" >' +
+                            location +
+                            '</td><td><input type="hidden" name="hotelName[]" value="' +
+                            hotelName +
+                            '" >' +
+                            hotelName +
+                            '</td><td><input type="hidden" name="cost[]" value="' +
+                            ecost +
+                            '">' +
+                            ecost +
+                            '</td><td><input type="hidden" name="ticket[]" value="' +
+                            eticket +
+                            '">' +
+                            eticket +
+                            '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                    );
+                    $("[data-bs-dismiss=modal]").trigger({
+                        type: "click",
+                    });
+                    $("#extra-service-form").trigger("reset");
+                    // console.log('passed')
+                }
+                break;
+
+            case "Network":
+                if (network != "") {
+                    $(".rc").show();
+                    $("#Networkbody").append(
+                        '<tr><td><input type="hidden" name="network[]" value="' +
+                            network +
+                            '" >' +
+                            network +
+                            '</td><td><input type="hidden" name="cost[]" value="' +
+                            ecost +
+                            '">' +
+                            ecost +
+                            '</td><td><input type="hidden" name="ticket[]" value="' +
+                            eticket +
+                            '">' +
+                            eticket +
                             '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
                     );
                     $("[data-bs-dismiss=modal]").trigger({

@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $query = User::orderBy('id',"desc");
-    
+
         if($request->has('role_by')  && $request->role_by != '')
         {
             $query->where('role', $request->role_by);
@@ -31,13 +31,13 @@ class UserController extends Controller
         return view('admin.user.index', compact('users'));
     }
 
-    
+
     public function create()
     {
         return view('admin.user.create');
     }
 
-   
+
     public function store(Request $request)
     {
         // return $request;
@@ -64,7 +64,7 @@ class UserController extends Controller
             'role'=> $request->role,
             'emp_id'=> $request->empid,
         ];
-       
+
         $user = User::create($userLoginDetails);
         $user_id = $user->id;
         $userDetails = UserDetail::create([
@@ -89,7 +89,7 @@ class UserController extends Controller
         }
 
 
-       
+
     }
 
     /**
@@ -142,7 +142,8 @@ class UserController extends Controller
             $userLoginDetails['password'] = Hash::make($request->password);
         }
     //    return $userLoginDetails;
-        $user = User::find($id)->update([$userLoginDetails]);
+        $user = User::find($id)->update($userLoginDetails);
+        // return $user;
         $userDetails = UserDetail::where('user_id',$id)->update([
             'user_id'=>$id,
             'designation'=> $request->designation,
@@ -170,7 +171,7 @@ class UserController extends Controller
     public function bulkupload(){
         return view('admin.user.bulkupload');
     }
-    public function import(Request $request) 
+    public function import(Request $request)
 {
     $request->validate([
         'uploadfile' => 'required|mimes:csv,xlsx,xls',

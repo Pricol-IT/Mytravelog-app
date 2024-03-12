@@ -55,7 +55,7 @@
             </a>
           </li> -->
               <li>
-                  <a href="#">
+                  <a href="{{ route('user.mytripexpenses') }}">
                       <i class="bi bi-circle"></i><span>My Trip Expenses</span>
                   </a>
               </li>
