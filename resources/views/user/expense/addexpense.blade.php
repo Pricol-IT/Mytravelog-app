@@ -101,7 +101,7 @@
         <input type="hidden" name="to_date" value="{{ $trip['trip_todate'] }}">
         <input type="hidden" name="trip_type" value="{{ $trip['trip_type'] }}">
         @endforeach --}}
-
+        <input type="hidden" name="tripid" value="{{ $tripid }}">
         <div class="row" id="request">
             <div class="col-lg-12">
                 <h4 class="mb-4">Added Expenses</h4>
@@ -215,6 +215,7 @@
                         </tr>
                         <tr class="fw-bold">
                             <td>International roaming days</td>
+                            <td>Mobile number</td>
                             <td>Total Cost</td>
                             <td>Invoice</td>
                             <td></td>
@@ -272,10 +273,7 @@
                                 <label>Total Ticket Cost</label>
                                 <input type="number" required class="form-control cost" min="0" name="cost" id="cost" placeholder="price">
                             </div>
-                            <div class="col-12 mb-2">
-                                <label>Upload E-ticket</label>
-                                <input type="file" required class="form-control ticket" name="ticket" id="ticket" placeholder="upload file">
-                            </div>
+
                         </div>
                     </div>
                     <br>
@@ -292,12 +290,7 @@
         </div>
     </div>
 </div>
-'<tr>
-    <td><input type="hidden" name="from[]" value="' +from +'">' + from +'</td>
-    <td><input type="hidden" name="to[]" value="' +to +'">' + to + '</td>
-    <td><input type="hidden" name="cost[]" value="' + cost +'">' + cost +'</td>
-    <td><input type="hidden" name="ticket[]" value="' + ticket + '">' + ticket +'</td>
-</tr>'
+
 
 
 
@@ -349,14 +342,16 @@
                             <input type="number" required class="form-control" name="network" id="network" placeholder="Enter the no.of.days">
                         </div>
 
+                        <div class="col-6 mb-2 network-form">
+                            <label>Mobile Number</label>
+                            <input type="text" required class="form-control" name="mobile" id="mobile" placeholder="Enter the mobile number">
+                        </div>
+
                         <div class="col-12 mb-2">
                             <label>Total Ticket Cost</label>
                             <input type="number" required class="form-control cost" min="0" name="cost" id="ecost" placeholder="price">
                         </div>
-                        <div class="col-12 mb-2">
-                            <label>Upload Invoice</label>
-                            <input type="file" required class="form-control ticket" name="ticket" id="eticket" placeholder="upload file">
-                        </div>
+
 
 
 

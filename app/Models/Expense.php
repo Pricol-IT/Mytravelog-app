@@ -12,9 +12,15 @@ class Expense extends Model
     protected $fillable = [
         "trip_id",
         "service",
-        "form",
+        "from",
         "to",
         "cost",
         "ticket",
     ];
+
+
+    public function trip()
+    {
+        return $this->belongsTo(Trip::class,'trip_id');
+    }
 }

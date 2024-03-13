@@ -1,4 +1,5 @@
-@extends('user.layouts.app')
+@extends( (auth()->user()->role) == 'user' ? 'user.layouts.app' : 'accountant.layouts.app')
+
 @section('title')
 {{ __('My Trip Details') }}
 @endsection
@@ -28,238 +29,403 @@
         </div>
         <div class="row" id="request">
             <div class="col-lg-12">
-                <div class="d-flex justify-content-between"><h4 class="">Expense Summary</h4><a href="{{ route('addexpense') }}" class="btn btn-primary text-center"><i class="bi bi-plus-lg"></i>   Add Expense</a> </div>
+                <div class="d-flex justify-content-between">
 
-                @if ($trip->flight->isNotEmpty())
+                    <h4 class="">Expense Summary</h4>
+                    @if ((auth()->user()->role) == 'user')
+                    <a href="{{ route('addexpense',$trip->id) }}" class="btn btn-primary text-center"><i class="bi bi-plus-lg"></i> Add Expense</a>
+                    @endif
+
+                </div>
+                @php
+                // $isFlight = any($expense["service"] == "Flight" for $expense in $expense);
+                @endphp
+
+
+
+
+
+                @if (($trip->flight->isNotEmpty()) || ($trip->expense->contains('service', 'Flight')))
                 <table class="table">
                     <thead>
+                        @if (($trip->flight->isNotEmpty()))
                         <tr>
-                            <td colspan="4">
-                                <h6 class="text-primary"> <i class="bx bxs-plane-alt"></i> Flight Request</h6>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class="bx bxs-plane-alt"></i> Flight</h6>
                             </td>
                         </tr>
+                        @else
+                        <tr>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class="bx bxs-plane-alt"></i> Claim Request for Flight</h6>
+                            </td>
+                        </tr>
+                        @endif
+
                         <tr class="fw-bold">
                             <td>Origin</td>
                             <td>Destination</td>
-                            <td>Date/Time</td>
-                            <td>Class</td>
                             <td>Ticket Cost</td>
+                            <td>e-Ticket</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody id="Flightbody">
-                        @foreach ($trip->flight as $flight)
+                        @forelse ($trip->flight as $flight)
                         <tr>
-                            <td>{{ $flight->origin }}
+                            <td>{{ $flight->origin }}</td>
                             <td>{{ $flight->destination }}</td>
-                            <td> {{ split_timestamp($flight->preferred_date)[0] }} /
-                                {{ split_timestamp($flight->preferred_date)[1] }}</td>
-                            <td>{{ $flight->trip_class }}</td>
                             <td>₹8316</td>
+                            <td> <span class="badge bg-warning text-dark">Not uploaded</span></td>
                         </tr>
+                        @empty
+                        @endforelse
+                        @if(($trip->flight->isNotEmpty()))
+                        <tr>
+                            <td colspan="4">
+                                <h6 class="text-primary m-0"> Claim Request</h6>
+                            </td>
+                        </tr>
+                        @endif
+                        @forelse ($trip->expense as $data)
+                        @if ($data->service == 'Flight')
+                        <tr>
+                            <td>{{ $data->from }}
+                            <td>{{ $data->to }}</td>
+                            <td>{{ '₹'.$data->cost }}</td>
+                            <td><span class="badge bg-success">file uploaded</span></td>
+                            {{-- @php $extension = pathinfo($data->ticket, PATHINFO_EXTENSION); @endphp
 
-                        @endforeach
+                            <td>@if($extension == 'pdf')
+                                <a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-success">View </a>
+
+                                @elseif($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png')
+                                <a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-success">View </a>
+                                {{-- <img src="{{ asset($data->ticket) }}" alt="{{ $data->ticket }}" class="img-fluid" /> --}}
+
+                                {{-- @endif</td> --}}
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
+                        </tr>
+                        @endif
+                        @empty
+                        @endforelse
                     </tbody>
                 </table>
                 @endif
-                @if ($trip->train->isNotEmpty())
+
+
+
+
+
+
+
+                @if (($trip->train->isNotEmpty()) || ($trip->expense->contains('service', 'Train')))
                 <table class="table">
                     <thead>
+                        @if (($trip->train->isNotEmpty()))
                         <tr>
-                            <td colspan="4">
-                                <h6 class="text-primary"> <i class='bx bxs-train'></i> Train Request</h6>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bxs-train'></i> Train</h6>
                             </td>
                         </tr>
+                        @else
+                        <tr>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bxs-train'></i> Claim Request for Train</h6>
+                            </td>
+                        </tr>
+                        @endif
+
                         <tr class="fw-bold">
                             <td>Origin</td>
                             <td>Destination</td>
-                            <td>Date/Time</td>
-                            <td>Class</td>
                             <td>Ticket Cost</td>
+                            <td>e-Ticket</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody id="Trainbody">
-                        @foreach ($trip->train as $train)
+                        @forelse ($trip->train as $train)
                         <tr>
                             <td>{{ $train->origin }}</td>
                             <td>{{ $train->destination }}</td>
-                            <td>{{ $train->preferred_date }} </td>
-                            <td>{{ $train->trip_class }}</td>
-                            <td>₹421</td>
+                            <td>₹8316</td>
+                            <td> <span class="badge bg-warning text-dark">Not uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
                         </tr>
+                        @empty
+                        @endforelse
+                        @if(($trip->train->isNotEmpty()))
                         <tr>
-                            <td colspan="4" class="text-primary" style="font-size:12px;margin:0;">
-                                {{ $train->preferences }}</td>
+                            <td colspan="5">
+                                <h6 class="text-primary m-0"> Claim Request</h6>
+                            </td>
                         </tr>
-                        @endforeach
+                        @endif
+                        @forelse ($trip->expense as $data)
+                        @if ($data->service == 'Train')
+                        <tr>
+                            <td>{{ $data->from }}
+                            <td>{{ $data->to }}</td>
+                            <td>{{ '₹'.$data->cost }}</td>
+                            <td><span class="badge bg-success">file uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
+                        </tr>
+                        @endif
+                        @empty
+                        @endforelse
                     </tbody>
                 </table>
                 @endif
-                @if ($trip->bus->isNotEmpty())
+
+
+
+                @if (($trip->bus->isNotEmpty()) || ($trip->expense->contains('service', 'Bus')))
                 <table class="table">
                     <thead>
+                        @if (($trip->bus->isNotEmpty()))
                         <tr>
-                            <td colspan="4">
-                                <h6 class="text-primary"> <i class='bx bxs-bus'></i> Bus Request</h6>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bxs-bus'></i> Bus</h6>
                             </td>
                         </tr>
+                        @else
+                        <tr>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bxs-bus'></i> Claim Request for Bus</h6>
+                            </td>
+                        </tr>
+                        @endif
+
                         <tr class="fw-bold">
                             <td>Origin</td>
                             <td>Destination</td>
-                            <td>Date/Time</td>
-                            <td>Class</td>
                             <td>Ticket Cost</td>
+                            <td>e-Ticket</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody id="Busbody">
-                        @foreach ($trip->bus as $bus)
+                        @forelse ($trip->bus as $bus)
                         <tr>
                             <td>{{ $bus->origin }}</td>
                             <td>{{ $bus->destination }}</td>
-                            <td>{{ $bus->preferred_date }}</td>
-                            <td>{{ $bus->trip_class }}</td>
-                            <td>₹841</td>
+                            <td>₹8316</td>
+                            <td> <span class="badge bg-warning text-dark">Not uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
                         </tr>
+                        @empty
+                        @endforelse
+                        @if(($trip->bus->isNotEmpty()))
                         <tr>
-                            <td colspan="4" class="text-primary" style="font-size:12px;margin:0;">
-                                {{ $bus->preferences }}</td>
+                            <td colspan="5">
+                                <h6 class="text-primary m-0"> Claim Request</h6>
+                            </td>
                         </tr>
-                        @endforeach
+                        @endif
+                        @forelse ($trip->expense as $data)
+                        @if ($data->service == 'Bus')
+                        <tr>
+                            <td>{{ $data->from }}
+                            <td>{{ $data->to }}</td>
+                            <td>{{ '₹'.$data->cost }}</td>
+                            <td><span class="badge bg-success">file uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
+                        </tr>
+                        @endif
+                        @empty
+                        @endforelse
                     </tbody>
                 </table>
                 @endif
-                @if ($trip->taxi->isNotEmpty())
+
+
+
+                {{auth()->user()->role}}
+
+                @if (($trip->taxi->isNotEmpty()) || ($trip->expense->contains('service', 'Taxi')))
                 <table class="table">
                     <thead>
+                        @if (($trip->taxi->isNotEmpty()))
                         <tr>
-                            <td colspan="6">
-                                <h6 class="text-primary"> <i class='bx bxs-taxi'></i> Taxi Request</h6>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bxs-taxi'></i> Taxi</h6>
                             </td>
                         </tr>
+                        @else
+                        <tr>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bxs-taxi'></i> Claim Request for Taxi</h6>
+                            </td>
+                        </tr>
+                        @endif
+
                         <tr class="fw-bold">
-                            <td>Airport To Hotel</td>
-                            <td>Hotel To Company</td>
-                            <td>No.of.days</td>
-                            <td>Class</td>
-                            <td>Pickup Date</td>
-                            <td>Drop Date</td>
+                            <td>Origin</td>
+                            <td>Destination</td>
                             <td>Total Cost</td>
+                            <td>Invoice</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody id="Taxibody">
-                        @foreach ($trip->taxi as $taxi)
+                        @forelse ($trip->taxi as $taxi)
                         <tr>
-                            <td>{{ $taxi->airport_to_hotel }}</td>
-                            <td>{{ $taxi->hotel_to_company }}</td>
-                            <td>{{ $taxi->no_of_days }}</td>
-                            <td>{{ $taxi->class }}</td>
-                            <td>{{ $taxi->pick_date }}</td>
-                            <td>{{ $taxi->drop_date }}</td>
+                            <td>{{ $taxi->origin }}</td>
+                            <td>{{ $taxi->destination }}</td>
+                            <td>₹8316</td>
+                            <td> <span class="badge bg-warning text-dark">Not uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
                         </tr>
-
-                        @endforeach
+                        @empty
+                        @endforelse
+                        @if(($trip->taxi->isNotEmpty()))
+                        <tr>
+                            <td colspan="5">
+                                <h6 class="text-primary m-0"> Claim Request</h6>
+                            </td>
+                        </tr>
+                        @endif
+                        @forelse ($trip->expense as $data)
+                        @if ($data->service == 'Taxi')
+                        <tr>
+                            <td>{{ $data->from }}
+                            <td>{{ $data->to }}</td>
+                            <td>{{ '₹'.$data->cost }}</td>
+                            <td><span class="badge bg-success">file uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
+                        </tr>
+                        @endif
+                        @empty
+                        @endforelse
                     </tbody>
                 </table>
                 @endif
-                @if ($trip->accommodation->isNotEmpty())
+
+
+                @if (($trip->accommodation->isNotEmpty()) || ($trip->expense->contains('service', 'Hotel')))
                 <table class="table">
                     <thead>
+                        @if (($trip->accommodation->isNotEmpty()))
                         <tr>
-                            <td colspan="4">
-                                <h6 class="text-primary"> <i class='bx bxs-hotel'></i> Accomadation Request</h6>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bxs-hotel'></i> accommodation</h6>
                             </td>
                         </tr>
+                        @else
+                        <tr>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bxs-hotel'></i> Claim Request for accommodation</h6>
+                            </td>
+                        </tr>
+                        @endif
+
                         <tr class="fw-bold">
                             <td>Location</td>
-                            <td>Hotel Name</td>
-                            <td>Check-In</td>
-                            <td>Check-Out</td>
+                            <td>Hotel name</td>
                             <td>Total Cost</td>
+                            <td>Invoice</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody id="Hotelbody">
-                        @foreach ($trip->accommodation as $accommodation)
+                        @forelse ($trip->accommodation as $accommodation)
                         <tr>
-                            <td>{{ $accommodation->location }}</td>
-                            <td>{{ $accommodation->hotel_name }}</td>
-                            <td>{{ $accommodation->checkin }}</td>
-                            <td>{{ $accommodation->checkout }}</td>
+                            <td>{{ $accommodation->origin }}</td>
+                            <td>{{ $accommodation->destination }}</td>
+                            <td>₹8316</td>
+                            <td> <span class="badge bg-warning text-dark">Not uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
                         </tr>
-                        @endforeach
+                        @empty
+                        @endforelse
+                        @if(($trip->accommodation->isNotEmpty()))
+                        <tr>
+                            <td colspan="5">
+                                <h6 class="text-primary m-0"> Claim Request</h6>
+                            </td>
+                        </tr>
+                        @endif
+                        @forelse ($trip->expense as $data)
+                        @if ($data->service == 'Hotel')
+                        <tr>
+                            <td>{{ $data->from }}
+                            <td>{{ $data->to }}</td>
+                            <td>{{ '₹'.$data->cost }}</td>
+                            <td><span class="badge bg-success">file uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
+                        </tr>
+                        @endif
+                        @empty
+                        @endforelse
                     </tbody>
                 </table>
                 @endif
-                @if ($trip->advance->isNotEmpty())
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td colspan="2">
-                                <h6 class="text-primary"> <i class='bx bx-rupee'></i> Advance Request</h6>
-                            </td>
-                        </tr>
-                        <tr class="fw-bold">
-                            <td>Amount</td>
-                            <td>Special Advance</td>
-                        </tr>
-                    </thead>
-                    <tbody id="Advancebody">
 
-                        @foreach ($trip->advance as $advance)
-                        <tr>
-                            <td>{{ $advance->amount }}</td>
-                            <td>{{ $advance->special_amount }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                @endif
-                @if ($trip->connectivity->isNotEmpty())
+
+
+                @if (($trip->connectivity->isNotEmpty()) || ($trip->expense->contains('service', 'Network')))
                 <table class="table">
                     <thead>
+                        @if (($trip->connectivity->isNotEmpty()))
                         <tr>
-                            <td colspan="2">
-                                <h6 class="text-primary"><i class='bx bx-broadcast'></i> Connectivity Request</h6>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bx-broadcast'></i> Connectivity</h6>
                             </td>
                         </tr>
+                        @else
+                        <tr>
+                            <td colspan="5">
+                                <h6 class="text-primary"> <i class='bx bx-broadcast'></i> Claim Request for Connectivity</h6>
+                            </td>
+                        </tr>
+                        @endif
+
                         <tr class="fw-bold">
-                            <td>International roaming</td>
-                            <td>Mobile Number</td>
+                            <td>N0. of Days</td>
+                            <td>Mobile number</td>
                             <td>Total Cost</td>
-
+                            <td>Invoice</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody id="Networkbody">
-                        @foreach ($trip->connectivity as $connectivity)
+                        @forelse ($trip->connectivity as $connectivity)
                         <tr>
-                            <td>{{ $connectivity->international_roaming }}</td>
-                            <td>{{ $connectivity->mobile_number }}</td>
+                            <td>{{ $connectivity->origin }}</td>
+                            <td>{{ $connectivity->destination }}</td>
+                            <td>₹8316</td>
+                            <td> <span class="badge bg-warning text-dark">Not uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
                         </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                @endif
-                @if ($trip->forex->isNotEmpty())
-                <table class="table">
-                    <thead>
+                        @empty
+                        @endforelse
+                        @if(($trip->connectivity->isNotEmpty()))
                         <tr>
-                            <td colspan="2">
-                                <h6 class="text-primary"> <img src="{{ asset('images/cu.svg') }}" style="background:#0072bc;"> Forex Request</h6>
+                            <td colspan="5">
+                                <h6 class="text-primary m-0"> Claim Request</h6>
                             </td>
                         </tr>
-                        <tr class="fw-bold">
-                            <td>Currency</td>
-                            <td>Amount</td>
-                        </tr>
-                    </thead>
-                    <tbody id="Forexbody">
-                        @foreach ($trip->forex as $forex)
+                        @endif
+                        @forelse ($trip->expense as $data)
+                        @if ($data->service == 'Network')
                         <tr>
-                            <td>{{ $forex->currency }}</td>
-                            <td>{{ $forex->amount }}</td>
+                            <td>{{ $data->from }}
+                            <td>{{ $data->to }}</td>
+                            <td>{{ '₹'.$data->cost }}</td>
+                            <td><span class="badge bg-success">file uploaded</span></td>
+                                <td><a href="{{ asset($data->ticket) }}" target="_blank" class="btn btn-primary">View </a></td>
                         </tr>
-                        @endforeach
+                        @endif
+                        @empty
+                        @endforelse
                     </tbody>
                 </table>
                 @endif
+
+
+
+
             </div>
 
             <div class="col-lg-12">

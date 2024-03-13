@@ -51,12 +51,14 @@ Route::prefix('user')->middleware('requester')->group(function () {
         Route::get('/mysavedtrip', 'mysavedtrip')->name('user.mysavedtrip');
     });
 
-    Route::controller(ExpenseController::class)->group(function () {
-        Route::get('/expense/mytrip', 'mytripexpenses')->name('user.mytripexpenses');
-        Route::get('/expense/viewsummary/{id}', 'viewexpensesummary')->name('user.expensesummary');
-        Route::get('/expense/addexpense', 'addexpense')->name('addexpense');
-        Route::put('/expense/storetrip', 'storeexpense')->name('storeexpense');
-    });
+
+});
+
+Route::controller(ExpenseController::class)->group(function () {
+    Route::get('/expense/mytrip', 'mytripexpenses')->name('user.mytripexpenses');
+    Route::get('/expense/viewsummary/{id}', 'viewexpensesummary')->name('user.expensesummary');
+    Route::get('/expense/addexpense/{tripid}', 'addexpense')->name('addexpense');
+    Route::put('/expense/storetrip', 'storeexpense')->name('storeexpense');
 });
 
 
@@ -82,24 +84,37 @@ Route::controller(ApproverController::class)->prefix('approver')->middleware('ap
     Route::get('/mysavedtrip', 'mysavedtrip')->name('approver.mysavedtrip');
     Route::post('/tripStatus', 'tripStatus')->name('approver.tripStatus');
 
+
 });
 
-Route::controller(AccountantController::class)->prefix('accountant')->middleware('accountant')->group(function () {
 
-    Route::get('/dashboard', 'index')->name('accountant.home');
-    Route::get('/allrequests', 'allrequests')->name('accountant.allrequests');
-    Route::get('/notprocessed', 'notprocessed')->name('accountant.notprocessed');
-    Route::get('/inprogress', 'inprogress')->name('accountant.inprogress');
-    Route::get('/completed', 'completed')->name('accountant.completed');
-    Route::get('/viewsummary/{id}', 'viewsummary')->name('accountant.summary');
-    Route::get('/startproceed/{id}', 'startproceed')->name('accountant.startproceed');
+Route::prefix('accountant')->middleware('accountant')->group(function () {
+    Route::controller(AccountantController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('accountant.home');
+        Route::get('/allrequests', 'allrequests')->name('accountant.allrequests');
+        Route::get('/notprocessed', 'notprocessed')->name('accountant.notprocessed');
+        Route::get('/inprogress', 'inprogress')->name('accountant.inprogress');
+        Route::get('/completed', 'completed')->name('accountant.completed');
+        Route::get('/viewsummary/{id}', 'viewsummary')->name('accountant.summary');
+        Route::get('/startproceed/{id}', 'startproceed')->name('accountant.startproceed');
 
-    Route::get('/expenses/allrequests', 'expenses_allrequests')->name('accountant.expenses_allrequests');
-    Route::get('/expenses/notprocessed', 'expenses_notprocessed')->name('accountant.expenses_notprocessed');
-    Route::get('/expenses/inprogress', 'expenses_inprogress')->name('accountant.expenses_inprogress');
-    Route::get('/expenses/completed', 'expenses_completed')->name('accountant.expenses_completed');
-    Route::get('/expenses/viewsummary/{id}', 'expenses_viewsummary')->name('accountant.expenses_summary');
+        Route::get('/expenses/allrequests', 'expenses_allrequests')->name('accountant.expenses_allrequests');
+        Route::get('/expenses/notprocessed', 'expenses_notprocessed')->name('accountant.expenses_notprocessed');
+        Route::get('/expenses/inprogress', 'expenses_inprogress')->name('accountant.expenses_inprogress');
+        Route::get('/expenses/completed', 'expenses_completed')->name('accountant.expenses_completed');
+        Route::get('/expenses/viewsummary/{id}', 'expenses_viewsummary')->name('accountant.expenses_summary');
+    });
+
+    // Route::controller(ExpenseController::class)->group(function () {
+    //     Route::get('/expense/mytrip', 'mytripexpenses')->name('user.mytripexpenses');
+    //     Route::get('/expense/viewsummary/{id}', 'viewexpensesummary')->name('user.expensesummary');
+    //     Route::get('/expense/addexpense/{tripid}', 'addexpense')->name('addexpense');
+    //     Route::put('/expense/storetrip', 'storeexpense')->name('storeexpense');
+    // });
 });
+
+
+
 
 Route::controller(TravelsController::class)->prefix('travels')->middleware('travels')->group(function () {
 

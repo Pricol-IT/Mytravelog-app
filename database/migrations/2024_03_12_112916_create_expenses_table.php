@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Trip::class, 'trip_id')->constrained()->cascadeOnDelete();
             $table->string('service');
-            $table->string('form');
+            $table->string('from');
             $table->string('to')->nullable();
             $table->string('cost');
             $table->string('ticket');

@@ -50,8 +50,13 @@ class Trip extends Model
         return $this->hasMany(History::class,'trip_id')->orderBy('id','desc');
     }
 
+    public function expense()
+    {
+        return $this->hasMany(Expense::class,'trip_id');
+    }
+
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id'); 
+        return $this->belongsTo(User::class,'user_id');
     }
 }

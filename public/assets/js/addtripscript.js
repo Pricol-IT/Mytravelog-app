@@ -562,7 +562,7 @@ $(".addExpense").on("click", function () {
 
     var ticket = $("#ticket").val();
 
-
+    var mobile = $("#mobile").val();
 
     var efrom = $("#efrom").val();
 
@@ -628,11 +628,9 @@ $(".addExpense").on("click", function () {
                         cost +
                         '">' +
                         cost +
-                        '</td><td><input type="hidden" name="ticket[]" value="' +
+                        '</td><td><input  type="file" name="ticket[]" value="' +
                         ticket +
-                        '">' +
-                        ticket +
-                        '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                        '"></td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
                 );
                 $("[data-bs-dismiss=modal]").trigger({
                     type: "click",
@@ -658,11 +656,9 @@ $(".addExpense").on("click", function () {
                         cost +
                         '">' +
                         cost +
-                        '</td><td><input type="hidden" name="ticket[]" value="' +
+                        '</td><td><input  type="file" name="ticket[]" value="' +
                         ticket +
-                        '">' +
-                        ticket +
-                        '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                        '"></td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
                 );
                 $("[data-bs-dismiss=modal]").trigger({
                     type: "click",
@@ -692,11 +688,9 @@ $(".addExpense").on("click", function () {
                         ecost +
                         '">' +
                         ecost +
-                        '</td><td><input type="hidden" name="ticket[]" value="' +
+                        '</td><td><input  type="file" name="ticket[]" value="' +
                         eticket +
-                        '">' +
-                        eticket +
-                        '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                        '"></td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
                 );
 
                 $("[data-bs-dismiss=modal]").trigger({
@@ -708,11 +702,13 @@ $(".addExpense").on("click", function () {
                 if (location != "") {
                     $(".rh").show();
                     $("#Hotelbody").append(
-                        '<tr><td><input type="hidden" name="location[]" value="' +
+                        '<tr><td><input type="hidden" name="service[]" value="' +
+                        extra_service +
+                        '"><input type="hidden" name="from[]" value="' +
                             location +
                             '" >' +
                             location +
-                            '</td><td><input type="hidden" name="hotelName[]" value="' +
+                            '</td><td><input type="hidden" name="to[]" value="' +
                             hotelName +
                             '" >' +
                             hotelName +
@@ -720,11 +716,9 @@ $(".addExpense").on("click", function () {
                             ecost +
                             '">' +
                             ecost +
-                            '</td><td><input type="hidden" name="ticket[]" value="' +
+                            '</td><td><input  type="file" name="ticket[]" value="' +
                             eticket +
-                            '">' +
-                            eticket +
-                            '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                            '"></td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
                     );
                     $("[data-bs-dismiss=modal]").trigger({
                         type: "click",
@@ -738,19 +732,23 @@ $(".addExpense").on("click", function () {
                 if (network != "") {
                     $(".rc").show();
                     $("#Networkbody").append(
-                        '<tr><td><input type="hidden" name="network[]" value="' +
+                        '<tr><td><input type="hidden" name="service[]" value="' +
+                        extra_service +
+                        '"><input type="hidden" name="from[]" value="' +
                             network +
                             '" >' +
                             network +
+                            '</td><td><input type="hidden" name="to[]" value="' +
+                            mobile +
+                            '">' +
+                            mobile +
                             '</td><td><input type="hidden" name="cost[]" value="' +
                             ecost +
                             '">' +
                             ecost +
-                            '</td><td><input type="hidden" name="ticket[]" value="' +
+                            '</td><td><input  type="file" name="ticket[]" value="' +
                             eticket +
-                            '">' +
-                            eticket +
-                            '</td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
+                            '"></td><td><button class="btn btn-danger remove"><i class="bx bx-trash"></i></button></td></tr>'
                     );
                     $("[data-bs-dismiss=modal]").trigger({
                         type: "click",

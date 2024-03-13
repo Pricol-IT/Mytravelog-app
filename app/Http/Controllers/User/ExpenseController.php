@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Expense;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,31 +21,48 @@ class ExpenseController extends Controller
 
     public function viewexpensesummary($id)
     {
-        $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation', 'advance', 'connectivity', 'forex', 'history'])->find($id);
+        $trip = Trip::with(['flight', 'train', 'bus', 'taxi', 'accommodation', 'advance', 'connectivity', 'forex', 'history','expense'])->find($id);
+        // $expense = Expense::where('trip_id',$id)->get();
+
+        // return $trip;
 
         return view('user.expense.summary', compact('trip'));
     }
 
-    public function addexpense(Request $request)
+    public function addexpense($tripid)
     {
-        return view('user.expense.addexpense');
+        // return $tripid;
+        return view('user.expense.addexpense', compact('tripid'));
     }
 
     public function storeexpense(Request $request)
     {
-        $input = [
-            'tripid' => $request->tripid,
-            'service' => $request->service,
-            'from' => $request->from,
-            'to' => $request->to,
-            'cost' => $request->cost,
-        ];
+        // return $request;
+        $serviceCount = count($request->service);
 
-        if ($image = $request->ticket[0]) {
-            $url = uploadImage($image, 'proofs');
-            $input['ticket'] = $url;
+        for ($i = 0; $i < $serviceCount; $i++) {
+            $input = [
+                'trip_id' => $request->tripid,
+                'service' => $request->service[$i],
+                'from' => $request->from[$i],
+                'to' => $request->to[$i],
+                'cost' => $request->cost[$i],
+            ];
+
+            if ($image = $request->ticket[$i]) {
+                $url = uploadImage($image, 'proofs');
+                $input['ticket'] = $url;
+            }
+            $expense = Expense::create($input);
+            // return $input;
         }
-        return $input;
+        if ($expense) {
+            toastr()->success('Trip Expense Added');
+            return redirect()->route('user.expensesummary',$request->tripid);
+        } else {
+            toastr()->warning('Saved your trip');
+            return redirect()->back();
+        }
     }
 
 }

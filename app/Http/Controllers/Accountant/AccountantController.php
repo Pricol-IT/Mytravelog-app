@@ -15,6 +15,7 @@ use App\Models\Bus;
 use App\Models\Advance;
 use App\Models\Accomadation;
 use App\Models\Connectivity;
+use App\Models\Expense;
 use App\Models\Forex;
 use App\Models\History;
 
@@ -114,7 +115,7 @@ class AccountantController extends Controller
         return view('accountant.advance.completed', compact('advances'));
     }
 
-    public function startproceed( $id)
+    public function startproceed($id)
     {
         Advance::where('trip_id', $id)->update(['status' => 'inprogress']);
         // $advance = Advance::where('trip_id', $id)->get();
@@ -127,10 +128,13 @@ class AccountantController extends Controller
 
     public function expenses_allrequests()
     {
-        $advances = Advance::with('trip')->whereHas('trip', function ($query) {
-            $query->where('status', 'approved');
-        })->orderBy('id', 'desc')->get();
-        return view('accountant.expenses.allrequests', compact('advances'));
+        // $expenses = Expense::with('trip')->whereHas('trip', function ($query) {
+        //     $query->where('status', 'approved');
+        // })->orderBy('id', 'desc')->get();
+
+        $expenses = Trip::with('expense')->where('status', 'approved')->get();
+        // return $expenses;
+        return view('accountant.expenses.allrequests', compact('expenses'));
         // return $advances;
     }
     public function expenses_notprocessed()
@@ -159,9 +163,13 @@ class AccountantController extends Controller
 
     public function expenses_viewsummary(string $id)
     {
-        $advance = Advance::find($id);
+        $expenses = Trip::with(['expense' => function($query){
+            $query->selectRaw('service,trip_id,SUM(cost) as servicecost,COUNT(cost) as countcost')->groupBy('service','trip_id');
+        }])->where('status', 'approved')->find($id);
+        // $expenses = Trip::with('expense')->where('status', 'approved')->find($id);
+        // return $expenses;
 
-        return view('accountant.expenses.summary', compact('advance'));
+        return view('accountant.expenses.summary', compact('expenses'));
         // return dd($advance);
     }
 }
