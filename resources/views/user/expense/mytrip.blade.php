@@ -46,7 +46,7 @@
                                             @endif
                                         </td>
 
-                                        <td><a href="{{route('user.expensesummary',$trip->id)}}" class="btn btn-primary text-white"><i class="bi bi-arrow-right-circle"></i></a>
+                                        <td><a href="{{route('user.overallsummary',$trip->id)}}" class="btn btn-primary text-white"><i class="bi bi-arrow-right-circle"></i></a>
                                         </td>
                                     </tr>
                                     @empty

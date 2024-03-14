@@ -19,11 +19,16 @@
     $tier1=0;
     $tier2=0;
     $tier3=0;
+    // for international
+    $level=App\Models\Grade::select('category')->where('levels',$usergrade)->first();
+    $internationalstaydata=App\Models\InternationalPolicy::where('level',$level->category)->where('components','Hotel and Stay arrangements')->first();
+    $internationalallowancedata=App\Models\InternationalPolicy::where('level',$level->category)->where('components','Per Diem & Incidental Allowance')->first();
+    $allowance=[$internationalstaydata,$internationalallowancedata];
     for ($x = 4; $x
     <= 9; $x++) { $dataArray=json_decode($selectdata[$x], true); $valuesArray=array_values($dataArray); $tier1+=$valuesArray[1]; $tier2+=$valuesArray[2]; $tier3+=$valuesArray[3]; } @endphp <x-container.draftcontainer :trip="$trip" :usergrade="$usergrade" :tier="[$tier3,$tier2,$tier1]" />
 </main><!-- End #main -->
 <x-modal.requestmodel :tripDetails="$tripDetails" :usergrade="$usergrade" />
-<x-modal.servicemodel :tier="[$tier3,$tier2,$tier1]" />
+<x-modal.servicemodel :tier="[$tier3,$tier2,$tier1]" :allowance="$allowance" />
 @endsection
 
 @section('script')

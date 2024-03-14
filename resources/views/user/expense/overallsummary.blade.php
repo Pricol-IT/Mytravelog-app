@@ -1,4 +1,4 @@
-@extends('accountant.layouts.app')
+@extends('user.layouts.app')
 @section('title')
 {{ __('Expense summary details') }}
 @endsection
@@ -28,7 +28,8 @@
 
         <div class="row mt-2 p-2 bg-white">
             <div class="col-lg-6 p-3">
-                <h5><span class="fw-bold"> Internal ( Pricol) Expenses</span> </h5>
+                <h5><span class="fw-bold"> Company Paid Expenses</span> </h5>
+
                 <p class="fw-bold">Ticket Booking Cost</p>
                 <div class="d-flex justify-content-between">
                     <h6 class="fw-bold">flight</h6>
@@ -66,13 +67,13 @@
             </div>
             <div class="col-lg-6 p-3">
                 <div class="d-flex justify-content-between">
-                    <h5><span class="fw-bold"> External (User) Expensess</span> </h5>
-                    <a href="{{ route('user.expensesummary', 37) }}" class="btn btn-primary">Proofs</a>
+                    <h5><span class="fw-bold"> My Expenses</span> </h5>
+                    <a href="{{ route('addexpense',$expenses->id) }}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add Expense </a>
                 </div>
                 @php
                 $total=0;
                 @endphp
-                <p class="fw-bold">Ticket Booking Cost</p>
+                <p class="fw-bold">By Company Card</p>
                 @forelse ($expenses->expense as $expense)
                 @php
                 $total+=$expense->servicecost;
@@ -90,7 +91,7 @@
 
 
 
-                <p class="fw-bold">Accommodation Cost</p>
+                <p class="fw-bold">By Self Paid</p>
                 @forelse ($expenses->expense as $expense)
 
                 @if(($expense->service == 'Hotel') || ($expense->service == 'Network'))
@@ -115,7 +116,7 @@
                     <h6>{{$expenses->advance->isNotEmpty() ? '₹ '.$expenses->advance[0]->amount : 0}}</h6>
                 </div>
                 @php
-                    $advance=$expenses->advance->isNotEmpty() ? $expenses->advance[0]->amount : 0
+                $advance=$expenses->advance->isNotEmpty() ? $expenses->advance[0]->amount : 0
                 @endphp
                 <hr>
                 <div class="d-flex justify-content-between">
@@ -125,7 +126,9 @@
 
 
             </div>
-            <center><input type="submit" name="submit" class="btn btn-primary" value="Submit"></center>
+            <center>
+                <a href="{{ route('user.mytripexpenses') }}" class="btn btn-primary text-center saveAlert">Send for approval</a>
+                <a href="{{ route('user.mytripexpenses') }}" class="btn btn-danger text-center">Back</a></center>
         </div>
 
     </section>

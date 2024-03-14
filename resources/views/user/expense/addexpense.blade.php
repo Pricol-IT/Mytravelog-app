@@ -232,7 +232,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <center>
-                    <input type="submit" name="submit" class="btn btn-primary saveAlert" value="Sumbit">
+                    <input type="submit" name="submit" class="btn btn-primary" value="View">
                     <a href="#" class="btn btn-danger">Cancel</a>
                 </center>
             </div>

@@ -59,6 +59,7 @@ Route::controller(ExpenseController::class)->group(function () {
     Route::get('/expense/viewsummary/{id}', 'viewexpensesummary')->name('user.expensesummary');
     Route::get('/expense/addexpense/{tripid}', 'addexpense')->name('addexpense');
     Route::put('/expense/storetrip', 'storeexpense')->name('storeexpense');
+    Route::get('/expense/overallsummary/{id}', 'overallsummary')->name('user.overallsummary');
 });
 
 
