@@ -32,42 +32,42 @@
                 <p class="fw-bold">Ticket Booking Cost</p>
                 <div class="d-flex justify-content-between">
                     <h6 class="fw-bold">flight</h6>
-                    <h6>- 12000</h6>
+                    <h6>₹ 12000</h6>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h6 class="fw-bold">train</h6>
-                    <h6>- 12000</h6>
+                    <h6>₹ 12000</h6>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h6 class="fw-bold">bus</h6>
-                    <h6>- 12000</h6>
+                    <h6>₹ 12000</h6>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h6 class="fw-bold">Taxi</h6>
-                    <h6>- 12000</h6>
+                    <h6>₹ 12000</h6>
                 </div>
 
 
                 <p class="fw-bold">Accommodation Cost</p>
                 <div class="d-flex justify-content-between">
                     <h6 class="fw-bold">Hotel</h6>
-                    <h6>- 12000</h6>
+                    <h6>₹ 12000</h6>
                 </div>
                 <div class="d-flex justify-content-between">
                     <h6 class="fw-bold">Food</h6>
-                    <h6>- 12000</h6>
+                    <h6>₹ 12000</h6>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
                     <h6 class="fw-bold">Total</h6>
-                    <h6>- 12000</h6>
+                    <h6>₹ 12000</h6>
                 </div>
 
             </div>
             <div class="col-lg-6 p-3">
                 <div class="d-flex justify-content-between">
                     <h5><span class="fw-bold"> External (User) Expensess</span> </h5>
-                    <a href="{{ route('user.expensesummary', 37) }}" class="btn btn-primary">Proofs</a>
+                    <a href="{{ route('user.expensesummary', $expenses->id) }}" class="btn btn-primary">Proofs</a>
                 </div>
                 @php
                 $total=0;
@@ -115,7 +115,7 @@
                     <h6>{{$expenses->advance->isNotEmpty() ? '₹ '.$expenses->advance[0]->amount : 0}}</h6>
                 </div>
                 @php
-                    $advance=$expenses->advance->isNotEmpty() ? $expenses->advance[0]->amount : 0
+                $advance=$expenses->advance->isNotEmpty() ? $expenses->advance[0]->amount : 0
                 @endphp
                 <hr>
                 <div class="d-flex justify-content-between">

@@ -274,6 +274,14 @@
                                 <input type="number" required class="form-control cost" min="0" name="cost" id="cost" placeholder="price">
                             </div>
 
+                            <div class="col-12">
+                                <label>Choose payment method</label>
+                                <select class="form-control" required name="payment" id="payment">
+                                    <option value=""> Select method</option>
+                                    <option value="Economy">Company Card</option>
+                                    <option value="Economy">Self Paid</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -350,6 +358,15 @@
                         <div class="col-12 mb-2">
                             <label>Total Ticket Cost</label>
                             <input type="number" required class="form-control cost" min="0" name="cost" id="ecost" placeholder="price">
+                        </div>
+
+                        <div class="col-12">
+                            <label>Choose payment method</label>
+                            <select class="form-control" required name="payment" id="payment">
+                                <option value=""> Select method</option>
+                                <option value="Economy">Company Card</option>
+                                <option value="Economy">Self Paid</option>
+                            </select>
                         </div>
 
 
